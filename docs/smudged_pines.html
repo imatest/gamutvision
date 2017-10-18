@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Gamutvision: Smudged pine mystery">
+  <meta content="Gamutvision: Smudged pine mystery" name="description">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+
+
+<p>This is a case study in how Gamutvision can be used to examine defects in the <em><strong>interior</strong></em> of profiles. When real images are transformed for printing, most of the action takes placen <em><strong>inside</strong></em> the gamut boundary. </p>
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><h3>Introduction</h3>
+      <p>It started when I dropped in on <a href="http://fricc.blogspot.com/" target="_blank">Fabio Riccardi</a>, the author of <a href="http://www.lightcrafts.com/" target="_blank">LightZone</a>, a powerful new image editor for Mac and Windows, based on the <a href="http://www.normankoren.com/zonesystem.html" target="_blank">Ansel Adams' Zone system</a>. I told him about <span class="module">Gamutvision</span> (then newly-released), and he showed me the image on the right, printed on Epson Enhanced Matte paper with the Epson 2200 printer using Epson's standard 2880 dpi ICC profile. Although most of the image printed OK, the pine trees to the right of the river were severely smudged (below right). </p>
+      <p>&quot;Explain this,&quot; he said.</p>
+    <p>&quot;Your printer is hosed,&quot; I replied. &quot;The nozzles are fouled up.&quot;</p>
+    </td>
+    <td><table width="100%" border="0" cellpadding="4" cellspacing="0" bgcolor="#CCCCCC">
+      <tr>
+        <td><div align="center"><a href="http://www.lightcrafts.com/" target="_blank"><img src="images/Fabio_whole_CRW_600W_sRGB.jpg" alt="Yosemite-- Fabio's complete image" width="600" height="400" hspace="8" vspace="6" border="0"><br>
+        </a>Yosemite&nbsp; &copy; <font size="-1"><a href="http://fricc.blogspot.com/" target="_blank">Fabio Riccardi</a> </font></div></td>
+      </tr>
+    </table>      </td>
+  </tr>
+</table>
+<p align="left">Then he showed me the soft proof preview, shown on the right, below. The smudging  clearly visible on the screen was identical to the smudging in the print. <em><strong>The printer was working perfectly.</strong></em> The problem was <em><strong>tonal</strong></em> rather than <em><strong>spatial</strong></em>; the culprit was clearly the ICC profile: the file that controls the bits sent to the printer. The problem takes place in the <em><strong>interior</strong></em> of the gamut volume, not on the surface, which represents the most saturated possible colors, and which is what most gamut viewers display.</p>
+<table border="0" align="center" cellpadding="6" cellspacing="0">
+  <tr>
+    <td valign="top"><div align="center"><strong><img src="images/Fabio_crop_360W_8268_sRGB.jpg" alt="Pines image: normal view" width="360" height="500"><br>
+      Original image, shown with sRGB profile.</strong></div></td>
+    <td valign="top"><div align="center"><strong><img src="images/Fabio_crop_360W_sRGB_2200softproof.jpg" alt="Pines image: soft proofed for the Epson 2200, Enhanced Matte" width="360" height="500"><br>
+      Soft proof: Epson ICC profile for 2200 printer,<br>
+      Enhanced Matte, 2880 dpi, Relative Colorimetric,<br>
+      Black Point Comp. off. </strong></div></td>
+  </tr>
+</table>
+<h3 align="left">Gamutvision Image color difference </h3>
+<p align="left">The smudging is apparent on a crop of the image in Gamutvision's <font face="Arial, Helvetica, sans-serif"><strong>Image Color difference</strong></font> display, shown below full-sized (the remainder of images will be reduced for faster downloading.) The display option has been set to <font size="-1" face="Arial, Helvetica, sans-serif">Output &gt; Monitor</font>, which displays the output of the gamut mapping (AdobeRGB1998.icc to SP2200&nbsp;EnhancedMatte&nbsp;2880MK.icc with (Relative) Colorimetric rendering intent and no Black Point Compensation (BPC)). The image on the right has been set to show the input (mapped to the monitor, <font size="-1"><span class="button">I&gt;M</span></font> ). It normally displays the mapped output. <em>[Note: <a href="http://www.lightcrafts.com/" target="_blank">LightZone</a> uses a large-gamut linear 16-bit color space rather than the popular Adobe RGB (1998) space, but the results are substantially the same.] </em></p>
+<p align="center"><img src="images/Pines_in_out_view.jpg" alt="Gamutvision views of Pine image" width="803" height="658"></p>
+<p align="left">The smudging is also obvious when the display option is set to <font size="-1" face="Arial, Helvetica, sans-serif">L* (output)</font> with <font size="-1" face="Arial, Helvetica, sans-serif">Grayscale color map</font>. Hence we can be quite certain that the problem involves  <em>L</em>* (luminance). </p>
+<p align="left">The  <font face="Arial, Helvetica, sans-serif"><strong>Image Color difference</strong></font> display has a Probe that allows you to examine individual pixels of the image (which is usually reduced in size from the original to speed calculations). The Probe, shown below, left, is turned on by checking the <font size="-1" face="Arial, Helvetica, sans-serif">Probe</font> box in the display options area. Either of the images can be probed. The Probe is turned off when you click outside an image. The left side of the probe display contains the input color (on top) and the output color (on bottom). The smudged colors are relatively dark unsaturated greens and browns. Input <em>L</em>* values vary from about 26 to 40, but output values tend to cluster around 40: clear evidence that the smudging is caused by tonal (<em>L</em>*) compression. </p>
+<p align="center"><img src="images/Pines_in_out_probe.jpg" alt="Pines image, showing Probe" width="516" height="379" hspace="4" border="1"></p>
+<p align="left">The usual gamut surface views for saturated colors show few clues. For example, the 3D L*a*b* view for <em>S</em>(HSL) = 1, below left (rotated to display the colors of interest), shows no indication of the problem. But the 3D  L*a*b* view for <em>S</em>(HSL) = 0.2, below right (note different <em>a</em>*, <em>b</em>* scaling), shows something suspicious: a flattening of the contour for darker colors, which equates to a severe loss of contrast. This is more apparent in the 3D <em>L</em>* (output) display below. </p>
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><div align="center"><strong><img src="images/pines_3D_solid.jpg" alt="Pines: 3D L*a*b* view" width="228" height="292" hspace="12" vspace="4" border="0"><br>
+      S(HSL) = 1</strong> </div></td>
+    <td><div align="center"><strong><img src="images/pines_3D_solid_S20.jpg" alt="Pines: 3D L*a*b* view" width="218" height="292" hspace="12" vspace="4" border="0"><br>
+      S(HSL) = 0.2 </strong></div></td>
+  </tr>
+</table>
+<h3 align="left">Gamutvision 3D L* (output) display </h3>
+<p align="left">We've learned a few things from studying the smudging problem, most importantly,</p>
+<table width="90%" border="0" align="center" cellpadding="6" cellspacing="0" bgcolor="#FFEEFF">
+  <tr>
+    <td><strong><font color="#440044" size="-1" face="Arial, Helvetica, sans-serif">The smudging problem is a rare occurrence; it depends on a specific interaction between the image values and the ICC profile. It is not easy to preview with standard test patterns, all of which vary <a href="gamutvision_equations.html#hsvhsl">HSL</a> Hue <em>H</em>(HSL) and either HSL Saturation <em>S</em>(HSL) or Lightness <em>L</em>(HSL), keeping the third parameter constant. </font></strong></td>
+  </tr>
+</table>
+<p align="left">The best display for viewing the cause of the problem is <em>L</em>*(output), which isn't actually a color difference. We begin by illustrating <em>L</em>*(output) for maximum saturation <em>S</em>(<a href="gamutvision_equations.html#hsvhsl">HSL</a>) = 1. This corresponds to the device gamut. <em><strong>Note:</strong></em> this plot is a perfectly flat tilted sheet when <em>L</em>*(input) is selected (mostly as a check). </p>
+<blockquote>
+  <p align="left"><font face="Arial, Helvetica, sans-serif"><strong><em><font size="-1">Notes on the display.</font></em></strong> <font size="-1"><strong>Light</strong></font></font><font size="-1" face="Arial, Helvetica, sans-serif"> has been checked to turn on the light. This emphasizes the contours; surfaces are featureless if Light is turned off. The 3d h*L* axes has been selected  for the clearest visualization. Image lightness = 0.1 lightens the image slightly from its true value: this makes the contour lines more visible. </font></p>
+</blockquote>
+<p align="center"><img src="images/pines_Lout_S1.jpg" alt="Output L* for 2200: maximum saturation S = 1" width="602" height="493"></p>
+<p align="left">There are two areas where green contrast (the slope of the surface) is lower than average: in the highlights (<em>L</em>*(input) around 80) and in dark regions (<em>L</em>*(input) from about 10 to about 35). The highlight bump is unrelated to the smudging problem. Although the contrast reduction is of some concern, it may not be enough to account for the severity of the problem. Also, the smudged regions are relatively unsaturated. We need to look at lower values of saturation, <em>S</em>(HSL): <em><strong>inside</strong></em> the gamut boundary. </p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The plot on the right is for <em>S</em>(HSL) = 0.3. The irregularities in the brighter areas, above <em>L</em>*(output) = 0.4 have all but disappeared, but <strong><font color="#660000">the plateau (low contrast region) from <em>L</em>*(input) from about 10 to about 40&mdash; especially for greens&mdash;   is considerably more pronounced. The plateau is higher for the browns, and there is an irregular transition. These irregularities are significant, and they change quite a lot, for <em>S</em>(HSL) between 0.1 and 0.4. Any of these features could account for the smudging. </font></strong></p>
+      <p>The picture below is for the Epson R2400, same paper, &quot;Best&quot; profile. This combination has little smudging. A significant plateau is present, but the surface is much more regular. </p>
+      <p align="center"><img src="images/pines_Lout_S3_2400EhM.jpg" alt="Epson R2400 Ehnchace Matte S = 0.3" width="300" height="121" border="1"></p></td>
+    <td><img src="images/pines_Lout_S3.jpg" alt="L* view for S(HSL) = 0.3." width="392" height="382" hspace="10" vspace="6" border="1"></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The low L* behavior for  <em>S</em>(HSL) = 0.3, i.e., the plateau, is not what one would expect with no <a href="blackpoint.html">Black Point Compensation (BPC)</a>. But when   <em>S</em>(HSL) is reduced to 0.05 (very faint colors), the tonal response changes quite dramatically, resembling the expected response curve described in the <a href="blackpoint.html">BPC</a> page. This rapid change of density with <em>S</em> can certainly cause print quality problems; it could be related to the smudging. The change is much less dramatic for the R2400, which does not have a smudging issue. </p>
+    </td>
+    <td><img src="images/pines_Lout_S05.jpg" alt="L* view for S(HSL) = 0.3." width="390" height="187" hspace="10" vspace="6" border="1"></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The smudging problem can be reduced by turning on BPC (checking the box). This doesn't entirely eliminate it: it's still visible although it's less offensive.<em> S</em>(HSL) = 0.3 is shown on the right. </p></td>
+    <td><img src="images/pines_Lout_S3_BPC.jpg" alt="L* view for S(HSL) = 0.3 with BPC on." width="390" height="138" hspace="10" vspace="6" border="1"></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The profile for <a href="Hanhemuehle" target="_blank">Hahnemuehle's</a> highly-regarded Photo Rag, HFA2400PhotoRag308MK.icc, is just about perfect at <em>S</em>(HSL) = 0.3 with BPC turned on. It  shows  only a trace of the problem with BPC off: it has no smudging. I wish I could say it was perfect in all regards, but it shows some serious irregularities in middle blues and magentas for <em>S</em>(HSL) larger than about 0.4. It's not easy to find the perfect profile. </p>    </td>
+    <td><img src="images/pines_Lout_S3_HahnBPC.jpg" alt="L* view for S(HSL) = 0.3 with BPC on." width="390" height="171" hspace="10" vspace="6" border="1"></td>
+  </tr>
+</table>
+<p><strong><em>General observation:</em></strong> In addition to the plateau, and the difference in the plateau level for greens and browns, the smoothness and regularity of the profile response seems to play a role. The offending profile  has a rougher response with more irregularities than any of the profiles that don't smudge. Smoothness and regularity are definite virtues in profiles. </p>
+<h3>Gamutvision B&amp;W density response: Output vs. input L* a* b* c* </h3>
+<table border="0" align="center" cellpadding="6" cellspacing="0">
+  <tr>
+    <td><p>The Black &amp; White CIELAB plot, Output <em>L</em>*, <em>a</em>*, <em>b</em>*, and <em>c</em>* (chroma) vs. input <em>L</em>*, shown on the right zoomed in slightly, sheds light on the problem. This plot not only contains the grayscale response curve, it contains curves (output vs. input <em>L</em>*) for the primary colors: R, Y, G, C, B, and M with saturation <em>S</em>(HSL) set by the slider. These curves contain similar (but slightly less) information than the 3D L* output curves (above), but they update much more quickly, hence are more useful for diagnosing problems. They also show up irregularities and &quot;plateaus&quot; in luminance response <em><strong>very</strong></em> clearly. </p>
+    <p>More details on this plot can be found in <a href="gamutvision_displays.html#BW">Gamutvision displays</a>. </p></td>
+    <td><div align="center"><strong><img src="images/pines_Lout_BW_CIELAB.jpg" alt="Epson R2200 B&amp;W CIELAB plot" width="360" height="349" hspace="4" vspace="4" border="1"><br>
+      Epson R2400 (no smudging) </strong></div></td>
+  </tr>
+</table>
+<h3 align="left">Gamutvision 3D &Delta;E*<sub>94</sub> color difference display </h3>
+<p align="left">&Delta;<em>E</em>*<sub>94</sub> is an excellent color metric, better than the familiar &Delta;<em>E</em>*<sub>ab</sub> because it gives less weight to chroma differences for saturated colors, and hence corresponds more closely to the eye's perception. Here are two &Delta;<em>E</em>*<sub>94</sub> displays: the Epson 2200, (Relative) Colorimetric intent with BPC off and the R2400 with the same settings. The R2400 does not suffer from smudging.</p>
+<table border="0" align="center" cellpadding="6" cellspacing="0">
+  <tr>
+    <td><div align="center"><strong><img src="images/pines_DE94_S3_2200.jpg" alt="Epson 2200 (with smudging)" width="385" height="380" hspace="4" vspace="4" border="1"><br>
+    Epson 2200 (with smudging) </strong></div></td>
+    <td><div align="center"><strong><img src="images/pines_DE94_S3_R2400.jpg" alt="Epson R2400 (no smudging)" width="385" height="380" hspace="4" vspace="4" border="1"><br>
+      Epson R2400 (no smudging) </strong></div></td>
+  </tr>
+</table>
+<p align="left">The key difference is that the R2400 profile is smoother and more regular, especially in the area of interest&mdash; dark browns and greens.  This seems to be a characteristic of profiles that don't smudge. </p>
+<h3 align="left">Conclusions</h3>
+<p align="left">It's not easy to see the cause of the smudging from the test patterns, but there are a few strong indicators. The offending Epson 2200 profile </p>
+<ul>
+  <li>has a strong plateau that compresses <em>L</em>* for the colors that  smudge, </li>
+  <li>has irregularities in the <em>L</em>* plateau (low contrast region), which is higher for browns than for greens,</li>
+  <li>has a large change in <em>L</em>* response when Saturation <em>S</em>(HSL) is reduced from 0.3 to 0.05 </li>
+  <li>has a generally more irregular response, visible  in the&nbsp;&Delta;<em>E</em>*<sub>94</sub> color difference display. </li>
+</ul>
+<p align="left">All these factors contribute to the smudging; it's hard to say which dominates. Profiles that didn't smudge sometimes had plateaus, but they all had smoother, more regular response in both the <em>L</em>* and&nbsp;&Delta;<em>E</em>*<sub>94</sub> displays. </p>
+<p align="left"><strong><em>Bottom line:</em></strong> ICC profiles are improving, but they're still far from perfect. Gamutvision allows you to probe their interior, much like an MRI or CAT scan allows you to probe the body' interior. It's a new tool; there is much to learn. </p>
+</body>
+</html>

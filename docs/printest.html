@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+  <meta name="Description" content="A tour of Imatest: Q-13 Stepchart"><title>Imatest Print Test Tour</title>
+  
+  <meta name="description" content="Tour of Imatest: Q-13 Stepchart">
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<p><span class="module"><a name="intro" id="intro"></a>Gamutvision Print Test </span><font color="#000000"> 
+  measures several of the key factors that contribute to photographic print quality, </font>including </p>
+<ul>
+  <li><font color="#000000"><strong>Color response</strong>, the relationship between pixels in the image file and colors in the print, </font></li>
+  <li><font color="#000000"><strong>Color gamut</strong>, the range of saturated colors a print can reproduce, i.e., the limits of color response,</font></li>
+  <li><font color="#000000"> <strong>Tonal response</strong>, the relation between pixels and print density, and</font></li>
+  <li><font color="#000000"> <strong>Dmax</strong>, the deepest printable black tone: a <em>very</em> important print quality factor</font></li>
+</ul>
+<p><font color="#000000"><span class="module">Gamutvision Print Test</span>. measures these factors from a printed test pattern scanned on a flatbed scanner. No specialized equipment is required. You can observe response irregularities by viewing the test print, but you need to run <span class="module">Print Test</span> to obtain detailed measurements of the print's color and tonal response.</font></p>
+<p><font color="#000000">The essential steps in running <span class="module">Print Test</span> are</font></p>
+<ul>
+  <li><strong>Assign</strong> a profile to the test pattern, if needed. </li>
+  <li><font color="#000000"><strong>Print</strong> the test pattern, noting (as applicable) the printer, paper, ink, working color space, ICC profile, rendering intent, color engine, and miscellaneous software settings.</font></li>
+  <li><font color="#000000"><strong>Scan</strong> it on a flatbed scanner, preferably one that has been profiled.</font> Best results are obtained by scanning it next to a step chart such as the Kodak Q-13 into a file tagged with Adobe RGB (1998) color space. </li>
+  <li><font color="#000000"><strong>Run</strong> <span class="module">Gamutvision Print test</span>.</font></li>
+</ul>
+<p><font color="#000000">Color quality is a function of <span class="module">gamut</span>&mdash; the range of saturated colors a print can reproduce, as well as overall color response&mdash; the  relationship between file pixels and print color. Tonal quality is strongly correlated with <span class="module">Dmax</span>&mdash; the deepest attainable black tone, as well as the tonal response curve. Prints usually appear weak in the absence of truly deep black tones.</font></p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p><font color="#000000"><a name="testpattern"></a>The <a href="images/Print_test_target.png">test pattern</a>, shown (reduced) on the right, was generated using the <a href="gamutvision_equations.html#Colorspace">HSL color representation</a>.</font></p>
+      <ul>
+        <li><font color="#000000"><strong><em>H</em></strong> = Hue varies from 0 to 1 for the color range R&rarr;  Y&rarr; G&rarr; C&rarr; B&rarr; M&rarr; R (horizontally across the image on the right). (0 to 6 is used in the Figures below for clarity.) </font></li>
+        <li><font color="#000000"><strong><em>S</em></strong> = Saturation = max(R,G,B)/min(R,G,B). <em>S</em> = 0 for grays; <em>S</em> = 1 for the most saturated colors for a given Lightness value. </font></li>
+        <li><font color="#000000"><strong><em>L</em></strong><sub>HSL</sub> = Lightness = (max(R,G,B)+min(R,G,B))/2. (The HSL subscript is used to distinguish it from CIELAB L.) <em>L</em> = 0 is pure black; 1 is pure white. The most visually saturated colors occur where <em>L</em><sub>HSL</sub> = 0.5. </font></li>
+      </ul>
+      <p><font color="#000000">The key zones are,</font></p>
+      <ol>
+        <li><font color="#000000"><span class="module">S=1.</span> A square with all possible hues (0 &le; <em>H</em> &le; 1) and lightnesses (0 &le;<em> L</em><sub>HSL </sub>&le; 1), where all colors have maximum saturation (<em>S</em> = 1).</font></li>
+        <li><span class="module">L=0.5. </span>A rectangular region with all possible hues (0 &le; <em>H</em> &le; 1) and saturation levels (0 &le; <em>S</em> &le; 1) for middle Lightness (<em>L</em><sub>HSL</sub> = 0.5), where colors are most visually saturated.</li>
+        <li><span class="module">Gry.</span> Two identical  monochrome tone scales, where pixel levels vary linearly,  0 &le; {R=G=B} &le; 1.</li>
+    </ol></td>
+    <td><font color="#000000"><img src="images/printer_targ_labels_560H.png" alt="The test pattern, illustrating zones" width="363" height="560" hspace="8" vspace="4" border="1" align="right"></font></td>
+  </tr>
+</table>
+<p>The zones labelled <strong><font face="Arial, Helvetica, sans-serif">K</font></strong>, <strong><font face="Arial, Helvetica, sans-serif">Gry</font></strong>, and <strong><font face="Arial, Helvetica, sans-serif">W</font></strong> are uniform black (pixel level = 0), gray (pixel level = 127), and white (pixel level = 255), respectively. </p>
+<h2><b><i><a name="instructions"></a>Detailed instructions </i></b></h2>
+<ul>
+  <li><strong>The printer test patterns </strong>are located  in the <span class="code">images</span> subfolder of the Gamutvision installation folder. They can also be downloaded from the following links: <a href="images/Print_test_target.png">Print_test_target.png</a> (no embedded profile),  <a href="images/Print_test_target_sRGB.tif">Print_test_target_sRGB.tif</a> ,  <a href="images/Print_test_target_Adobe.tif">Print_test_target_Adobe.tif</a>, <a href="images/Print_test_target_WGRGB.tif">Print_test_target_WGRGB.tif </a>(embedded profiles as indicated in the file name). These patterns all contain the same data; only the profile tag differs. <font color="#666666" size="-1">[I was unable to save embedded profiles in PNG files with any of my editors, so I used LZW-compressed TIFF. (I found a small error when using maximum quality JPEGs.)]</font> </li>
+</ul>
+<table width="84%"  border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#E9E9E9">
+  <tr>
+    <td><font color="#990000" face="Arial, Helvetica, sans-serif"><strong><a name="assign"></a><font size="-1">Assigning a profile:</font></strong></font><font size="-1" face="Arial, Helvetica, sans-serif"><strong> To explore the effect of working color space on print quality you may want to change the ICC profile of the test image <em><font color="#990000">without</font></em> changing the image data. </strong></font></td>
+  </tr>
+  <tr>
+    <td><p><font size="-1" face="Arial, Helvetica, sans-serif"><strong>    In Photoshop:</strong> Click Image, Mode, Assign Profile... <br>
+    </font></p></td>
+  </tr>
+  <tr>
+    <td><p><font size="-1" face="Arial, Helvetica, sans-serif"><strong>In <a href="http://www.dl-c.com/">Picture Window Pro</a>:</strong> Click Transformation, Color, Change Color Profile... Set Change: (the bottom setting) to Profile Setting Only. </font></p></td>
+  </tr>
+</table>
+<ul>
+  <li><strong><b><i><div style="float:right;"><img src="images/EpsEnhMatteStd1440_300W.jpg" width="300" height="396" hspace="12" vspace="4" border="1"></div></i></b>Open a test pattern</strong> in an image editor, preferably an ICC-aware image editor such as Photoshop or <a href="http://www.dl-c.com">Picture Window Pro</a> with color management enabled. For most printer testing I recommend <a href="images/Print_test_target_Adobe.tif">Print_test_target_Adobe.tif</a>, which has an embedded Adobe RGB (1998) profile, but patterns with other color spaces are also of interest. Print test lets you see the effect of printing with different color spaces. </li>
+  <li><strong>Print</strong> the pattern, approximately 6.5<span class="small">x</span>10 inches (16<span class="small">x</span>25 cm), from your image editor. Carefully record the paper, ink, working color space, ICC profile, rendering intent, and printer software settings. I recommend running a nozzle check before making the print&mdash; just make sure everything is OK. </li>
+  <li><strong>Scan</strong> the print on a flatbed scanner at around 100 to 150 dpi. The scanned image should be no larger than about 1500 pixels high. Higher resolution is wasted; it merely slows the calculations. The pattern must be aligned precisely (not tilted). The scanner's auto exposure should be turned off and ICC Color Management should be used if possible. <br>
+    <br>
+  On the Epson 3200 flatbed scanner, I click on the Color tab in the Configuration dialog box, then select ICM. Source (Scanner): is either be EPSON Standard or a custom scanner profile. Target: should be one of the three profiles recognized by Print test: sRGB (small gamut; comparable to CRTs), Adobe RGB (1998) (medium gamut; comparable to high quality printers), or Wide Gamut RGB (larger gamut than any physical device). Since the Epson standard profile, which represents the scanner's intrinsic response, has a large gamut (between Adobe and Wide Gamut RGB, according to <a href="http://www.color.org/membersonly/resourcemain2.html">ICC Profile Inspector</a>), and since the measured printer gamut is bounded the gamut of the working color space, a moderate to large gamut color space should be chosen for best accuracy. I recommend Adobe RGB. The profile is not embedded in the output file; you'll need to remember it: it can be part of the file name. </li>
+  <li><strong>Save</strong> the scan with a descriptive name. TIFF, PNG, or maximum quality JPEG are the preferred formats. A reduced scan of a print made on the Epson 2200 printer with Epson Enhanced Matte paper and the standard Epson ICC profile is shown above. Colors are somewhat more subdued than glossy, semigloss, or luster papers. </li>
+  <li> Accuracy is improved if you scan a Q-13 or equivalent reflective step chart next to the print (shown on the right of the above image), then run <a href="q13.html">Stepchart</a>. When the run is complete, check the box labelled &quot;<span class="code">Save Print test calibration data</span>&quot; in the <span class="code">Save Q-13 Stepchart Results</span> window. This saves the tonal response and Dmax calibration data, even if you click <span class="button">No</span> to <span class="arialhelv">Save Q-13 Stepchart results?</span> <span class="module">This only needs to be done once for a set of scans made under identical conditions.</span> This optional step improves the accuracy of the tonal response and Dmax. </li>
+</ul>
+<table width="94%"  border="0" align="center" cellpadding="8" cellspacing="0" bgcolor="#EEEEEFF">
+  <tr>
+    <td><strong><font color="#000099" face="Arial, Helvetica, sans-serif">Scanner settings and performance verification</font></strong> </td>
+  </tr>
+  <tr>
+    <td><img src="images/Epson_3200_config.gif" width="360" height="287" hspace="8" vspace="2" align="right">For the    Epson 3200 flatbed scanner, the Configuration dialog box, shown on the right, is opened by clicking <font face="Arial, Helvetica, sans-serif">Configuration...</font> in the main window. If you have a trustworthy custom profile for your scanner, you should enter it in the <font face="Arial, Helvetica, sans-serif">Source (Scanner):</font> box. The  Epson Standard (default) profile is shown.<br>
+      <br>
+    If the custom profile is not visible, go to <font face="Arial, Helvetica, sans-serif">Control Panel</font>, double-click on <font face="Arial, Helvetica, sans-serif">Scanners and Cameras</font>, right-click on your flatbed scanner, click <font face="Arial, Helvetica, sans-serif">Properties</font>, then click on the Color management tab. Click <span class="button">Add...</span> then select the custom profile. <em><font size="2">(A lotta steps!)</font></em> <br>
+    <br>
+    <font face="Arial, Helvetica, sans-serif">Target:</font> contains the output profile for the scan. Adobe RGB is recommended in most cases because its gamut exceeds that of most high quality printers: sRGB (the default) may not be sufficient. Make sure to select the same Color space for the scanner in the Print test input dialog box. <strong>Note:</strong> this profile is <em><strong>not</strong></em> embedded in the scanner output. This is a deficiency in the Epson scanner software: almost a bug (though a common bug; it appears in many cameras and raw converters.). You need to remember the profile and embed it in the file without changing the image data. See <a href="#assign">Assigning a profile</a>, above. </td>
+  </tr>
+  <tr>
+    <td><table border="0" align="center" cellpadding="0" cellspacing="0">
+      <tr>
+        <td><strong><em>Is the scanner gamut large enough?</em></strong> The xy chromaticity diagram produced by <span class="module">Gamutvision </span>for the Epson 3200 scanner default color space(for reflected images) is shown on the right (dotted line) along with the gamut for Adobe RGB (1998) (solid line). The Epson 3200 has a much larger gamut. The scanner and Adobe RGB (1998) should cover the gamuts of most high quality printers. <br>
+              <br>
+            <strong>Scanner color response:</strong> Because Print test results are filtered by the scanner's color response, it's a good idea to verify it using <a href="tour_colorcheck.html">Colorcheck</a>. The response of the Epson 3200 with Epson's default ICC profile, shown below, is very good; comparable to the best digital cameras. For the best accuracy you should profile your scanner using one of several available software packages.<br>
+          <br></td>
+        <td><img src="images/gamutvision_Epson_3200_gam.jpg" width="374" height="393" hspace="8" vspace="2"></td>
+      </tr>
+    </table>
+    </td>
+  </tr>
+</table>
+
+<table width="96%" border="0" align="center" cellpadding="4" cellspacing="0" bgcolor="#EEEEFF"  text-align: left;">
+  <tbody>
+    <tr>
+      <td width="45%" style="vertical-align: middle;"><img src="images/Printest_colorcheck.jpg" width="380" height="445" hspace="2" vspace="8" border="1"></td>
+      <td width="55%" style="vertical-align: middle;">        <br>
+        <br>        <a href="http://www.photographical.net/scanner_profiling1_2.html" target="_blank">Scanner profiling on a budget</a>        from <a href="http://www.photographical.net/" target="_blank">Photographical.net</a> has a nice introduction to the process. <a href="http://www.photographical.net/scanner_profiling2_2.html" target="_blank">Part 2</a> describes a promising free program called IPhotoMinusICC. (I has lots of poorly-documented options. I tried it and didn't get  good results. I didn't take the time to figure out where I went wrong.) There are also several commercial programs of interest:<br>
+        <br>        <a href="http://www.dl-c.com/Temp/" target="_blank">Profile Mechanic - Scanner</a> from the creators of my favorite image editor, <span class="module">Picture Window Pro</span>. Works with IT8, GretagMacbeth ColorChecker, and other charts. <br>
+        <br>        <a href="http://www.ddisoftware.com/prism/" target="_blank">Profile Prism</a> <br>
+        <br>        <a href="http://www.xrite.com/product_overview.aspx?Line=32&IndustryID=23" target="_blank">MonacoEZColor</a>        </td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li><strong>Run</strong> <span class="module">Gamutvision</span>. </li>
+  <li>Profile 1 should be set to the (original) working color space used to print the target. This space is used in the L*a*b* plots below to generate curves representing the color space for various <em>L</em> (lightness) and <em>S</em> (saturation) levels. These lines are used to compare the actual and ideal color responses. </li>
+  <li>Profile 2 should be set to the scanner output color space. <font color="#660000"><em><strong>It should not&nbsp; be set to a printer profile. </strong></em></font></li>
+  <li>Click on  <span class="button">Print test</span>. Select the image file and crop it so a small white border appears around the test pattern. If you scanned a Q-13 chart beside the test chart, be sure to omit it from the crop.</li>
+</ul>
+<p align="left"><span class="module">Print Test</span> results are filtered by the color space of the scanned file. The Windows default is sRGB, which has a limited gamut. For best results you should scan to a color space with a larger gamut&#8212; comparable to your printer. I recommend Adobe RGB (1998). Wide Gamut RGB, which hs a gamut far larger than any printer you're likely to encounter, offers little advantage over Adobe RGB.</p>
+<h2><a name="results"></a>Results
+</h2>
+
+
+<p>Some results can be found in the <a href="tour_gamutvision.html">Gamutvision Tour</a> and in <a href="gv_defective_profile.html">Finding defective profiles</a>. </p>
+<p>A few results are shown below  for the Epson 2200 printer with Ultrachrome inks, Premium Luster paper, and the standard 1440 dpi Epson profile. <span class="module">Gamutvision Print Test</span> can produce all of the results available in <a href="printest.html#results">Imatest Print Test</a>, and more: it takes advantage of <span class="module">Gamutvision's</span> versatile display, which makes it easy to compare Print Test results with results derived from Profiles. </p>
+<h3>Density</h3>
+<p>The Figure below contains the grayscale density response and the maximum density of the print, Dmax, where density is defined as &ndash;log<sub>10</sub>(fraction of reflected light). The blue and black curve are for the two grayscale regions. The value of Dmax (2.03) is the average of the upper and right black areas. This value is respectable for a luster (semigloss) paper. (The newer R2400 has higher Dmax values.) Matte surfaces tend to have lower values, typically around 1.6 - 1.8. </p>
+<p>The upper plot shows print density as a function of the original file density, log<sub>10</sub>(original pixel level (in the test pattern)/255). This corresponds to a standard density-log exposure characteristic curve for photographic papers. The <font color="#0000CC"><strong>blue</strong></font> plot is for the upper grayscale; the <strong>black</strong> plot is for the lower-right grayscale. Slightly uneven illumination is evident. </p>
+<p align="center"><img src="images/GV_printest_BW_2200PremLuster.jpg" alt="Print test B&amp;W density plot" width="602" height="493"></p>
+<p align="left">When <span class="module">Print Test</span> is active, the Print Test area is highlighted in pale red. Profile 1 and 2 are used, and Rendering intent is set to <font size="-1" face="Arial, Helvetica, sans-serif">None</font>. </p>
+<h3 align="left">3D L*a*b* plot (solid input; wireframe output) </h3>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>CIELAB is a relatively perceptually uniform device-independent color space, i.e.,  that <font color="#000000">the visible difference between colors is approximately proportional to the distance between them. It's not perfect, but it's far better than HSL (where Y, C, and M occupy narrow bands) or or the familiar CIE 1931 xyY color space, where gamuts are represented as triangles or hexagons inside the familiar horseshoe curve and greens get far more weight than they should.</font></p>
+    <p>The 3D L*a*b* plot, shown on the right, contains the most complete display of the gamut boundary. It can be rotated or zoomed as desired. </p></td>
+    <td><img src="images/GV_printest_Lab3D_2200PremLuster.jpg" alt="3D L*a*b* display" width="369" height="366" hspace="8" vspace="4"></td>
+  </tr>
+</table>
+<h3 align="left">L=0.5 a*b* Saturation map </h3>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>Colors can be represented on the CIELAB a*b* plane, where <em>a</em>* goes from cyan-green to magenta, and <em>b</em>* goes from blue to yellow. a* = b* = 0 is neutral gray or white (zero chroma). The colors of the a*b* plane are represented roughly in the background of the Figure on the right.</p>
+    <p align="left"><em>L </em>= 0.5 Saturation results are also well suited for display on the CIELAB a*b* plane. Gamuts are shown for 0 &le; <em>S</em> &le; 1 in steps of 0.2. The dotted lines and shapes are the ideal values (the color space used to print the pattern) and the solid shapes are the measured values. </p>
+    <p align="left">Gamut is excellent for <em>S</em> = 0.2 (brown curve) and 0.4 (red curve). But compression becomes apparent around S = 0.4 for magenta, blue, and green, where the printer starts to <span class="module">saturate</span>. Increasing <em>S</em> above these values doesn't increase the print saturation: in fact, saturation decreases slightly at <em>S</em> = 1. This is the result of  limitations of the Epson 2200's pigment-based inks and weaknesses in the standard Epson ICC profile. The good performance for relatively unsaturated colors (<em>S</em> &le; 0.4) is extremely important: skin tones and other subtle tones should reproduce very well on the Epson 2200. </p></td>
+    <td><div align="center"><img src="images/GV_printest_ab2D_2200PremLuster.jpg" alt="2D a*b* saturation map" width="384" height="395"></div></td>
+  </tr>
+</table>
+<p>With Saturation maps, differences between printers, papers, and profiles are immediately apparent. These differences are far more difficult to visualize without <span class="module">Gamutvision Print test</span> because each image has its own color gamut. One image may look beautiful but another may be distorted by the printer's limitations.</p>
+<h3>3D HL Color differences</h3>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p><a href="gamutvision_displays.html#colordiff3D">3D HL color difference plots</a> are extremely valuable for visualizing color response because they are clear and visually striking. They can display any of a large number of color difference metrics. The plot on the right shows &Delta;<em>E</em>*<sub>94</sub> with HSL <em>H</em> and <em>L</em> as the independent axis. </p>
+    <p>Several &Delta;<em>E</em>* and &Delta;<em>C</em>* metrics can be chosen. The  &Delta;<em>C</em>* metrics do not include luminance <em>L</em>* in their calculation. The display on the right shows large values of &Delta;<em>E</em>*<sub>94</sub> (&gt; 15) for light greens and cyans. Much of this difference is apparently due to a darkening of the light greens. The difference is much lower in the  &Delta;<em>C</em>*<sub>94</sub> plot below. Note that the vertical scaling has changed. </p></td>
+    <td><div align="center"><img src="images/GV_printest_3D_DE94_2200PremLuster.jpg" alt="Delta-E 94" width="391" height="388" hspace="8" vspace="4"></div></td>
+  </tr>
+</table>
+<p align="center"><img src="images/GV_printest_3D_DC94_2200PremLuster.jpg" alt="Delta-C 94" width="602" height="493"></p>
+<p align="left">When color differences are calculated from the ICC profiles, rather than the scanned test print, the difference between &Delta;<em>E</em>*<sub>94  </sub> (below, left) and &Delta;<em>E</em>*<sub>94</sub> <sub> </sub> (below, right) is smaller. The large green-cyan peak in &Delta;<em>E</em>*<sub>94 </sub> is tamed, but the general features are remarkably similar. More comparisons can be found in the <a href="tour_gamutvision.html">Gamutvision Tour</a> and in <a href="gv_defective_profile.html">Finding defective profiles</a>. </p>
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><div align="center"><strong>&Delta;<em>E</em>*<sub>94 </sub> from ICC profile </strong><br>
+    <img src="images/GV_printest_3D_Profile_DE94_2200PremLuster.jpg" alt="Delta-E 94 from ICC profile" width="327" height="323" hspace="8" vspace="6"></div></td>
+    <td><div align="center"><strong>&Delta;<em>C</em>*<sub>94 </sub> from ICC profile</strong><br>
+    <img src="images/GV_printest_3D_Profile_DC94_2200PremLuster.jpg" alt="Delta-C 94 from ICC profile" width="327" height="323" hspace="8" vspace="6"></div></td>
+  </tr>
+</table>
+<hr size="2" noshade>
+<p><a href="http://www.incits.org/tc_home/w11htm/2003docs/w1103032.pdf">Digitization and Metric Conversion for Image Quality Test Targets</a> by 
+William Kress discusses the use and accuracy of flatbed scanners for measuring print quality. </p>
+</body>
+</html>

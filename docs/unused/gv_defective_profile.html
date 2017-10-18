@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Gamutvision: Finding defective profiles">
+  <meta content="Gamutvision: Finding defective profiles" name="description">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h2>
+<a name="intro" id="intro"></a>Introduction</h2>
+<blockquote>
+  <blockquote>
+    <p><font color="#CC0000"><strong><font color="#CC0000"><strong><font size="-1" face="Arial, Helvetica, sans-serif">A beta version of </font></strong></font><font size="-1" face="Arial, Helvetica, sans-serif"><em class="module">Gamutvision</em> is available <a href="gamutvision.html#load">here</a> for registered Imatest users. <br>
+      There will be many refinements prior to the release. </font></strong></font></p>
+  </blockquote>
+</blockquote>
+
+<p align="left"><span class="module">Gamutvision</span> can analyze the performance of printer/paper/ICC profile combinations from ICC profiles themselves: <em><strong><font color="#330066">you don't need to have the printer or paper in your possession</font><font color="#663333">.</font></strong></em> All you need is the ICC profile, which can often be <a href="tour_gamutvision.html#profdownload">dowloaded from the internet</a>. With the profile and&nbsp;<span class="module">Gamutvision</span> you to do a number of remarkable things.</p>
+<ul>
+  <li>Find out about what performance to expect from  a printer/paper combination <em><strong><font color="#330066">before you buy</font></strong></em>. </li>
+  <li>Determine the quality of ICC profiles and learn which rendering intents work best.</li>
+  <li>Find out if your printer is performing as specified&mdash; by comparing test prints with <span class="module">Gamutvision</span> simulations.  <span class="module">Gamutvision</span> won't tell you <em><strong><font color="#330066">why</font></strong></em> your prints don't look right; it can't tell whether it's your printer hardware or software settings, but it will show you <font color="#330066" size="+1"><em><strong> what</strong></em></font> is happening. This can be a huge help in tracing problems. </li>
+</ul>
+<p align="left">Once in a while you may stumble on a defective ICC profile. Epson's standard profiles for their Ultrachrome and Ultrachrome K3 printers are generally excellent, but <font size="-1" face="Arial, Helvetica, sans-serif">SPR2400 EnhMatte BstPhoto.icc</font>, the profile for the Epson R2400 printer with Enhanced Matte paper at the best quality print setting, has a defect when used with perceptual rendering intent (the intent most frequently recommended for full-tone photogrpahic images). The problem pops right out at you when you run Gamutvision, using the ICC profile as input. </p>
+<p align="center"><img src="images/Epson_defective_3D_small.jpg" alt="3D plot showing defective profile" width="602" height="493"></p>
+<p align="left">The white band in the bright green-cyan region doesn't belong! There is a corrresponding pothole in the 3D La*b* gamut plot. It's not a common color; you wouldn't notice a problem in most prints, but it might show up unexpectedly as white blotches in  images of turquoise jewelry or a tropical lagoon. You could spend hours and burn lots of paper trying to diagnose the problem. </p>
+<p align="left">Of course, this is just a simulation. You need to make a print to verify the problem. </p>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><p>The results of printing the Print Test pattern (shown below) on the Epson R2400 (6.5<font face="Arial, Helvetica, sans-serif">x</font>10 inches) with the SPR2400 EnhMatte BstPhoto.icc profile, Enhanced Matte paper, and perceptual rendering intent are shown on the right. The print was scanned with the Epson 3200 flatbed scanner and saved as an sRGB file. The similarity of the scanned print with the image above&mdash; <em><strong>derived from the profile</strong></em>&mdash;  is quite stunning; nearly perfect to the eye. </p></td>
+    <td rowspan="2"><div align="center"><img src="images/R2400_enhmatte_best_percept_480H.jpg" alt="Scanned test pattern" width="313" height="480" hspace="12" vspace="2"></div></td>
+  </tr>
+  <tr>
+    <td><div align="center"><img src="images/Print_test_target_sRGB_280H.jpg" alt="Print test target" width="181" height="280"></div></td>
+  </tr>
+</table>
+<p align="left">Here are the results of analyzing the scanned print  using Gamutvision's Print Test feature (very similar to the Imatest Print Test module).</p>
+<p align="center"><img src="images/Epson_defective_printest_3D_small.jpg" alt="Print test results" width="602" height="493" vspace="4"><br>
+  <strong><font size="-1" face="Arial, Helvetica, sans-serif">Though this closely resembles the above image,<br>
+it is derived from a scanned print rather than  the ICC profile.</font></strong></p>
+<p align="left">The results are nearly identical to the first image. The print was scanned on an Epson 3200 flatbed scanner set for ICM color management with output to Adobe RGB (1998). (This differs slightly from the image shown above, which was scanned to the sRGB color space for proper web viewing.) The comparison is even more impressive when we view the 2D La*b* saturation map. </p>
+<table border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><div align="center"><strong>Simulated</strong></div></td>
+    <td><img src="images/Epson_defective_2Dsatmap_small.jpg" alt="from profile" width="602" height="493" hspace="12" vspace="2"></td>
+  </tr>
+  <tr>
+    <td><div align="center"><strong>Scanned<br>
+        <br>
+      (analyzed<br>
+      with<br>
+      <a href="gv_printest.html">Print Test</a>)</strong> </div></td>
+    <td><img src="images/Epson_defective_printest_2Dsatmap_small.jpg" alt="from scanned print" width="602" height="493" hspace="12" vspace="2"></td>
+  </tr>
+</table>
+<p align="left">Of course the curves aren't identical, but they're remarkably close, especially when you consider that the the Epson 3200 is a relatively inexpensive scanner. It's not a cheap low-end scanner&mdash; it has very decent film scanning capability (now replaced by the 4990), but it's not an expensive laboratory instrument either. It costs about as much as a good compact digital camera. </p>
+<p align="left">This profile is usable  as long as you <em><strong>don't use the prceptual rendering intent</strong></em>. The Relative Colorimetric intent works fine. Results are shown below. </p>
+<p align="center"><img src="images/Epson_colrmtrc_2Dsatmap_small.jpg" alt="Colorimetric-- good profile" width="602" height="493"></p>
+</body>
+</html>

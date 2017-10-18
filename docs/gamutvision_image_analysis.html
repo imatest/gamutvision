@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Gamutvision image analysis">
+  <meta content="Gamutvision image analysis" name="description">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><img src="images/GV_display_image_analysis_sel.gif" alt="Gamutvision display and selection areas" width="246" height="244" hspace="16" vspace="4"></td>
+    <td><p><span class="module">Gamutvision&trade;</span> can analyze how <em><strong>image</strong></em> colors change  when they are mapped to different color spaces or sent  to an output device such as a monitor or printer. A variety of displays are available, including 2D pseudocolor plots and 3D L*a*b* vector plots.</p>
+    <p>To read an image into Gamutvision, click on the arrow&nbsp;<img src="images/dropdown_arrow.gif" alt="Dropdown arrow" width="18" height="16" align="top"> to the right of the Main display selector, shown on the left, and select <font size="-1"><span class="button">Read image for analysis</span></font>. This opens  standard Windows file selection dialog box, labeled <span class="smallbold">Image file</span>. </p></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>Select an  image file to open. You may, if you wish, press View (<img src="images/viewbutton.gif" alt="View button" width="29" height="16" hspace="4" align="absmiddle">), <span class="smallbold">Thumbnails</span> to see thumbnails in the dialog box (illustrated on the right). This is sometimes  helpful for locating the file to open. </p>
+      <p>You will need to  select <font size="-1"><span class="button">Read image for analysis</span></font> each time you want to open an image. </p></td>
+    <td><img src="images/Image_read_open_dialog.gif" alt="" width="426" height="275" hspace="12" vspace="4" align="right"></td>
+  </tr>
+</table>
+<p>The most recently selected display appears. </p>
+<h3 align="left"><a name="diff2d" id="diff2d"></a>2D Image color difference display </h3>
+<p align="left">Here is an example, showing a 2-Dimensional pseudocolor plot of Delta-C*CMC (&Delta;<em>C*</em><sub>CMC </sub>) for the image mapped from sRGB to the Epson R2400 (SPR2400 EnhMatte BstPhoto.icc with Colorimetric rendering intent with Black Point Compensation on).  This example uses a photograph taken in Paris by <a href="http://flyinggina.smugmug.com/gallery/1322966" target="_blank">Virginia Bonesteel</a>.</p>
+<p align="center"><img src="images/GV_image_diff_Virginia.jpg" alt="Image difference display" width="602" height="493"></p>
+<p align="left">This pseudocolor display shows one of several perceptual measures of image color difference before and after gamut mapping. It contains far more information than the gamut warnings of image editors, which merely tell you that a color is outside the gamut of the output device, but give no indication of <em><strong>how much</strong></em> change to expect.</p>
+<p align="left">The <em><strong>Display options</strong></em> area, located on the right of the Gamutvision window, contains the following controls. </p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>
+        <ul>
+          <li><strong><em><img src="images/GV_ctrlbox_2D_imagedif.gif" alt="Image color difference Display options" width="240" height="95" hspace="10" vspace="4" align="right"></em><font face="Arial, Helvetica, sans-serif">Display/Color metric</font></strong>, selected in the upper popup menu, determines the type of display. Choices (shown on the right) include
+            <ul>
+                <li>Color difference metrics &Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>, and &Delta;<em>C*</em><sub>CMC</sub>. &Delta;<em>C*</em> color difference metrics are similar to the corresponding &Delta;<em>E</em> metrics, except that they omit the difference in Luminance (&Delta;<em>L*</em>). &Delta;<em>E</em> metrics tend to become very high in dark regions, especially for matte papers, which have relatively low Dmax, for example, 1.61 estimated from the profile for Epson Enhanced Matte. <a href="gamutvision_equations.html">Equations here.</a> </li>
+              <li> &Delta;<em>L</em>*,  &Delta;Chroma (&Delta;<em>C</em>*),&nbsp; &Delta;|Hue distance| (&Delta;<em>H</em>*) , and &Delta;Hue angle (in degrees). Chroma <em>C</em>* and Hue <em>H</em>* are obtained by converting a* and b* from rectangular to polar coordinates. </li>
+              <li><em>L</em>* (input and output) and Chroma <em>C</em>* (input and output). An interesting application of <em>L</em>* is found in the <a href="smudged_pines.html">Smudged pine mystery</a>. </li>
+              <li>The input and output images mapped to the monitor color space can also be displayed. The output image mapped to the monitor color space is identical to the <font color="#660033"><em><strong>soft proof</strong></em></font> in image editors. </li>
+              <li>You can also select 3D L*a*b* image color difference displays, described <a href="#3dvector">below</a>. </li>
+            </ul>
+          </li>
+        </ul></td>
+    <td width="12">&nbsp;</td>
+    <td width="200" class="smallbold">Delta-E*ab<br>
+      Delta-C*ab<br>
+      Delta-E*94<br>
+      Delta-C*94'<br>
+      Delta-E*CMC <br>
+      'Delta-C*CMC<br>
+      Delta-L*<br>
+      Delta-Chroma<br>
+      Delta-|Hue distance<br>
+      Delta-Hue angle<br>
+      L* (input)<br>
+      L* (output)<br>
+      Chroma (input<br>
+      Chroma (output)<br>
+      Input &gt; Monitor<br>
+      Output &gt; Monitor<br>
+      Input 3D cluster<br>
+      Output 3D Cluster<br>
+      'Input-Output 3D Vectors<br>
+      Output-Input 3D Vectors</td>
+  </tr>
+</table>
+<ul>
+  <li><strong><font face="Arial, Helvetica, sans-serif">The color map</font></strong> (2D color difference plots only) is selected in the lower popup menu. The map shown, WYRMBK (White-Yellow-Red-Magenta-Blue-Black) goes from white to black through a range of light to dark colors. It offers an intuitive light-to-dark progression and good value discrimination. Other color maps  have different properties.</li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Probe</font></strong> (2D plots only) turns on the probe. When the probe box is checked, crosshairs appear in the <span class="module">Gamutvision</span> window, and the error metrics shown below  are displayed beneath the image for the location where the left mouse button is clicked. You can also click on the preview image on the upper-right. Input and output colors are shown to the left of the metric:, input on the top and output on the bottom.  The probe is turned off whenever you click outside the images. <br>
+      <br>
+    The probe displays
+    <ul>
+      <li>Input and output L*a*b* values</li>
+      <li>&Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>,  &Delta;<em>C*</em><sub>CMC</sub></li>
+      <li>&Delta;<em>L</em>*,  &Delta;Chroma (&Delta;<em>C</em>*), &Delta;|Hue distance| (&Delta;<em>H</em>*), and &Delta;Hue angle (degrees) <br>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p align="center"> <img src="images/GV_probemetrics.jpg" alt="Probe display" width="523" height="103" border="1"></p>
+<ul>
+  <li><strong><font face="Arial, Helvetica, sans-serif">The Invert checkbox</font></strong> (2D color difference plots only) inverts the direction of the color map. It is useful for  metrics like  &Delta;Chroma, which is mostly negative.</li>
+</ul>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><h3><a name="3dvector"></a>3D Vector image color difference display </h3>
+        <p>The four  display selections  at the bottom of the Color metric popup menu are not, strictly speaking, color differences. They display color changes between input and output images in 3D L*a*b* space.</p>
+        <ul>
+          <li><font size="-1"><span class="button">Input 3D cluster</span></font> displays input colors as dots or circles, where larger circles indicate a greater frequency of the color. </li>
+          <li><font size="-1"><span class="button">Output 3D cluster</span></font> displays output colors as dots or circles. </li>
+          <li><font size="-1"><span class="button">Input-Output 3D vectors</span></font> displays vectors connecting the input and output colors as well as output (inner) colors as dots or circles.  </li>
+          <li><font size="-1"><span class="button">Output-Input 3D vectors</span></font> displays vectors connecting the input and output colors as well as input (outer) colors as dots or circles. Shown on the right. </li>
+        </ul>
+        <p>A semitransparent wireframe of the  output color space (after gamut mapping) is also shown in this display.  A great may display options are available. </p>
+    </td>
+    <td><div align="center"><img src="images/Image_vectors_3D_crop.jpg" alt="" width="400" height="380" hspace="8" vspace="4"></div></td>
+  </tr>
+</table>
+<ul>
+  <li>Displays can include Vectors only (no wireframe), Output wireframe, and input wireframe (in addition to the cluster and vector plots).</li>
+  <li>The wireframe transparency can be adjusted from totally transparent (1) to opaque (0). </li>
+  <li>The wireframe line color,  face color, and the background color can be changed in the Dialog box that opens when you press the <font size="-1"><span class="button">More</span></font> button. </li>
+</ul>
+<p>The algorithm for this display is quite complex: it involves reducing tens or hundreds  of thousands of image colors to a manageable number. Essentially, the L*a*b* coordinates are transformed into spherical coordinates centered at L* = 50 and a* = b* = 0. The sphere is divided into segments of approximately equal area, each of which is filled with the image color with maximum radius. </p>
+<p><strong><em><img src="images/GV_ctrlbox_3D_imagedif.gif" alt="Image color difference Display options" width="244" height="127" hspace="10" vspace="4" align="right"></em></strong>The <em><strong>Display options area</strong></em> for the 3D L*a*b* plots are different from the 2D plots. </p>
+<ul><li><span class="button">Reset scale</span> resets the scale to fit the current display. When different mappings or wireframes are selected the scale is expanded to fit the display. The scale remains expanded to facilitate visual gamut comparisons until <span class="button">Reset scale</span> is pressed. </li>
+  <li><span class="button">Reset view</span> restores the original viewing angle. </li>
+  <li><span class="button">Top view</span> shows the view from the top (the a*b* plane). <span class="button">Last view</span> appears in this location after <span class="button">Top view</span> has been pressed. Pressing it restores the previous viewing angle. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Display/Color metric</font></strong> (containing <span class="small">Output-Input 3D Vectors</span>) is the same for 3D and 2D displays. </li>
+  <li><span class="emphasis">Transparency</span> (slider) sets the transparency of the output wireframe. It is only active if the output wireframe is selected. (It isn't active for the input wireframe because it would obscure all data.)</li>
+  <li>The lower popup menu contains the following selections. 
+    <ul>
+      <li><span class="smallbold">Vectors only</span>&nbsp; No wireframe is displayed. </li>
+      <li><span class="smallbold">Input wireframe</span>&nbsp; The input (outer) wireframe is displayed. It is always transparent. </li>
+      <li><span class="smallbold">Output wireframe</span>&nbsp; The output (inner) wireframe is displayed. Transparency can be adjusted. This display has a small bug: Input points (or circles) in front of an opaque wireframe appear to be behind the surface. They display fine when they are on the side. (This could be a glitch in the OpenGL implementation on my computer.) </li>
+    </ul>
+  </li>
+</ul>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><ul>
+      <li><span class="button">More</span> opens the <span class="smallbold">3D Plot Settings</span> dialog box with several additional display options. This dialog box is also used for 3D L*a*b* gamut plots. 
+        <ul>
+          <li><span class="smallbold">3D Plot Axis Setting</span> and the <span class="smallbold">OpenGL</span> checkbox are self-explanatory.</li>
+          <li><span class="smallbold">Background</span>&nbsp; controls the background grayscale level. </li>
+          <li><span class="smallbold">Light</span>&nbsp; (applies only to 3D L*a*b* gamut plots) sets the direction of the illumination.. </li>
+          <li><span class="smallbold">Wire frame</span>&nbsp; controls the color of the wire frame.</li>
+          <li><span class="smallbold">Wire frame transparency color</span>&nbsp; controls the grayscale level of the wire frame face when transparency is set below 1 (totally transparent).  </li>
+          <li><span class="smallbold">Display Gamut volumes</span>&nbsp; (applies only to 3D L*a*b* gamut plots)</li>
+          <li><font size="-1"><span class="button">Reset</span></font> restores the default settings. </li>
+        </ul>
+      </li>
+    </ul>      </td>
+    <td><img src="images/More_3D.gif" alt="More 3D dialog box" width="380" height="357" hspace="10" vspace="4"></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><h3><a name="gmbcc"></a>The GretagMacbeth&trade; ColorChecker<sup>&reg;</sup> </h3>
+        <p>Gamutvision can analyze a simulated <a href="http://www.gretagmacbeth.com/index/products/products_colorcheckers/products_cc-overview/products_colorchecker.htm" target="_blank">GretagMacbeth ColorChecker</a>, derived from L*a*b* D65 data supplied by GretagMacbeth. This data is transformed to the input color spaces (1 and 3). Display selections are identical to Image color analysis, described above. </p>
+      <p align="right"><strong>&Delta;E<sub>94</sub> pseudocolor plot</strong><br>
+            <strong>Adobe RGB to Epson 2200 Enhanced Matte, Colorimetric intent</strong></p></td>
+    <td><img src="images/ColorChecker_Delta_E.jpg" alt="ColorChecker Delta-E display" width="360" height="294" hspace="10" vspace="4"></td>
+  </tr>
+</table>
+</body>
+</html>

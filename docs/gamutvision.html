@@ -1,0 +1,330 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Gamutvision instructions">
+  <meta content="Gamutvision instructions" name="description">
+  <title>Gamutvision instructions</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<p align="left"><span class="module">Gamutvision&trade;</span> is a powerful utility for exploring color management. With it you can</p>
+<ul>
+  <li><strong><em>Examine color space and device gamuts</em></strong> (ranges of reproducible colors). </li>
+  <li><em><strong>Study gamut mappings and rendering intents </strong></em> (image transformations between color spaces or devices with different color gamuts and algorithms for handling colors where input colors are near or outside the output gamut). The definitions of the four <em><strong>rendering intents</strong></em> can be quite vague&mdash; especially perceptual rendering intent, which is often recommended for photographers. And the definitions often don't correspond to actual performance. </li>
+  <li><em><strong>Evaluate ICC profile quality</strong></em>.</li>
+  <li> <em><strong>Estimate printer and paper quality</strong></em> by examining ICC  profiles&mdash; which you can <a href="tour_gamutvision.html#profdownload">download from the Internet</a>. </li>
+  <li><strong><em>Preview how much an image or simulated GretagMacbeth&trade; ColorChecker<sup>&reg;</sup> will change</em></strong> when sent to a printer. </li>
+</ul>
+<blockquote>
+  <blockquote>
+    <p align="left"><span class="module"><font size="-1" face="Arial, Helvetica, sans-serif">Gamutvision</font></span><font size="-1" face="Arial, Helvetica, sans-serif"> uses <a href="http://www.littlecms.com/lcmsMatlab.zip" target="_blank">ICCTrans</a>, the Matlab interface to the <a href="http://www.littlecms.com/" target="_blank">LittleCMS</a> color management system. The&nbsp;<a href="http://www.littlecms.com/lcmsMatlab.zip" target="_blank">ICCTrans</a> file is worth downloading for the excellent manual. Many             thanks to Ignacio Ruiz de Conejo and Marti Maria (of Hewlett-Packard Spain) for their outstanding work.</font></p>
+  </blockquote>
+</blockquote>
+<h2 align="left"><a name="structure"></a>Gamutvision structure</h2>
+<p><span class="module">Gamutvision</span> analyzes one of several built-in test patterns, external image files, or a simulated GretagMacbeth&trade; ColorChecker<sup>&reg;</sup>. The test image is displayed on the upper-right of the <span class="module">Gamutvision</span> window. The bulit-in color test patterns vary <a href="gamutvision_equations.html#Colorspace">HSL</a> Hue <em>H</em> and either Lightness <em>L</em> or Saturation <em>S</em>, keeping the third parameter (<em>S</em> or <em>L</em>) fixed. HSL values include (HSL) in their designation, e.g., <em>L</em>(HSL), to distinguish them from CIELAB <em>L</em>*. </p>
+<table width="640" border="0" align="center" cellpadding="6" cellspacing="0">
+  <tr>
+    <td colspan="3"><div align="center"><strong><font size="-1" face="Arial, Helvetica, sans-serif">Basic built-in patterns</font></strong> <br>
+            <img src="images/gv_target.png" alt="Gamutvision target" width="576" height="256" hspace="8" vspace="4" border="1"></div></td>
+  </tr>
+  <tr>
+    <td width="277"><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Left: Fixed <em>S</em>(HSL) pattern (normally <em>S</em>(HSL) = 1)</strong> with all <a href="gamutvision_equations.html#Colorspace">HSL Hues and Lightnesses</a>.  Represents the gamut boundary when Saturation <em>S</em>(HSL) = 1 (its maximum value). <em>S</em>(HSL) can be reduced (&lt; 1) to visualize profile behavior for unsaturated colors.</font><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp; </font></td>
+    <td width="221"><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Middle: <em>Fixed L</em>(HSL) pattern (normally <em>L</em>(HSL) = 0.5)</strong> with all <a href="gamutvision_equations.html#Colorspace">HSL Hues and Saturations</a>. Colors reach maximum saturation at Lightness <em>L</em>(HSL) = 0.5. Lightness can be selected, </font><font size="-1" face="Arial, Helvetica, sans-serif"> 0.05 &le; <em>L</em>(HSL) &le; 0.95</font>.</td>
+    <td width="106"><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Right: Grayscale pattern. </strong>0 &le; <em>L</em>(HSL) &le; 1. </font></td>
+  </tr>
+</table>
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The diagram on the right illustrates <span class="module">Gamutvision's</span> data flow in detail.  RGB input consists of one of the three patterns shown above or an external image file. To obtain the input display it is mapped to L*a*b*, xy, or uv using the input profile. RGB input is also mapped from the input to the output profile to obtain the output RGB (or CMYK) values, which are then mapped to L*a*b*, xy, or uv using the output profile to obtain the output display.  Numerous display options are available.</p>
+    </td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_detail_block.gif" alt="Gamutvision block diagram" width="391" height="213" hspace="8" vspace="8" align="left"></font></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>Here is a  broader picture <span class="module">Gamutvision's</span> structure. You can select up to four ICC profiles: two input profiles and two output profiles. </p>
+      <ul>
+        <li> The input image is interpreted according to the input profile (1 or 3). Input plots always display the full gamut of the device or color space represented by the input profile. </li>
+        <li>The input image is mapped to the output image, using the input and output profiles with the specified rendering intent. No gamut mapping takes place (RGB values are unchanged) if  <font size="-1" face="Arial, Helvetica, sans-serif">Rendering intent</font> is set to <font size="-1" face="Arial, Helvetica, sans-serif"><strong>None</strong></font>. </li>
+        <li>Output plots display the gamut of the output device or color space (profiles 2 or 4) <em><strong><font color="#660000">after mapping</font></strong></em>. Numerous display options are available.</li>
+    </ul></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_block.gif" alt="Gamutvision block diagram" width="432" height="282" hspace="8" vspace="8" align="left"></font></td>
+  </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><ul><ul><li>You can view  input and corresponding output gamuts simultaneously.</li>
+          <li>You can view <strong><em>any</em></strong> two gamuts simultaneously using Displays A and B. </li>
+          <li>You can  switch between views for rapid comparisons. </li>
+        </ul>
+      </ul>
+    <p>For example, to compare the effects of two working color spaces with a single printer/profile combination, you would enter the two working color space profiles into input Profiles 1 and 3 and the same printer profile into output Profiles 2 and 4. You could then view profiles 1 and 2 or 3 and 4 (showing the effects of the gamut mapping),  or you could use a Display box (A or B, shown below) to compare the output gamuts in profiles 2 and 4. The gamuts for Epson R2400 Premium Luster prints made from Adobe RGB (1998) (wireframe) and sRGB (solid) working color spaces  are shown on the right, using the 3D L*a*b* display set to <font size="-1"><span class="button">Top view</span></font>.  (Displays on this page use Epson-supplied <a href="http://photoshopnews.com/2005/10/06/x-rite-premium-profiles-bundled-with-epson-r2400-printer/" target="_blank"><font size="-1">X-rite &quot;premium&quot; profiles</font></a>, released around October 2005; different from earlier profiles supplied with the R2400). </p></td>
+    <td><img src="images/GV_adobe_srgb_top.jpg" alt="Adobe RGB vs. sRGB: Gamut top view" width="279" height="284" hspace="8" vspace="2"></td>
+  </tr>
+</table>
+<h2><a name="startup"></a>Startup</h2>
+<p>When you open <span class="module">Gamutvision</span> the following window (shown reduced) appears.  The first time you run Gamutvision, <font size="-1" face="Arial, Helvetica, sans-serif">Browse...</font> appears in  all four profile windows (bottom left). Settings are saved in succeeding runs. </p>
+<p align="center"><img src="images/Gamutvision_startup_small.gif" alt="Gamutvision startup window" width="602" height="493" hspace="4" vspace="0"> </p>
+<table width="100%" border="0" cellspacing="2" cellpadding="6">
+  <tr>
+    <td ><ol>
+      <li>Click on &nbsp;<img src="images/Gamutvision_downarrow.gif" alt="Popup menu down arrow" width="19" height="17" align="top">&nbsp; on the right the Profile 1 popup menu, located near the lower left of the <span class="module">Gamutvision</span> window, just above&nbsp; <span class="button"><font size="-1">View</font></span>. The list on the right appears. Click on <font size="-1" face="Arial, Helvetica, sans-serif">Browse...</font> to open a browse window (the default folder is the Windows XP profile folder). Clicking on an  entry starting with * selects one of the profiles built into LittleCMS. You can find a description of these profiles in the manual included in&nbsp;<a href="http://www.littlecms.com/lcmsMatlab.zip" target="_blank">www.littlecms.com/lcmsMatlab.zip</a>, downloadable from the <a href="http://www.littlecms.com/downloads.htm" target="_blank">LittleCMS</a> website. </li>
+    </ol></td>
+    <td width="2">&nbsp;</td>
+    <td width="300" bgcolor="#EEEEEE"><font size="-1" face="Arial, Helvetica, sans-serif">Browse...<br>
+      *sRGB   (IEC6 1996-2.1 sRGB)<br>
+      *Lab       (D50-based Lab)<br>
+      *LabD65 (D65-based Lab)<br>
+      *XYZ       (XYZ (D50))<br>
+      *Gray22 (D50 gamma=2.2 grayscale)<br>
+      <em><font color="#990000">(previous profile)</font></em><br>
+    Profile and output from box 2 <font color="#990000"><em>(Profile 3 only)<br>
+    </em></font><font size="-1" face="Arial, Helvetica, sans-serif">Recent ICC profile</font></font></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><blockquote>
+      <p>The <font size="-1" face="Arial, Helvetica, sans-serif">Browse...</font> dialog box shown on the right opens by default in the Windows XP profiles folder. If you are using a different system, you should first click on <font size="-1" face="Arial, Helvetica, sans-serif">Settings</font>,<font size="-1" face="Arial, Helvetica, sans-serif"> ICC profile folder</font> and  navigate to the appropriate folder. The folder may contain a large variety of profiles-- for scanners, cameras, printers, monitors, etc. You will normally select source or display (color space) profiles (not  output) for input profiles (1 and 3) and  display or output (often printer) profiles for output profiles (2 and 4). </p>
+    </blockquote></td>
+    <td><img src="images/Gamutvision_browse.gif" alt="Gamutvision profile browse window" width="426" height="275" hspace="12" vspace="8"></td>
+  </tr>
+</table>
+<ol start="2">
+  <li>Click on  &nbsp;<img src="images/Gamutvision_downarrow.gif" alt="Popup menu down arrow" width="19" height="17" align="top">&nbsp; on the right the Profile 2 popup menu, located at the lower left of the <span class="module">Gamutvision</span> window, just below&nbsp; <span class="button"><font size="-1">View</font></span>. The same options appear as for the Profile 1 popup menu. Select a profile.</li>
+  <li>To change the rendering intent, click on the rendering intent menu, between the Profile 1 and Profile 2 popup menus, to the right of&nbsp; <span class="button"><font size="-1">View</font></span>. You can choose among
+    <ul>
+      <li>the four classic rendering intents: <font size="-1" face="Arial, Helvetica, sans-serif"><strong>Perceptual</strong>, <strong>Colorimetric</strong> (relative), <strong>Saturation</strong>, or <strong>Absolute</strong> (colorimetric)</font>,</li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>None</strong></font>, in which case no gamut mapping takes place, and the full gamut of the output profile is displayed,</li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Round trip</strong> (Perceptual or Colorimetric)</font>, useful for evaluating printer profile quality. Described <a href="roundtrip.html">here</a>, and</li>
+      <li>the four classic rendering intents, soft-proofed (previewed on the monitor). Soft-proofed gamuts are restricted by the monitor profile's gamut. The monitor profile, which defaults to sRGB, can be selected by clicking <span class="smallbold">Settings</span>..., <span class="smallbold">Monitor profile</span>. These intents enable soft-proofed monitor gamuts to be compared with final output. </li>
+    </ul>
+  </li>
+
+  <li>Select the desired view in the main display selector. <font size="-1" face="Arial, Helvetica, sans-serif"><strong>3D L*a*b* (wire input, solid output)</strong></font>, shown below, is a good view to start with. You can freely switch between views at any time. </li>
+  <li>Now, click on <span class="button"><font size="-1">View</font></span> to see the results of the gamut mapping from input profile 1 to output profile 2. </li>
+  <li>You may repeat steps 1 through 5 for Profiles 3 and 4. You can chain profiles by selecting <font size="-1" face="Arial, Helvetica, sans-serif">Profile 2 (output)</font> as the input for Profile 3. Displays A and B allow input and output profiles to be compared side-by-side. </li>
+</ol>
+
+<table width="94%" border="0" align="center" cellpadding="1" cellspacing="0" bgcolor="#998866">
+  <tr>
+    <td><table width="100%" border="0" cellpadding="6" cellspacing="0" bgcolor="#FFF9EE">
+      <tr>
+        <td><span class="emphasis"><em>Selecting ICC profiles </em></span></td>
+        <td width="456" rowspan="7"><div align="center"><img src="images/recent_file.gif" alt="Recent file selection window" width="456" height="332"></div></td>
+      </tr>
+      <tr>
+        <td class="smallbold">Several options are available in Profile popup menus 1 through 4. </td>
+        </tr>
+      <tr>
+        <td><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Browse...</strong>&nbsp; Open a standard browse window. </font></td>
+        </tr>
+      <tr>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td><font size="-1" face="Arial, Helvetica, sans-serif"><strong>*sRGB...</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong><br>
+*Lab       (D50-based Lab)<br>
+*LabD65 (D65-based Lab)<br>
+*XYZ       (XYZ (D50))<br>
+*Gray22...</strong></font></td>
+            <td width="12">&nbsp;</td>
+            <td><font size="-1" face="Arial, Helvetica, sans-serif">Select a standard built-in profile. </font></td>
+          </tr>
+        </table>          </td>
+        </tr>
+      <tr>
+        <td><font size="-1" face="Arial, Helvetica, sans-serif"><em><font color="#990000"><strong>(previous profile)</strong></font></em>&nbsp; displays the profile  most recently opened with <strong>Browse...</strong> or <strong>Recent ICC profile</strong>. Click here to restore this profile after selecting one of the built-in protiles. </font></td>
+        </tr>
+      <tr>
+        <td><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Profile and output from box 2 <font color="#990000"><em>(Profile 3 only)</em></font></strong>&nbsp; The profile and output from box 2 are entered into box 3. </font></td>
+        </tr>
+      <tr>
+        <td><font size="-1" face="Arial, Helvetica, sans-serif"><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Recent ICC profile</strong>&nbsp; The window on the right appears, listing up to twelve recently-opened profiles available for opening.</font></font></td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
+<p>The full Gamutvision window is shown reduced below. Explanatory tooltips appear when the cursor is moved over buttons or controls. </p>
+<table width="90%" border="0" align="center" cellpadding="6" cellspacing="0" bgcolor="#EEEEFF">
+  <tr>
+    <td width="60%"><font size="-1" face="Arial, Helvetica, sans-serif">The large image on the upper left contains the primary gamut display. The 3D L*a*b* plot of the input gamut (wire frame) and mapped output gamut (solid) is shown. You can change the angle of view by clicking your left mouse button anywhere on the image, then moving it. You can also zoom in and out and select among several other options. The <a href="gamutvision_equations.html#gamutvol">gamut volume</a>, which is the single number that best characterizes color response, is shown on the lower right of the gamut display. Several additional views, <a href="#displaytable">listed in the table below </a>, can be selected from the display selector box on the right that contains <strong>3D La*b* (wire input, solid output)</strong>.</font></td>
+    <td width="40%"><font size="-1" face="Arial, Helvetica, sans-serif">The image on the right contains the test pattern or image. Depending on the settings (<span class="button">Inp</span>, ..., <span class="button">O&gt;M</span>), the input or output image may be displayed in its original form or mapped to the monitor color space (typically similar to sRGB). Settings are described in the table below.&nbsp;Output mapped to display profile <span class="button">O&gt;M</span> is the default. </font></td>
+  </tr>
+  <tr>
+    <td colspan="2"><div align="center"><img src="images/Gamutvision_3D_example_small.jpg" alt="Gamutvision example showing 3D plot" width="602" height="493"></div></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">The area below the left image is used to select the two input and two output profiles as well as the rendering intents (or none) used to transform the input to the output images.</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">The lower right of the Gamutvision window is the plot control area, described below. Saturation = 1 displays the gamut boundary. Lower values display the gamut <em>interior</em>. </font></td>
+  </tr>
+</table>
+<h3>Test pattern (input or output) </h3>
+<p>This image, located on the upper right of the <span class="module">Gamutvision</span> window, is controlled by selecting one of the four buttons ( <font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">Inp</span>, <span class="button">I&gt;M</span>, <span class="button">Out</span>, <span class="button">O&gt;M</span></font> ) just below the  image. The pattern depends on the display, and may be affected by the <font size="-1" face="Arial, Helvetica, sans-serif">Saturation</font> (or <font size="-1" face="Arial, Helvetica, sans-serif">Lightness</font>) slider. </p>
+<table width="80%" border="0" align="center" cellpadding="3" cellspacing="0">
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">Inp</span></font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Input image (original) with no mapping. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">I&gt;M</span></font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Input image mapped to the monitor color space (which defaults to sRGB, but can be set to any monitor profile). </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">Out</span></font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Output image (original) with no mapping.This image may look strange for printer profiles because it contains the bits sent to the printer, which can have a highly nonlinear relationship to the printed image. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">O&gt;M</span></font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Output image mapped to the monitor color space (the default). </font></td>
+  </tr>
+</table>
+<br>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+  
+  <tr>
+    <td><ul>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Zoom checkbox</strong>. Checking it turns zoom on and (for 3D displays) rotation off; unchecking it turns zoom off and (for 3D displays) rotation on. The zoom setting is kept for similar displays, for example when changing the profile but keeping the display unchanged. </font></li>
+      <li><span class="button"><font size="-1" face="Arial, Helvetica, sans-serif">Z-Out</font></span><font size="-1" face="Arial, Helvetica, sans-serif"> zooms the image back out (resets the zoom) </font></li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong><a href="blackpoint.html">Black point compensation</a> checkbox.</strong> Sets Black Point Compensation (BPC), explained <a href="blackpoint.html">here</a>. Can be set separately for left (1&gt;2) and right (3:4) data flows. Only affects Colorimetric and Saturation rendering intents for Printer (OutputClass) output profiles; has no effect on monitor (DisplayClass; color space) profiles. Most visible in the B&amp;W density response display. Makes the B&amp;W tonal response of the Colorimetric intent resemble Perceptual. </font></li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Main display selector.</strong> (<strong>3D La*b* (wire input, solid output)</strong> is displayed in the example.) Selects one of the displays listed briefly in the <a href="#displaytable">table below</a>, and in detail in <a href="gamutvision_displays.html">Using Gamutvision Part 2: Displays</a>. </font></li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>Display options area.</strong> The contents changes for different displays. </font></li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"><span class="button">Print Test</span> allows you to open a file of the printed and scanned Print Test pattern for analysis. Described in <a href="printest.html">Gamutvision Print Test</a>. </font></li>
+      <li><font size="-1" face="Arial, Helvetica, sans-serif"> The two <strong>Display A</strong> and <strong>B </strong> areas that allow you to select which of the profile results (1-4) to display as input and output. This facilitates comparisons. </font></li>
+      <li><span class="button"><font size="-1" face="Arial, Helvetica, sans-serif">Help</font></span><font size="-1" face="Arial, Helvetica, sans-serif"> opens a web browser window with online help. </font></li>
+      <li><span class="button"><font size="-1" face="Arial, Helvetica, sans-serif">Exit</font></span><font size="-1" face="Arial, Helvetica, sans-serif"> terminates Gamutvision.</font><font size="-1" face="Arial, Helvetica, sans-serif"><br>
+      </font></li>
+    </ul>    </td>
+    <td align="center"><img src="images/Gamutvision_control_area.gif" alt="Gamutvision control area" width="248" height="362" hspace="10" vspace="8"></td>
+  </tr>
+</table>
+<h2><a name="displaytable"></a>Table of Gamutvision displays </h2>
+<p>This table contains a brief summary of displays. Detailed descriptions can be found in <a href="gamutvision_displays.html">Using Gamutvision Part 2: Displays</a>. </p>
+<table width="90%" border="1" align="center" cellpadding="3" cellspacing="0">
+  <tr>
+    <td width="40%" bgcolor="#EEEEFF"><strong><font face="Arial, Helvetica, sans-serif">Display</font></strong></td>
+    <td width="104" bgcolor="#EEEEFF">&nbsp;</td>
+    <td width="40%" bgcolor="#EEEEFF"><strong><font face="Arial, Helvetica, sans-serif">Display</font></strong></td>
+    <td width="104" bgcolor="#EEEEFF">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Lab3D">3D L*a*b* (wire input, solid output) (<em>S</em> </a><a href="gamutvision_displays.html#colordiff3D">&le;</a><a href="gamutvision_displays.html#Lab3D"> 1)</a><br>
+      </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">A 3D plot in L*a*b* space showing the input  gamut as a wire frame and the output gamut as a solid. May be rotated or zoomed. Vectors&nbsp; and gamut volumes can be displayed. Lighting can be turned on to highlight the gamut surface. <em>S</em> has a default value of 1, but can be set to any value between 0 and 1.</font>      </td>
+    <td width="104" rowspan="2" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_3D_example_thumb.jpg" alt="3D plot" width="100" height="96" hspace="2"></font></td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Gamut2D">2D a*b* Gamut (<em>S</em> = 1)</a></font></strong><br>
+        <font size="-1" face="Arial, Helvetica, sans-serif">2D Gamut map on the a*b* plane. Shows the input and output gamut for the <em>S</em>=1 (maximum saturation) pattern for L = [0.1, 0.3, 0.5, 0.7, 0.9]</font>.</td>
+    <td width="104" rowspan="2" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2Dgamutmap.jpg" alt="2D gamut map" width="100" height="98" hspace="2"></font></td>
+  </tr>
+  <tr bgcolor="#FFFFEE">
+    <td width="40%"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Lab3D">3D L*a*b* Reversed (wire output) (<em>S</em> </a><a href="gamutvision_displays.html#colordiff3D">&le;</a><a href="gamutvision_displays.html#Lab3D"> 1)</a></font></strong></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Sat2D">2D a*b* Saturation (<em>L</em>(HSL) constant)</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Shows the input and output gamut response for saturation levels <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1] for fixed values of <em>L</em>(HSL). <em>L</em> has a default value of 0.5 (where colors are the most saturated), but can be set to any value between 0.05 and 0.95. This is an excellent representation of a printer's color response. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2Dsatmap.jpg" alt="2D Satuartion map" width="100" height="98" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#colordiff2D">2D a*b* Color difference (<em>L</em>(HSL) constant)</a></font></strong><font size="-1" face="Arial, Helvetica, sans-serif"><br>
+      Shows the perceptual difference between the input and output gamuts at saturation levels <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1] using fixed values of <em>L</em>(HSL) between 0.05 and 0.95 (default = 0.5). Metrics include &Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>,  &Delta;<em>C*</em><sub>CMC</sub>, &Delta;L*, &Delta;Chroma, &Delta;Hue angle, and &Delta;|Hue distance|<em>.</em></font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2D_color_diff.jpg" alt="2D a*b* color differences" width="100" height="98" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#colordiff3D">3D/2D HL Color difference  (<em>S</em> &le; 1)</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Detailed 3D or 2D plots of the perceptual differences between the input and output gamut boundaries (saturation <em>S</em> = 1), with the option of reducing <em>S</em> to display the interior of the gamut volume. Metrics include &Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>,  &Delta;<em>C*</em><sub>CMC</sub>, &Delta;L*, </font><font size="-1" face="Arial, Helvetica, sans-serif"> &Delta;Chroma, </font><font size="-1" face="Arial, Helvetica, sans-serif"> &Delta;Hue angle, and &Delta;|Hue distance|<em>.</em> Input and output Lightness (L*) and Chroma (c*) can also be displayed. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_3D_color_diff.jpg" alt="3D Color difference" width="100" height="91" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#CIE_xy">xy Chromaticity  (<em>L</em>(HSL)=0.5)</a><br>
+      </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">CIE 1931 <em>xy</em> Chromaticity pattern. <em>L</em>(HSL)=0.5 pattern. Shown with  gamuts for <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1]. Familiar but not perceptually uniform: greens are greatly exaggerated. <strong> <br>
+      </strong></font></td>
+    <td width="104" bgcolor="#DDDDDD"><img src="images/gv_thumb_xy1931.jpg" alt="CIE 1931 xy diagram" width="100" height="105" hspace="2"></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#CIE_uv">u'v' Chromaticity  (<em>L</em>(HSL)=0.5)</a><br>
+      </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">CIE 1976 y=<em>u'v'</em> Chromaticity pattern. <em>L</em>(HSL)=0.5 pattern.  More perceptually uniform than the CIE 1931 xy diagram, but still not perfect. <strong> <br>
+      </strong></font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/gv_thumb_uv.jpg" alt="u'v' chromaticity diagram" width="100" height="100" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#HSLcontour">2D HSL contour plots</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">2D plot showing values of H, S, or L(HSL) or differences between input and output H, S, and L(HSL) values. Uses either <em>L</em>(HSL)=0.5 or <em>S</em>=1   patterns. The a*b* and HL color differences (above) are preferred because results are based on device-independent L*a*b* space. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2D_HSL.jpg" alt="2D HSL plot" width="100" height="97" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#BW">Black &amp; White density response</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Grayscale density response, typically Density (-log<sub>10</sub>(reflectance)) vs. log<sub>10</sub> pixel level. The digital counterpart of traditional density curves. Uses the Grayscale pattern. The output L*, c* vs. input L* plot displays deviation from neutrality. The best display for observing the effects of <a href="blackpoint.html">Black point compensation</a>. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_BW.jpg" alt="B&amp;W density response" width="100" height="98" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#imagediff">Read image for analysis (external image file) </a></font></strong><br>
+    <font size="-1" face="Arial, Helvetica, sans-serif">2D pseudocolor image of the perceptual differences between  input and output colors&mdash; typically between an image and printed output. Same metrics as the color difference plots.  Uses the contents of an image file (not a built-in pattern). Can also produce a 3D L*a*b* vector plot of color changes. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_imagediff.jpg" alt="Image color difference, shown in pseudocolor" width="100" height="85" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFEE"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#gmbcc">GretagMacbeth&trade; ColorChecker</a><sup>&reg;</sup> <br>
+    Analyzes a simulated <a href="http://www.gretagmacbeth.com/index/products/products_colorcheckers/products_cc-overview/products_colorchecker.htm" target="_blank">ColorChecker</a> using the same options as Read image for analysis, i.e., 2D pseudocolor analysis or 3D L*a*b* vector analysis. </font></td>
+    <td bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_CC.jpg" alt="ColorChecker difference, shown in pseudocolor" width="100" height="85" hspace="2"></font></td>
+    <td bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif">Profile Info</font></strong><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp; Text from the header, including profile type, profile connection space, etc. </font> </td>
+    <td bgcolor="#DDDDDD">&nbsp;</td>
+  </tr>
+</table>
+<table width="84%" border="0" align="center" cellpadding="6" cellspacing="0">
+  <tr>
+    <td><p align="right"><strong><font color="#880000" size="-1">(Right) An early colourization fiasco, doomed when the colourists failed to agree on the rendering intent for mapping [255, 255, 255] to [255, 0, 0]. They never even got to the colourimetric meaning of these numbers,<br>
+      but they managed to establish a <a href="gamutvision_equations.html#stdcom">standards committee</a>. <br>
+                <br>
+                <em>From our colour space-case file.</em> </font></strong></p></td>
+    <td><img src="images/roses_red_360W.gif" alt="Painting the roses red" width="360" height="214" hspace="8"></td>
+  </tr>
+</table>
+<h2 align="left"><a name="menu"></a>Menu settings </h2>
+<p align="left">The menu bar at the top of the Gamutvision window contains three pulldown menus labeled&nbsp;&nbsp;<font size="-1"><span class="button">&nbsp; File&nbsp;&nbsp;&nbsp;&nbsp; Settings&nbsp;&nbsp;&nbsp;&nbsp; Help&nbsp; </span></font>.</p>
+<blockquote>
+  <h3 align="left">File&nbsp; </h3>
+</blockquote>
+<ul>
+  <li><strong align="left"><font face="Arial, Helvetica, sans-serif">Save screen </font></strong>&nbsp; Save the Gamutvision screen as a PNG image file. A dialog box allows you to select the folder and file name for the screen image. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Close</font></strong> Closes Gamutvision. Same effect as pressing <font size="-1"><span class="button">Exit</span></font> or clicking <font size="-1" face="Arial, Helvetica, sans-serif" class="button">X</font> on the upper right. </li>
+</ul>
+<blockquote>
+  <h3 align="left">Settings</h3>
+</blockquote>
+<ul>
+  <li><strong><font face="Arial, Helvetica, sans-serif">ICC Profile folder</font></strong>&nbsp; Select the folder where ICC profiles are kept. Defaults to the Windows XP profile folder, <font size="-1" face="Arial, Helvetica, sans-serif">C:\WINDOWS\system32\spool\drivers\color</font>. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Monitor profile</font></strong>&nbsp; Select the monitor profile and rendering intent. Defaults to *sRGB (the built-in sRGB profile) and (Relative) Colorimetric  intent. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">3D Plot</font></strong>&nbsp; Select options for the 3D L*a*b* plot. Same as pressing <font size="-1"><span class="button">More</span></font> in the 3D L*a*b* plot Display options. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Small fonts/Normal fonts/Large fonts</font></strong>&nbsp; Select font size. May help appearance for very large screen resolutions or when DPI is set to Large size in  the Main tab of the Advanced Display Settings. Change the font size if it appears too large or small relative to the other features. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Reset screen</font></strong>&nbsp; sets the screen to its original position and size. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Save settings</font></strong>&nbsp; Save the contents of gamutvision.ini, which contains all current <span class="module">Gamutvision</span> settings, in a named file. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Retrieve settings</font></strong>&nbsp; Retrieve the&nbsp;<span class="module">Gamutvision</span> settings contained in a named file.</li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Default settings</font></strong>  &nbsp; Restore the default settings by erasing gamutvision.ini. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Save 3D view </font></strong>&nbsp; Save the current 3D view (angle and zoom) in a named (.ini) file. Does not work for 2D views. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Retrieve 3D view </font></strong>&nbsp; Retrieve a 3D view, previously saved, from a named (.ini) file. Does not work for 2D views.</li>
+</ul>
+<blockquote>
+  <h3>Help</h3>
+</blockquote>
+<ul>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Online Help</font></strong>&nbsp; Open online instructions in a web browser </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">Register&nbsp; Register</font></strong> <span class="module">Gamutvision</span>. </li>
+  <li><strong><font face="Arial, Helvetica, sans-serif">About</font></strong>&nbsp; Version and registration information. </li>
+</ul>
+<h2 align="left"><a name="apps"></a>Gamutvision applications, tips, and techniques </h2>
+<blockquote>
+  <p align="left"><strong>These pages, which illustrate a few of <span class="module">Gamutvision's</span> many uses, make excellent tutorial material. They will help you to get the most out of <span class="module">Gamutvision</span>. </strong></p>
+</blockquote>
+<p align="left"><a href="defective_profile.html">Identifying defective profiles</a> &mdash; Use <span class="module">Gamutvision</span> to find defective profiles. The example is a popular profile with a glaring defect for the excellent Epson R2400 printer. <span class="module">Gamutvision</span> points the way to a simple solution. </p>
+<p align="left"><a href="roundtrip.html">Evaluating printer profiles with Round trip</a> &mdash; <span class="module">Gamutvision's</span> Round trip rendering intent allows you to evaluate a printer profile's reversibility (i.e., self-consistency). It doesn't tell the whole story, but it's a quick and easy way to find problem profiles.<em><strong><font color="#CC0000"> </font></strong></em></p>
+<p align="left"><a href="smudged_pines.html">Profile mystery: The case of the smudged pines</a> &mdash; <span class="module">Gamutvision</span> sheds light on a profile defect that smudges a print of pine trees. </p>
+<p align="left"><a href="blackpoint.html">Black Point Compensation</a> &mdash; <span class="module">Gamutvision</span> shows the meaning of the mysterious checkbox, which affects printed media with relative colorimetric rendering intent. </p>
+<p align="left"><a href="camera_scanner.html">Camera and scanner profiles</a> &mdash; <span class="module">Gamutvision</span> shows you their color gamuts and what happens when you convert to standard color spaces.</p>
+<p align="left"><a href="gamut_total.html">Printer gamuts: total and real</a> &mdash; There is a difference between a printer's theoretical (i.e., maximum) color gamut and the real color gamut achieved when working with standard color spaces. This page shows you ways of displaying this difference. <strong><font color="#CC0000"><em></em></font></strong></p>
+
+
+<h2><a name="issues"></a>Limitations and issues</h2>
+<p align="left"><strong>View scaling.</strong>&nbsp; The scaling or appearance of the view may occasionally be incorrect, especially after unusual views or zooms have been applied. The view can be restored by pressing a combination of the <font size="-1"><span class="button">View</span></font>, <font size="-1"><span class="button">Z-out</span></font>, and <font size="-1"><span class="button">Reset scale</span></font> buttons. </p>
+<p align="left"><strong>Embedded ICC profiles.</strong> Gamutvision cannot read ICC color profiles embedded in image files. This only affects the Image color difference function. You must enter the appropriate ICC profile. </p>
+<p align="left"><strong>Device-link profiles.</strong>&nbsp; Gamutvision does not currently support device-link profiles. We hope to add that capability in the future. If you try to read a device-link profile, you may get an error that terminates Gamutvision, and this error may repeat when you try to reopen it. If this happens, either (A) delete gamutvision.ini, which is located in the Gamutvision installation folder (C:\Program files\Gamutvision in English language installations), or (B) edit gamutvision.ini (a simple ASCII text file), and remove the line with the offending file. There is no need to replace it. </p>
+<p align="left"><strong>OpenGL.</strong>&nbsp; The 3D L*a*b* display uses the OpenGL renderer. This may cause instability on some computers. More information can be found <a href="http://www.mathworks.com/support/tech-notes/1200/1201.html" target="_blank">here</a>. If you are having problems that may be caused by OpenGL, you should download and install the latest driver for your graphics adaptor: <a href="http://www.mathworks.com/support/tech-notes/1200/1201.html#Section_8" target="_blank">details here</a>. Gamutvision uses <em><strong>software</strong></em> OpenGL, as described <a href="http://www.mathworks.com/support/tech-notes/1200/1201.html#Section_9" target="_blank">here</a>. We had serious problems prior to implementing this patch. With Gamutvision 1.1.5 you can turn off OpenGL using the <font size="-1"><span class="button">More</span></font> button, but this removes the wireframe display, reducing the value of the 3D L*a*b* plots. This option is primarily for diagnosing mysterious Gamutvision crashed. We recommend following the advice in the <a href="http://www.mathworks.com/support/tech-notes/1200/1201.html" target="_blank">Mathworks page</a> for getting OpenGL to work correctly. </p>
+<p align="left"><strong>Printing.</strong>&nbsp; The Gamutvision window cannot be printed directly due to compiler limitations. You must print it from an image editor after either (a) saving it and opening it in the editor or (b) copying it to the clipboard using <font size="-1" face="Arial, Helvetica, sans-serif">Alt-PrintScreen,</font> then pasting it into the image editor. <a href="http://www.irfanview.com/" target="_blank">Irfanview</a> is a nice free image viewer that does the job well. </p>
+<p align="left">If you encounter problems with loading or running Imatest, go to the <a href="troubleshooting.html">Troubleshooting page</a>. </p>
+</body>
+</html>

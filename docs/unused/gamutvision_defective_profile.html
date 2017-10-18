@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Gamutvision instructions">
+  <meta content="Gamutvision instructions" name="description">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h2>
+<a name="intro" id="intro"></a>Introduction</h2>
+<blockquote>
+  <blockquote>
+    <p><font color="#CC0000"><strong><font color="#CC0000"><strong><font size="-1" face="Arial, Helvetica, sans-serif">A beta version of </font></strong></font><font size="-1" face="Arial, Helvetica, sans-serif"><em class="module">Gamutvision</em> is available <a href="#load">here</a> for registered Imatest users. <br>
+      There will be many refinements prior to the &quot;final&quot; release. </font></strong></font></p>
+  </blockquote>
+</blockquote>
+
+<p align="left"><span class="module">Gamutvision</span> can simulate and analyze the performance of printer/paper/ICC profile combinations from ICC profiles only: <em><strong><font color="#330066">you can learn a lot about the performance of a printer/paper combination without having the printer or paper in your possession</font><font color="#663333">.</font></strong></em> All you need is the ICC profile, which can often be dowloaded from the internet. This enables you to do a number of remarkable things.</p>
+<ul>
+  <li>You can get a good idea about what to expect from  a printer or paper <em><strong><font color="#330066">before you buy</font></strong></em>. </li>
+  <li>You can determine the quality of ICC profiles, and you can learn which rendering intents work best.</li>
+  <li>You can find out if your printer is performing as specified&mdash; by comparing test prints with <span class="module">Gamutvision</span> simulations.  It won't tell you why your prints aren't coming out correct&mdash; whether it's your printer hardware or software settings, but it will show you <font color="#333366"><em><strong>exactly</strong></em></font> what's happening. This can be a huge help in tracing problems. </li>
+</ul>
+<p align="left">You can test ICC profiles to see if they are defective. This may not seem like will be able to without the physical presence of the printer or paper. without is its analysis of ICC profile performance, which enables it to diagnose bad profiles.</p>
+<p align="left">SPR2400 EnhMatte BstPhoto.icc</p>
+<p align="center"><img src="images/Epson_defective_3D_small.jpg" alt="3D plot showing defective profile" width="602" height="493"></p>
+<p align="left">&nbsp;</p>
+<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>The results of printing the test pattern, shown below, on the Epson R2400 (6.5<font face="Arial, Helvetica, sans-serif">x</font>10 inches) using ... profile, then scanning the print into the Epson 3200 and saving the results saved as an sRGB file are shown on the right. The similarity of the scanned print with the image above&mdash; <em><strong>derived from the profile</strong></em>&mdash;  is quite stunning; nearly perfect to the eye. </td>
+    <td rowspan="2"><div align="center"><img src="images/R2400_enhmatte_best_percept_480H.jpg" alt="Scanned test pattern" width="313" height="480" hspace="12" vspace="2"></div></td>
+  </tr>
+  <tr>
+    <td><div align="center"><img src="images/Print_test_target_sRGB_280H.jpg" alt="Print test target" width="181" height="280"></div></td>
+  </tr>
+</table>
+<p align="left">&nbsp;</p>
+<p align="center"><img src="images/Epson_defective_printest_3D_small.jpg" alt="Print test results" width="602" height="493"></p>
+<p align="left">This looks almost identical to the first image, but it's generated from a  scanned print (Epson 3200 flatbed scanner set for ICM color management with output to Adobe RGB (1998). </p>
+<p align="left"><img src="images/Epson_defective_2Dsatmap_small.jpg" alt="from profile" width="602" height="493"> </p>
+<p align="left"><img src="images/Epson_defective_printest_2Dsatmap_small.jpg" alt="from scanned print" width="602" height="493"></p>
+<p align="left"><img src="images/Epson_colrmtrc_2Dsatmap_small.jpg" alt="Colorimetric-- good profile" width="602" height="493"></p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+<p align="left">&nbsp;</p>
+</body>
+</html>

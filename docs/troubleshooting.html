@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Troubleshooting Gamutvision">
+  <link rel="stylesheet" href="style/style.css" type="text/css">
+  <title>Troubleshooting Imatest</title>
+</head>
+<body>
+<h2>Version
+</h2>
+<p>Be sure you have the current version. It may contain fixes to bugs that appeared in earlier versions. </p>
+<p>The version number appears in the bar at the top of the <span class="module">Gamutvision&trade;</span> main window. If it's not the same as the latest version in the <a href="changelog.html">Change Log</a>, you should <a href="../download">download</a>, <a href="installation.html">install</a>, and run the latest version. </p>
+<h2><i><font color="#000099" face="Arial,Helvetica">Installation</font></i>
+</h2>
+<p><b>Update installations do not normally require an uninstall of the previous
+  version</b>, but if you encounter difficulties you may want
+  to uninstall and reinstall Imatest. The Uninstaller is accessable from the Start menu
+  (<font size="-1" face="Arial,Helvetica">Start, All programs, Gamutvision, Uninstall</font>) or from the <font size="-1" face="Arial,Helvetica">Add or Remove Programs</font> function of the Control Panel. It
+  gives you the option of keeping or removing the Matlab runtime library
+  archive,
+  <b><a href="../packages/Imatest-lib.exe">Imatest-lib.exe</a></b>. (Keep is the default;
+  you have to check the box to remove it.) Keeping it speeds up reinstallations.
+Remove it only if you don't plan to reinstall Gamutvision or if you have good reason to suspect it may be corrupted (a rare occurrence). Click <a href="installation.html">here</a> for full installation instructions.</p>
+<h2>Problems during installation </h2>
+<p>Installation can fail if</p>
+<ul>
+  <li>You don't   have <strong>administrator priveleges</strong> on your computer during installation. </li>
+  <li>Your computer is behind a strong corporate firewall. </li>
+</ul>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>This message sometimes appears in systems that have strong firewalls. It can usually be corrected by making sure  the Matlab runtime library, <a href="../packages/Imatest-lib.exe">Imatest-lib.exe</a>, is in the same folder as the Imatest installation file, available from the <a href="../download">Download page</a>. You may need to temporarily disable your firewall and manually download the library file. We are working on a more permanent solution. </p></td>
+    <td><img src="images/install_write_error.jpg" alt="Install error" width="440" height="178" hspace="10" vspace="4"></td>
+  </tr>
+</table>
+<p>If you have receive an indication of a &quot;DNS error&quot; (very rare), try clicking <span class="button">Start</span>, <font face="Arial, Helvetica, sans-serif">Run...</font> Enter <font face="Arial, Helvetica, sans-serif">ipconfig /flushdns</font> in the <font face="Arial, Helvetica, sans-serif">Open...</font> box, then click <span class="button">OK</span>. </p>
+<h2>Problems following installation </h2>
+<p>The most common installation problem is a failure of the Matlab runtime library, <a href="../packages/Imatest-lib.exe">Imatest-lib.exe</a>, to download or install properly. This results in an error message of the form, </p>
+<blockquote>
+  <p><font size="-1" face="Arial, Helvetica, sans-serif">&quot;The procedure entry point ... could not be 
+      located in the dynamic link library ... .dll.&quot; </font></p>
+</blockquote>
+<p>If you get such a message, check to see if file <a href="../packages/Imatest-lib.exe">Imatest-lib.exe</a> has been downloaded correctly. Also, check the status of your firewall. <span class="module">Firewalls have caused this problem.</span> </p>
+<ul>
+  <li>If it was downloaded automatically (during installation) there should be a copy in the <span class="module">Gamutvision</span> installation folder (C:\Program files\Gamutvision in English language installations). </li>
+  <li>If you downloaded it manually (usually required in systems with firewalls), there should be a copy in the same folder as the Gamutvision installer program, Gamutvision-<em>x.x</em>.exe. </li>
+</ul>
+<p>Windows XP Explorer reports its size as 8,513 kB, but the tooltip that appears when you move the cursor over the file name reports its size as 8.31 MB (go figure). If the download failed, a smaller size may be reported.</p>
+<p>If you fail to find Imatest-lib.exe or if you suspect that it was downloaded incorrectly, download it by right-clicking <a href="../packages/Imatest-lib.exe">here</a> or on any of the links in this section, then <a href="installation.html">reinstall</a> <span class="module">Imatest</span>. Imatest-lib.exe is a self extracting zip file that places the Matlab runtime library in subfolders bin\win32 and toolbox\matlab of the <span class="module">Imatest</span> installation folder. If problems persist, check to see that these folders are populated, then send  e-mail to <a href="contact.html">Imatest/Gamutvision support</a> with the text of the error message, if any, that appears in the DOS window.</p>
+<h2>Runtime errors </h2>
+<p>If <span class="module">Gamutvision</span> does not run as expected, the DOS window that normally stays minimized may contain helpful information. You can open it by clicking on the Gamutvision DOS Window icon  <img src="images/Gamutvision_icon_16.png" width="16" height="16" hspace="3" align="absmiddle"> in the taskbar. Here are some potential problems.</p>
+<ul>
+  <li>An <span class="module">Gamutvision</span> run may fail if the image file path name contains non-Latin characters. We have seen such a failure with Chinese characters. The error message was <br>
+    <font size="-1" face="Courier New, Courier, monospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The error message caught was &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp; Invalid file identifier. </font><br>
+  </li>
+</ul>
+<p>If you cannot solve the problem, send an e-mail to <a href="contact.html">Imatest/Gamutvision support</a>.</p>
+<ul>
+  <li>Tell us your operating system.</li>
+  <li>Attach gamutvision.ini, which may contain helpful information. In English language installations the full file name is C:\Program files\Imatest\gamutvision.ini. (It's different in other languages, for example, C:\Programme\Imatest\gamutvision.ini in German.) This will help us diagnose the problem.</li>
+  <li>Send the text of the error message, if any, that appears in the DOS window. (See the box below for instructions on getting a screen dump from the DOS window.)</li>
+  <li>In the Gamutvision main window, click on <font face="Arial, Helvetica, sans-serif">Settings</font> (in the toolbar), <font face="Arial, Helvetica, sans-serif">Default settings</font>. This deletes gamutvision.ini and creates a new version with default values. It sometimes fixes the problem. </li>
+</ul>
+<table width="584" border="0" align="center" cellpadding="6" cellspacing="1" bgcolor="#AAAAAA">
+  <tr>
+    <td bgcolor="#EEEEEE">
+	<strong><font face="Arial, Helvetica, sans-serif">The DOS window</font></strong><font face="Arial, Helvetica, sans-serif"><br>
+        <font size="-1">    Gamutvision </font><font face="Arial, Helvetica, sans-serif"><span class="small">runs from a DOS window that normally stays minimized. When a run terminates unexpectedly or just stalls, the DOS window may contain useful debugging information. To  get the DOS window contents, </span></font> <span class="small"></font> </span> </font>
+	<p class="small"><font face="Arial, Helvetica, sans-serif">Click on the Imatest icon in the taskbar (usually at the bottom of the screen) to bring up the DOS window.</font></p>
+	<p class="smallbold"><font size="-1" face="Arial, Helvetica, sans-serif">Procedure 1: Copy and paste text (simple, but a little tricky) </font></p>
+	<ul>
+      <li class="small">Right-click inside the DOS window, then click on <strong>Select All</strong> in the context menu. </li>
+	  <li class="small">Press <strong>Enter</strong> (or <strong>Return</strong>) on the keyboard. This is equivalent to Ctrl-C (Copy) in Windows (which doesn't work in the DOS window). </li>
+	  <li class="small">Paste the text into your <a href="contact.html">e-mail</a> using a standard Windows Paste command (Ctrl-V or Edit, Paste).</li>
+	  <li class="small">It's OK to delete obviously irrelevant text before you send the e-mail. </li>
+	  </ul>
+	<p class="smallbold"><font size="-1" face="Arial, Helvetica, sans-serif">Procedure 2: Copy and paste screen dump image (complex but reliable) </font></p>
+	<ul class="small">
+      <li><font face="Arial, Helvetica, sans-serif">Click <strong>Alt-PrtSc</strong> or <strong>Alt-PrintScreen</strong>, depending on the keyboard. </font></li>
+	  <li><font face="Arial, Helvetica, sans-serif">Paste the image (from the clipboard) into an image editor. In most image editors (for example, <a href="http://www.irfanview.com/" target="_blank">IrfanView</a>, a great free utility ), click Edit, Paste. </font></li>
+	  <li><font face="Arial, Helvetica, sans-serif">Save the image as a GIF or PNG file (much smaller than TIFF or BMP and clearer  than JPEG).</font></li>
+	  <li><font face="Arial, Helvetica, sans-serif">Attach the file to the <a href="contact.html">e-mail</a> (or include it inline). </font></li>
+	  </ul>
+	<div align="center"><img src="images/doswindow.gif" width="564" height="191" vspace="4">
+    </div></td>
+  </tr>
+</table>
+
+<p><b>For Gamutvision errors that shut down the DOS window (this is rare),</b></p>
+  <ul>
+  <li>
+  Run Gamutvision from the Gamutvision folder (C:\Program files\Gamutvision in English
+  installations) by double-clicking Diagnostics&nbsp;<img src="images/Gamutvision_icon_16.png" height="16" hspace="3" width="16">(or diagnostics.bat).
+  This keeps the DOS window open after Gamutvision terminates so you can view
+  the error message.</li>
+  <li>
+  <a href="contact.html">E-mail</a>  the error message to Imatest/Gamutvision support.</li>
+</ul>
+  <h3>Device-link profiles</h3>
+  <p align="left">Gamutvision does not currently support device-link profiles. We hope to add that capability in the future. If you try to read a device-link profile, you may get an error that terminates Gamutvision, and this error may repeat when you try to reopen it. If this happens, either (A) delete gamutvision.ini, which is located in the Gamutvision installation folder (C:\Program files\Gamutvision in English language installations), or (B) edit gamutvision.ini (a simple ASCII text file), and remove the line with the offending file. There is no need to replace it. </p>
+  <p>&nbsp; </p>
+</body></html>

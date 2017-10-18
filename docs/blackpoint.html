@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+<title>Black Point Compensation</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Black Point Compensation">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h3>
+  <a name="intro" id="intro"></a>Introduction</h3>
+<p><span class="module">Black point compensation</span> (BPC) can be a source of bewilderment for digital printmakers. There is plenty of conflicting advice on whether or not to check the BPC box when making prints from Photoshop or other programs. This page may contain the first clear explanation of BPC. </p>
+<p>BPC <em>must</em> be explained visually; verbal descriptions don't cut it. For example, <a href="http://www.color.org/Adobe1bpc.pdf" target="_blank">Adobe's description of BPC</a> for colorimetric rendering on the <a href="http://www.color.org/Adobe1bpc.pdf" target="_blank">Color.org website</a> states,</p>
+<blockquote>
+  <p align="left"><font size="-1" face="Arial, Helvetica, sans-serif">Otherwise, estimate the Destination Black Point from the round-trip curve. The round 
+    trip curve should look like a nearly constant section at the black point, with a corner and a 
+    nearly straight line to the white point. Estimate the length of the constant section to 
+    estimate the destination black point. The problem is that there is often noise in the 
+    constant section, and the corner is often rounded. Ignore any &quot;toe&quot; around the black 
+    point and estimate exactly where the extrapolated round trip curve would intersect the 
+    nearly constant black limited area. Fit a least square error quadratic curve though the 
+    shadow section of the curve, and use the point where this curve intersects the L*=0 round 
+  trip value as the Destination Black Point. </font></p>
+</blockquote>
+<p align="left"><em><strong>Got it?</strong></em> Well... It might make a little more sense after you study the illustrations below. (I just know you won't be able to sleep until you figure out where the extrapolated round trip curve intersects the least square error quadratic, will you?)</p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The figures below contain <a href="tour_gamutvision.html">Gamutvision&trade;</a> results without and with BPC for the Epson R2400 printer with Enhanced Matte  and Premium Luster papers. All results are derived from Epson-supplied ICC profiles, using Gamutvision's <a href="gamutvision_displays.html#BW">B&amp;W density response</a> display, which is the digital counterpart (with axes  reversed) of characteristic curves for photographic paper, illustrated on the right for <a href="http://www.ilfordphoto.com/Webfiles/2006130195422907.pdf" target="_blank">Ilfobrom Galerie FB glossy paper</a>. These curves are displayed logarithmically. </p>
+      <p><strong><em>Density</em></strong> is defined as -log<sub>10</sub>(reflected light/incident light), proportional to -log<sub>10</sub>(luminance). Increasing density by 1 decreases brightness by a factor of 10; doubling or halving exposure (or brightness) corresponds to a density change of 0.301. The maximum printable density (Dmax) for the Ilford Galerie FB paper is an outstanding 2.2 (a very deep black). </p>
+    </td>
+    <td><img src="images/Ilfospeed_paper_curves.gif" alt="Ilfospeed characteristic curves" width="375" height="330" hspace="10" vspace="4" border="1"></td>
+  </tr>
+</table>
+<p> BPC (in Gamutvision as well as Photoshop and other editors) applies only to Colorimetric rendering intents. BPC is always on for Perceptual intent, regardless of whether the box is checked.  Details <a href="#details">below</a>. In Gamutvision, BPC is set with a dropdown menu which has four settings: (Off, 1&gt;2 (Left data flow), 3&gt;4 (Right data flow), and Both (On). </p>
+<h3>Black point compensation off </h3>
+<p>Print density is proportional to file density for file densities less than the maximum printable density (Dmax). (Dmax = 1.63 for Enhanced Matte paper; Dmax = 2.12 for Premium Luster paper.) Pixels with lower values (representing higher densities) print at paper black, i.e., they are clipped (chopped off); no detail is visible. File and print densities are explained <a href="#details">below</a>. </p>
+<p align="center"><img src="images/BlackPtComp_off.gif" alt="Black point compensation off" width="531" height="572"></p>
+<h3 align="left"> Black Point Compensation on</h3>
+<p align="left">Print density rolls off smoothly (is rounded) in the region around density = Dmax. Tonal detail is still present where file density is greater than Dmax. Some tones are lightened, but print density approaches Dmax at the lowest pixel levels.</p>
+<p align="center"><img src="images/BlackPtComp_on.gif" alt="Black point compensation on" width="531" height="572"></p>
+<blockquote>
+  <p align="left"><font size="-1"><strong><em><font face="Arial, Helvetica, sans-serif">Summary:</font></em></strong><font face="Arial, Helvetica, sans-serif"> With BPC off, response is linear with the lowest pixel levels clipped (chopped off) at Dmax; with BPC on, response is rounded, i.e., it has a &quot;toe&quot; region around Dmax where some detail is present. Tones in the &quot;toe&quot; are lightened slightly, but  tones for the lowest pixel levels approach Dmax. </font></font></p>
+</blockquote>
+<p align="left">In this author's opinion, the best match between the monitor image and the print (for fine art photography) takes place when BPC is turned on. My default print setting is Relative Colorimetric rendering intent with Black point compensation on. BPC should probably be turned off for scientific or technical imagery. </p>
+<h3 align="left">Linear results </h3>
+<p align="left">When you look at the linear results: Output vs. Input luminance, the <a href="http://www.littlecms.com/" target="_top">LittleCMS</a> BPC algorithm becomes even clearer.</p>
+<table border="0" align="center" cellpadding="4" cellspacing="0">
+  <tr>
+    <td><div align="center"><strong><img src="images/Linear_BPC_off.gif" alt="BPC off; linear display" width="340" height="328"><br>
+    BPC off </strong></div></td>
+    <td><div align="center"><strong><img src="images/Linear_BPC_on.gif" alt="BPC on; linear display" width="340" height="328"><br>
+      BPC on </strong></div></td>
+  </tr>
+  <tr>
+    <td colspan="2"><div align="center"><strong>Output vs. Input Luminance (linear display) </strong></div></td>
+  </tr>
+</table>
+<p align="left">These plots contain exactly the same data plotted above for Epson Enhanced Matte (BstPhoto). The only difference is that they are linear: they plot luminance rather than density (-log<sub>10</sub>(luminance)). A minimum luminance of 0.024 (relative to a maximum of 1.0), shown in the left plot (BPC off), is equivalent to a maximum density of 1.62. </p>
+<p align="left">With BPC  off, Output luminance tracks Input luminance down to the medium's minimum luminance (Lmin = 10<sup>-Dmax </sup>); it is constant (equal to Lmin) for lower values of input luminance. With BPC on, Output tracks Input linearly all the way down. The equations (for Input and Output luminance normalized to 1) are,</p>
+<table border="0" align="center" cellpadding="4" cellspacing="0">
+  <tr>
+    <td><strong>BPC off </strong></td>
+    <td>Output luminance = Input luminance;&nbsp;&nbsp;&nbsp; Lmin &lt; Input luminance &le; 1 <br>
+Output luminance = Lmin; &nbsp;&nbsp; 0 &le; Input luminance &le; Lmin </td>
+  </tr>
+  <tr>
+    <td><strong>BPC on </strong></td>
+    <td>Output luminance = Lmin + (1-Lmin)&nbsp;&times; Input luminance </td>
+  </tr>
+</table>
+<h3 align="left"><a name="details"></a>Details</h3>
+<ul>
+  <li><strong>BPC</strong> is always <strong>on</strong> for <strong>perceptual</strong> rendering intent, i.e., the checkbox setting has no effect. </li>
+  <li><strong>BPC</strong> can be turned <strong>on or off</strong> for (<strong>Relative</strong>) Colorimetric and Saturation rendering intents.</li>
+  <li><strong>BPC</strong> is always <strong>off</strong> for <strong>Absolute</strong> (Colorimetric) rendering intent. <em><font color="#990000">[Unresolved issue: I've been told that BPC should work with Colorimetric intents, i.e., Relative and Absolute. Perhaps Absolute and Saturation have been swapped somehow.]</font></em></li>
+  <li><em><strong>Input density</strong></em> is derived from pixel levels in the image file.  For a file with bit depth of 8 (levels from 0 to 255), luminance = (pixel level/255)<sup><em>gamma</em></sup>, where <em>gamma</em> is specified by the file's color space. For example, Adobe RGB (1998) has <em>gamma</em> = 2.2. Since density is  proportional to -log<sub>10</sub>(luminance),<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; input density = -<em>gamma</em> log<sub>10</sub>(pixel level/255).</li>
+  <li><strong><em>Output density</em></strong> is derived from the printer profiles (in the files at the bottom of the figures). It is calculated when Gamutvision's <a href="gamutvision_displays.html#BW">B&amp;W density response</a> display is selected. </li>
+  <li>In a printer that could reproduce infinitely deep black tones, output density would track input density all the way down to zero. But real-world printers cannot print any darker than a maximum density, which is called Dmax. Dmax is a function of the paper surface and the type and amount of ink. Glossy or semigloss papers tend to have higher values of Dmax (2 or higher) than matte (fine art) papers (typically around 1.6-1.7). Black point compensation specifies the printers behavior around Dmax. </li>
+</ul>
+</body>
+</html>

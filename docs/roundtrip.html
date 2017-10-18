@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Camera and scanner gamuts</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Camera and scanner gamuts">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p><span class="module">Gamutvision</span> has several has several approaches to evaluating printer profile quality, each of which illustrates different aspects of quality. The simplest is a visual observation of the output test pattern (after gamut mapping; best if the output is mapped to the monitor color space: <font size="-1"><span class="button">O&gt;M</span></font> ). Irregularities and large defects in printer response are plainly visible. The most comprehensive is <a href="../../../docs/docs/printest.html">Print Test</a>, but it's also the most time-consuming, and it depends on careful technique and a well-characterized scanner for accurate results.</p>
+<p>This page describes the use of <span class="module">Round Trip</span> rendering intents for screening profiles and identifying potential problems. Round trip is an extremely fast way to test a printer profile's reversability, i.e., consistency. Round trip tests are described on p. 346 of <a href="http://www.amazon.com/gp/product/1401814476/sr=1-1/qid=1154211075/ref=sr_1_1/102-3371580-5530522?ie=UTF8&amp;s=books" target="_blank">Understanding Color Management</a> by Abhay Sharma. </p>
+<p>A round trip test consists of the following steps </p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><ol><li>Map a printer profile's gamut boundary to L*a*b* using the AToB<em>n</em> (device to profile connection space (PCS)) profile tag. This becomes the reference L*a*b* values, which describe the printer gamut. This step ensures that no out-of-gamut colors are sent to the device in step 2. </li>
+        <li>Map the reference L*a*b* values back to  printer RGB (or CMYK) using the BToA<em>n</em> (PCS to device) profile tag. </li>
+        <li>Map the printer RGB (or CMYK) values to L*a*b*, again using the AToB<em>n</em> profile tag. Steps 2 and 3 are the heart of the round trip. </li>
+    </ol></td>
+    <td><img src="images/Gamutvision_roundtrip_block.gif" alt="Gamutvision round trip structure" width="364" height="211" hspace="12" vspace="4" /></td>
+  </tr>
+</table>
+<ol start=4>
+  <li>Compare the second set of L*a*b* values (Output) to the first (reference; &quot;Input&quot;) L*a*b* values. If the profile is performing properly, i.e., is reversable, there will be very little difference between the two.</li>
+</ol>
+<p>Round trip tests are normally done with relative colorimetric intent, but perceptual rendering intent is also of interest.</p>
+<h3>Using Round trips in Gamutvision</h3>
+<p>Performing a round trip test is extremely simple. Select a printer profile for either of the output profiles (2 or 4) and select either <font size="-1" face="Arial, Helvetica, sans-serif"><strong>Round trip <em>n</em> (Percept.)</strong></font> or <font size="-1" face="Arial, Helvetica, sans-serif"><strong>Round trip <em>n</em> (Colrmtrc.)</strong></font> rendering intent.  (<em>n</em> is either 2 or 4.) The input profile is grayed out when a round trip intent is selected.</p>
+<h3>Examples</h3>
+<p>We illustrate the round trip with two profiles, both for the Epson R2400 printer with matte fine art papers.  One performs well; the other has a problem.</p>
+<p align="center"><img src="images/R2400_EnhMatte_Roundtrip_3DLab.jpg" alt="Enhanced Matte Round trip 3D L*a*b*" width="602" height="493" /> </p>
+<p align="left">This is the 3D L*a*b* (wire input, solid output) plot for the Epson R2400 with Enhanced Matte paper (BstPhoto profile), round-tripped with colorimetric rendering intent. From this image it's difficult to see any difference between input and output. That's a good sign. The output image (upper right) should be ignored: it has no valid meaning for round trip intents. </p>
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>The 2D/3D HL Color difference plot, set to 3D HL (HSL) background and&nbsp;&Delta;E*<sub>ab</sub> display, shows color differences very clearly. Except for a curious spike in the dark bluish-green spike (not that large), &Delta;E*<sub>ab</sub> is extremely low-- mostly less than 1. </p>
+    <p>This plot has a number of options. It can also display &Delta;E*<sub>94</sub> and &Delta;E*<sub>CMC</sub> as well as corresponding &Delta;C* values (similar to &Delta;E*, but omitting luminance difference). It can also be rotated and zoomed. </p></td>
+    <td><img src="images/R2400_EnhMatte_Roundtrip_DE.jpg" alt="Enhanced matte round trip Delta-E" width="410" height="450" hspace="8" vspace="4" /></td>
+  </tr>
+  <tr>
+    <td><p>This is the 3D L*a*b* (wire input, solid output) plot for the Epson R2400 with a fine art paper. We omit the manufacturer's name because they may fix their profile. Their papers are excellent&mdash; only the profile is at fault.&nbsp; There is a large difference between the input and output L*a*b* gamuts for the shadow region: the output (solid) is weak. </p></td>
+    <td><img src="images/R2400_FineArt_Roundtrip_3DLab.jpg" alt="Fine Art paper Round trip 3D L*a*b*" width="410" height="408" hspace="8" vspace="4" /></td>
+  </tr>
+  <tr>
+    <td><p>The 2D/3D HL Color difference plot, set to 3D HL (HSL) background and&nbsp;&Delta;E*<sub>ab</sub> display, highlights the color differences in the shadow region. </p>
+    <p>There are a number of limitations to the round trip test. Foremost among them is that it's difficult to tell where the problem lies: in the BToA<em>n</em> (PCS to device) tags, which affect the print, or the AToB<em>n</em> (device to PCS) tags, which affect soft proofing. But there are clues. This profile shows a large discrepancy between Dmax (maximum B&amp;W density) with and without Black Point Compensation. BPC normally affects the shape of the B&amp;W density response, but has little effect on Dmax. This indicates that the critical BToA<em>n</em> tag could be at fault. </p></td>
+    <td><img src="images/R2400_FineArt_Roundtrip_DE.jpg" alt="Fine Art paper round trip Delta-E" width="410" height="450" hspace="8" vspace="4" /></td>
+  </tr>
+</table>
+<p align="left">&nbsp; </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

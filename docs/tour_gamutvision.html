@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Gamutvision Tour</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+  <meta name="Description" content="Gamutvision Tour">
+  <link rel="stylesheet" href="style/style.css"><title>Gamutvision Tour</title>
+  <style type="text/css">
+<!--
+.style3 {text-align: left; font-weight: bold; margin: 10px;}
+.style4 {color: #660000; font-weight: bold; font-style: italic;}
+.style5 {font-family: arial, helvetica, sans-serif}
+-->
+  </style>
+</head>
+<body>
+<p><a name="intro" id="intro"></a><span class="module">Gamutvision&trade;</span><strong><font size="-1" face="Arial, Helvetica, sans-serif"> is a gamut viewer and <font color="#AA0000"><em>much more</em></font>: it is a powerful tool for learning color management, exploring its operations, and proofing color workflows.</font> </strong></p>
+<p><font color="#000099" face="Arial, Helvetica, sans-serif"><em><strong>What can you do with Gamutvision? </strong></em></font></p>
+<ul>
+  <li><font color="#000099" size="-1" face="Arial, Helvetica, sans-serif"><em><strong>Visualize color gamuts, gamut mappings, and rendering intents.</strong></em></font></li>
+  <li><font color="#000099" size="-1" face="Arial, Helvetica, sans-serif"><em><strong> Evaluate ICC profile quality.</strong></em></font></li>
+  <li><font color="#000099" size="-1" face="Arial, Helvetica, sans-serif"><em><strong>Analyze printer, paper, and photo lab performance using <a href="#profdownload">downloaded profiles</a>.</strong></em></font></li>
+  <li><font color="#000099" size="-1" face="Arial, Helvetica, sans-serif"><em><strong>Analyze the performance of your printer using <a href="#printest">scanned test prints</a> or <a href="roundtrip.html">round trip</a> mappings.</strong></em></font></li>
+  <li><font color="#000099" size="-1" face="Arial, Helvetica, sans-serif"><em><strong>See precisely how an image will  change <a href="#images">when printed</a>. </strong></em></font></li>
+</ul>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="404" valign="middle"><img src="images/Gamutvision_3D_example_crop.jpg" alt="3D plot example" width="384" height="384" hspace="10">      </td>
+    <td><p><font size="-1"><strong><font face="Arial, Helvetica, sans-serif">The image on the left is a typical Gamutvision display: a 3D L*a*b* representation of the color gamuts of</font></strong></font></p>
+      <ul>
+        <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong> the Adobe RGB (1998) color space (outer wire frame), and </strong></font></li>
+        <li><font size="-1" face="Arial, Helvetica, sans-serif"><strong>an Epson R2400 print made on Premium Luster paper set to best quality, mapped from Adobe RGB with colorimetric rendering intent (inner solid). Results  derived from Epson's ICC profile (an  <a href="http://photoshopnews.com/2005/10/06/x-rite-premium-profiles-bundled-with-epson-r2400-printer/" target="_blank">X-rite &quot;premium&quot; profile</a>, released around October 2005; different from earlier profiles supplied with the R2400). </strong></font></li>
+      </ul>
+    <p><font size="-1" face="Arial, Helvetica, sans-serif"><strong>This is  one of several <span class="style4"><a href="#displaytable">Gamutvision</a></span><a href="#displaytable"> displays</a>. It  can be rotated and zoomed. Gamut volumes, which are the single numbers that best characterize gamut size, are optionally displayed on the lower-right. </strong></font></p>
+    <blockquote>
+      <p><font size="-1" face="Arial, Helvetica, sans-serif">Gamutvision uses <a href="http://www.littlecms.com/lcmsMatlab.zip" target="_blank">ICCTrans</a>, the Matlab interface to the <a href="http://www.littlecms.com/" target="_blank">LittleCMS</a> color management system. The&nbsp;<a href="http://www.littlecms.com/lcmsMatlab.zip" target="_blank">ICCTrans</a> file is worth downloading for the excellent manual. Many             thanks to Ignacio Ruiz de Conejo and Marti Maria (of Hewlett-Packard Spain) for their outstanding work.</font></p>
+    </blockquote></td>
+  </tr>
+</table>
+
+<br>
+<h2><a name="structure"></a>Gamutvision structure </h2>
+<table width="100%" border="0" cellspacing="0" cellpadding="4">
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_block.gif" alt="Gamutvision block diagram" width="432" height="282" hspace="10" vspace="8" align="right"></font></td>
+    <td>      You can select up to four ICC profiles (files that characterize device color or color spaces): two input profiles (1 and 3) and two output profiles (2 and 4). The full gamuts of the input profiles are always calculated. The gamut response of the output profiles <em><strong><font color="#660000">after mapping</font></strong></em> are calculated unless <font size="-1" face="Arial, Helvetica, sans-serif">Rendering intent</font> is set to <font size="-1" face="Arial, Helvetica, sans-serif"><strong>None</strong></font>. You can view gamuts using numerous options.
+      <ul>
+        <li>You can view  input and corresponding output gamuts simultaneously.</li>
+        <li>You can view <strong><em>any</em></strong> two gamuts simultaneously using Displays A and B. </li>
+        <li>You can rapidly switch between views using the four <span class="button">View</span> buttons. </li>
+      </ul>
+    <span class="module">Gamutvision's</span> structure is shown in more detail in <a href="gamutvision.html#structure">Using Gamutvision</a>. Its displays are summarized in the table <a href="#displaytable">below</a>.  <br></td>
+  </tr>
+</table>
+<table width="90%" border="0" align="center" cellpadding="8" cellspacing="0" bgcolor="#EEEEEE">
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Color management is the science (or perhaps the art) of transforming images between files and devices with different color gamuts&mdash; ranges of reproducible colors. And <em><strong>every</strong></em> device has its own unique gamut. The transformations are called <strong><em>gamut mappings</em></strong>; they are performed by a <strong><em>color engine</em></strong> (or <em><strong>color management system</strong></em>) under control of files called <em><strong>ICC profiles</strong></em> with one of four user-selected <em><strong>rendering intents</strong></em>. The definitions of  rendering intent can be maddeningly vague&mdash; especially perceptual intent, which is often recommended for photographers. <br>
+          <br>
+      It's far from obvious which intent is best for a given application. For printer profiles, rendering intent behavior is built into each ICC profile; it depends on the manufacturer of the profiling software. The results may bear little resemblance to the textbook descriptions. This contributes to the frustration experienced by students and practitioners of color management. With <span class="style4">Gamutvision</span> you can cut through the fog. </font></td>
+  </tr>
+</table>
+<h2><a name="example"></a>Example</h2>
+<p align="left">The images below illustrate the gamut, color, and tonal response of the Epson R2400 printer with Premium Luster paper, &quot;best&quot; profile, and perceptual rendering intent for an image in Adobe RGB (1998) color space. Results derived from the ICC profile are compared with results from a scanned test print. Images have been reduced. </p>
+<p align="center"><img src="images/Gamutvision_2400_2Dgamutmap_all_small.jpg" alt="2D plot" width="602" height="493"></p>
+<p>The selected input and output color spaces, rendering intent, and <span class="button">View</span> are highlighted. Explanatory tooltips appear when the cursor is moved over buttons or controls. </p>
+<p>The large image on the left contains a 2D a*b*  saturation plot of the input gamut (dashed line) and mapped output gamut (solid line), for HSL Saturations <em>S</em> = {0.2, 0.4, 0.6, 0.8, 1.0} at <em>L</em>(HSL) = 0.5 (where colors achieve their maximum saturation). Additional displays, such as the 3D L*a*b* gamut plot shown near the top of this page, are selectable from the box on the right that says <strong><font size="-1" face="Arial, Helvetica, sans-serif">2D a*b* Saturation (L(HSL)=0.5)</font></strong>. They are summarized in the <a href="#displaytable">table</a> below and described in <a href="gamutvision_displays.html">Using Gamutvision Part 2: Displays </a>.</p>
+<p>The smaller image on the upper-right contains the input or output test image. The output mapped to the monitor display color space, which is typically similar to sRGB, is displayed above. You can use this image to compare the gamuts of the original and the transformed images. This window has four view options. </p>
+<table width="84%" border="0" align="center" cellpadding="3" cellspacing="0">
+  <tr>
+    <td><font size="-1"><span class="button">Inp</span></font></td>
+    <td><font size="-1">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Input image (original) with no mapping. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1"><span class="button">I&gt;M</span></font></td>
+    <td><font size="-1">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Input image mapped to the monitor color space (which defaults to sRGB, but can be set to any monitor profile). </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1"><span class="button">Out</span></font></td>
+    <td><font size="-1">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Output image (original) with no mapping.This image may look strange for printer profiles because it contains the bits sent to the printer, which can have a highly nonlinear relationship to the printed image. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1"><span class="button">O&gt;M</span></font></td>
+    <td><font size="-1">&nbsp;</font></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif">Output image mapped to the monitor color space. </font></td>
+  </tr>
+</table>
+<p>The above plot shows the gamut for the Adobe RGB (1998) color space (the input profile; dashed lines) mapped with Perceptual rendering intent to <font size="-1" face="Arial, Helvetica, sans-serif">SPR2400 PremLuster BstPhoto.icc</font> (Epson 2400, Premium Luster, best quality; the output profile; solid lines). The gamut achieved when mapping from Adobe RGB is somewhat smaller than the full printer gamut.  </p>
+<p align="left">Despite the R2400's evident weakness in the greens, blues, and magentas, it is  state-of-the-art for pigment-based printers in 2006. A comparison with the Epson 2200 (the previous printer generation) shows  little change in color gamut&mdash; reds are slightly improved , though Dmax (the maximum printable density) = 2.12 has improved by about 0.13 (an excellent number; a modest improvement). The grayscale plot is shown below.  Dmax tends to be lower for matte surfaces: typically 1.5 to 1.8. </p>
+<p align="center"><img src="images/Gamutvision_density2400_small.jpg" alt="Density response for Epson 2400 Premium luster" width="602" height="493"> </p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p align="left"><a name="printest"></a>Now here's where it gets interesting. <span class="module">Gamutvision</span> allows you to analyze a scanned test print, using the <a href="printest.html">Print Test</a> function, which is derived from <a href="printest.html">Imatest Print Test</a>, but takes advantage of Gamutvision's versatile output. Print Test operates as follows.</p>
+      <ol>
+        <li><font color="#000000"><strong>Print</strong> the <a href="printest.html#testpattern">test pattern</a>, noting (as applicable) the printer, paper, ink, working color space (Adobe RGB (1998) recommended), ICC profile, rendering intent, color engine, and miscellaneous software settings.</font></li>
+        <li><font color="#000000"><strong>Scan</strong> it on a flatbed scanner, preferably one that has been profiled. Auto-exposure must be disabled. </font> Best results are obtained by scanning it next to a step chart such as the Kodak Q-13. </li>
+        <li><font color="#000000"><strong>Run</strong> <span class="module">Gamutvision Print test</span></font> by clicking on <span class="button">Print test</span>. </li>
+      </ol>
+    <p>The grayscale plot is shown on the right. The black and blue curves are for the two grayscales in different parts of the test chart. Some useful information about the shape of the B&amp;W density response curve can be found in <a href="blackpoint.html">Black point compensation</a>. </p></td>
+    <td><img src="images/Gamutvision_printest_density2400_small.gif" alt="Density from Print Test (a real, scanned print)" width="368" height="368" hspace="8" vspace="2"></td>
+  </tr>
+</table>
+<p align="left">Full instructions can be found in <a href="printest.html">Gamutvision Print Test</a>. The grayscale density response is for the Epson R2400, Premium Luster paper, best quality. Here is the Print Test saturation map.</p>
+<p align="center"><img src="images/Gamutvision_2400_2Dgamutmap_printest_all_small.jpg" alt="Print Test saturation map" width="602" height="493"> </p>
+<p align="left">The Print Test results are remarkably similar to the results derived from the profile, though saturation is somewhat lower. The features of the output figure are notably similar, for example, the slight vertical ridge in the saturated greens. This illustrates one of the most important capabilities of <span class="module">Gamutvision</span>: predicting printer performance from ICC profiles, many of which are available for downloading. </p>
+<h2><strong><font face="Arial, Helvetica, sans-serif"><a name="displaytable"></a></font></strong>Display summary </h2>
+<p>More detail can be found in <a href="gamutvision_displays.html">Using Gamutvision Part 2: Displays</a>. </p>
+<table width="90%" border="1" align="center" cellpadding="3" cellspacing="0">
+  <tr>
+    <td width="40%" bgcolor="#EEEEFF"><strong><font face="Arial, Helvetica, sans-serif">Display</font></strong></td>
+    <td width="104" bgcolor="#EEEEFF">&nbsp;</td>
+    <td width="40%" bgcolor="#EEEEFF"><strong><font face="Arial, Helvetica, sans-serif">Display</font></strong></td>
+    <td width="104" bgcolor="#EEEEFF">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><font size="-1" face="Arial, Helvetica, sans-serif"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Lab3D">3D L*a*b* (wire input, solid output) (<em>S</em> </a><a href="gamutvision_displays.html#colordiff3D">&le;</a><a href="gamutvision_displays.html#Lab3D"> 1)</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">A 3D plot in L*a*b* space showing the input  gamut as a wire frame and the output gamut as a solid. May be rotated or zoomed. Vectors and gamut volumes can be displayed. Lighting can be turned on to highlight the gamut surface. <em>S</em> has a default value of 1, but can be set to any value between 0 and 1.</font> <strong><br>
+    </strong></font></td>
+    <td width="104" rowspan="2" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_3D_example_thumb.jpg" alt="3D plot" width="100" height="96" hspace="2"></font></td>
+    <td width="40%" rowspan="2" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Gamut2D">2D a*b* Gamut (<em>S</em> = 1)</a></font></strong><br>
+        <font size="-1" face="Arial, Helvetica, sans-serif">2D Gamut map on the a*b* plane. Shows the input and output gamut for the <em>S</em>=1 (maximum saturation) pattern for L = [0.1, 0.3, 0.5, 0.7, 0.9]</font>.</td>
+    <td width="104" rowspan="2" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2Dgamutmap.jpg" alt="2D gamut map" width="100" height="98" hspace="2"></font></td>
+  </tr>
+  <tr bgcolor="#FFFFEE">
+    <td width="40%"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Lab3D">3D L*a*b* Reversed (wire output) (<em>S</em> </a><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#colordiff3D">&le;</a></font></strong><a href="gamutvision_displays.html#Lab3D"> 1)</a></font></strong></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#Sat2D">2D a*b* Saturation (<em>L</em>(HSL) constant)</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Shows the input and output gamut response for saturation levels <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1] for fixed values of <em>L</em>(HSL). <em>L</em> has a default value of 0.5 (where colors are the most saturated), but can be set to any value between 0.05 and 0.95. This is an excellent representation of a printer's color response. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2Dsatmap.jpg" alt="2D Satuartion map" width="100" height="98" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#colordiff2D">D a*b* Color difference (<em>L</em>(HSL) constant)</a></font></strong><font size="-1" face="Arial, Helvetica, sans-serif"><br>
+Shows the perceptual difference between the input and output gamuts at saturation levels <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1] using fixed values of <em>L</em>(HSL) between 0.05 and 0.95 (default = 0.5). Metrics include &Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>,  &Delta;<em>C*</em><sub>CMC</sub>, &Delta;L*, &Delta;Chroma, &Delta;Hue angle, and &Delta;|Hue distance|<em>.</em></font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2D_color_diff.jpg" alt="2D a*b* color differences" width="100" height="98" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#colordiff3D">3D/2D HL Color difference  (<em>S</em> &le; 1)</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Detailed 3D or 2D plots of the perceptual differences between the input and output gamut boundaries (saturation <em>S</em> = 1), with the option of reducing <em>S</em> to display the interior of the gamut volume. Metrics include &Delta;<em>E*<sub>ab</sub></em>,  &Delta;<em>C*<sub>ab</sub></em>,  &Delta;<em>E*</em><sub>94</sub>,  &Delta;<em>C*</em><sub>94</sub>,  &Delta;<em>E*</em><sub>CMC</sub>,  &Delta;<em>C*</em><sub>CMC</sub>, &Delta;L*, </font><font size="-1" face="Arial, Helvetica, sans-serif"> &Delta;Chroma, </font><font size="-1" face="Arial, Helvetica, sans-serif"> &Delta;Hue angle, and &Delta;|Hue distance|<em>.</em> Input and output Lightness (L*) and Chroma (c*) can also be displayed. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_3D_color_diff.jpg" alt="3D Color difference" width="100" height="91" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#CIE_xy">xy Chromaticity  (<em>L</em>(HSL)=0.5)</a><br>
+      </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">CIE 1931 <em>xy</em> Chromaticity pattern. <em>L</em>(HSL)=0.5 pattern. Shown with  gamuts for <em>S</em> = [0, 0.2, 0.4, 0.6, 0.8, 1]. Familiar but not perceptually uniform: greens are greatly exaggerated. <strong> <br>
+    </strong></font></td>
+    <td width="104" bgcolor="#DDDDDD"><img src="images/gv_thumb_xy1931.jpg" alt="CIE 1931 xy diagram" width="100" height="105" hspace="2"></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#CIE_uv">u'v' Chromaticity  (<em>L</em>(HSL)=0.5)</a><br>
+      </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">CIE 1976 y=<em>u'v'</em> Chromaticity pattern. <em>L</em>(HSL)=0.5 pattern.  More perceptually uniform than the CIE 1931 xy diagram, but still not perfect. <strong> <br>
+    </strong></font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/gv_thumb_uv.jpg" alt="u'v' chromaticity diagram" width="100" height="100" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#HSLcontour">2D HSL contour plots</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">2D plot showing values of H, S, or L(HSL) or differences between input and output H, S, and L(HSL) values. Uses either <em>L</em>(HSL)=0.5 or <em>S</em>=1   patterns. The a*b* and HL color differences (above) are preferred because results are based on device-independent L*a*b* space. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_2D_HSL.jpg" alt="2D HSL plot" width="100" height="97" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#BW">Black &amp; White density response</a><br>
+    </font></strong><font size="-1" face="Arial, Helvetica, sans-serif">Grayscale density response, typically Density (-log<sub>10</sub>(reflectance)) vs. log<sub>10</sub> pixel level. The digital counterpart of traditional density curves. Uses the Grayscale pattern. The output L*, c* vs. input L* plot displays deviation from neutrality. The best display for observing the effects of <a href="blackpoint.html">Black point compensation</a>. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_BW.jpg" alt="B&amp;W density response" width="100" height="98" hspace="2"></font></td>
+    <td width="40%" bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#imagediff">Read image for analysis (external image file) </a></font></strong><br>
+      <font size="-1" face="Arial, Helvetica, sans-serif">2D pseudocolor image of the perceptual differences between  input and output colors&mdash; typically between an image and printed output. Same metrics as the color difference plots.  Uses the contents of an image file (not a built-in pattern). Can also produce a 3D L*a*b* vector plot of color changes. </font></td>
+    <td width="104" bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_imagediff.jpg" alt="Image color difference, shown in pseudocolor" width="100" height="85" hspace="2"></font></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFEE"><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_displays.html#gmbcc">GretagMacbeth&trade; ColorChecker</a><sup>&reg;</sup> <br>
+      Analyzes a simulated <a href="http://www.gretagmacbeth.com/index/products/products_colorcheckers/products_cc-overview/products_colorchecker.htm" target="_blank">ColorChecker</a> using the same options as Read image for analysis, i.e., 2D pseudocolor analysis or 3D L*a*b* vector analysis. </font></td>
+    <td bgcolor="#DDDDDD"><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/GV_thumb_CC.jpg" alt="ColorChecker difference, shown in pseudocolor" width="100" height="85" hspace="2"></font></td>
+    <td bgcolor="#FFFFEE"><strong><font size="-1" face="Arial, Helvetica, sans-serif">Profile Info</font></strong><font size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp; Text from the header, including profile type, profile connection space, etc. </font> </td>
+    <td bgcolor="#DDDDDD">&nbsp;</td>
+  </tr>
+</table>
+<h2 align="left"><a name="profdownload"></a>Profile downloads </h2>
+<p align="left">You can preview the performance of a printer/paper combination using its ICC profile&mdash; which can often be downloaded at no cost&mdash; <em>without</em> the printer or paper itself. Manufacturers have a strong incentive to keep profiles honest. If they aren't, prints won't match the monitor image and won't look good. ICC profile colors are usually accurate, but the maximum printable black density, Dmax, is less trustworthy. You can verify profile performance by comparing it with that of an actual test print scanned on a profiled, calibrated scanner, using  Gamutvision <a href="printest.html">Print Test</a>.</p>
+<p align="left">ICC profiles for a variety of printers, papers, and photo labs are available from the sites listed below. Epson offers profile downloads for many of their printer/paper combinations, but Canon and HP profiles are included in their printer driver files: the drivers apparently have to be installed for the profiles to be accessible. Not convenient. </p>
+<table width="96%" border="1" align="center" cellpadding="6" cellspacing="0" bgcolor="#F0EEFF">
+  <tr>
+    <td><strong><font color="#330066" face="Arial, Helvetica, sans-serif"><em>ICC Profiles you can download</em></font></strong> </td>
+  </tr>
+  <tr>
+    <td class="small"><strong><em>Printer manufacturers:&nbsp; </em></strong><a href="http://www.epson.com/" target="_blank">Epson.com</a>&nbsp;(<em>the</em> source for standard Epson profiles)&nbsp; |&nbsp; <a href="http://www.hp.com/go/designjet/downloads" target="_blank">Hewlett-Packard Designjet profile downloads</a> (for HP professional printers such as the Z2100 and Z3100)&nbsp; |&nbsp; <a href="http://h50016.www5.hp.com/psb9180/b9180_iccprofile.asp" target="_blank">HP B9810 profiles</a> (for several media, from HP Singapore) </td>
+  </tr>
+  <tr>
+    <td class="small"><em><strong>Paper manufacturers/distributors (All have Epson profiles. C = Canon, HP = Hewlett-Packard, L = Lexmark.):</strong></em><br>
+    <a href="http://www.inkjetart.com/cgi-bin/profiles.cgi" target="_blank">Inkjetart.com</a>&nbsp; |&nbsp; <a href="http://www.crane.com/museo/profiles.aspx" target="_blank">Crane Museo</a>&nbsp; |&nbsp; <a href="http://www.hahnemuehle.com/index.php?mid=851&lng=us" target="_blank">Hanhemuehle</a>&nbsp;(C, HP)&nbsp; |&nbsp; <a href="http://www.breathingcolor.com/bc/catalog/index.php?cPath=1001" target="_blank">Breathing Color</a>&nbsp;(C)&nbsp; |&nbsp; <a href="http://www.moabpaper.com/index.asp?PageAction=Custom&ID=8" target="_blank">Moab</a>&nbsp; |&nbsp; <a href="http://www.legionpaper.com/index.asp?OID=18&PageType=Page" target="_blank">Legion (Somerset, Arches, Concorde)</a> (C)&nbsp; |&nbsp; <a href="http://www.ilford.com/html/us_english/prod_html/galerie/IJPROFILES/default.asp" target="_blank">Ilford Galerie </a> (C, HP, L)&nbsp; |&nbsp; <a href="http://www.orientalphotousa.com/icc_profiles.htm" target="_blank">Oriental</a>&nbsp; |&nbsp; <a href="http://www.lexjet.com/lexjet/profiles_list.asp?dir=\ImagePrint Profiles\2200pk_V6\ColorProfiles_V6_PhotoBlackInk" target="_blank">Red River</a> (C)&nbsp; |&nbsp; <a href="http://www.hawkmtnartpapers.com/profiles.htm" target="_blank">Hawk Mountain</a> &nbsp;|&nbsp; <a href="http://www.lexjet.com/lexjet/profiles_list.asp" target="_blank">Lexjet</a>&nbsp;(HP)&nbsp;  |&nbsp; <a href="http://www.lumijet.com/mainframe2.htm" target="_blank">Lumijet</a>&nbsp;(C)&nbsp;  |&nbsp; <a href="http://www.lyson.com/lyson-technical.html" target="_blank">Lyson</a>&nbsp; |&nbsp; <a href="http://www.innovaart.com/downloads_home.html" target="_blank">Innova</a>&nbsp; |&nbsp; <a href="http://www.digitalartsupplies.com/profiles2.html" target="_blank">Digital Art Supplies</a>&nbsp; |&nbsp; <a href="http://www.tetenal.com/f_ink_papier_service_icc_uk.htm" target="_blank">Tetenal</a>&nbsp;(C)&nbsp;  |&nbsp; <a href="http://www.stoneeditions.com/support.asp" target="_blank">Stone Editions</a>&nbsp; |&nbsp;&nbsp;<a href="http://www.kodak.com/global/en/professional/member/photoPrinters/ICCProfiles.jhtml?id=0.1.14.30.23&lc=en" target="_blank">Kodak</a> (C)&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="small"><span class="smallbold"><font color="#666666" size="-2">Manufacturers who lack ICC profiles:</font></span><font color="#666666" size="-2"> <a href="http://www.pictorico.com/index.php" target="_blank">Pictorico</a>]&nbsp; |&nbsp; <a href="http://www.mitsubishiimaging.com/di/index_di.asp" target="_blank">Mitsubishi</a> </font></td>
+  </tr>
+  <tr>
+    <td class="small"><strong><em>Monitor manufacturers:</em></strong>&nbsp; <a href="http://www.eizo-downloads.com/downloads/icc/index.php" target="_blank">Eizo</a>&nbsp; |&nbsp; <a href="http://www.lacie.com/us/support/drivers/index.htm?id=10010" target="_blank">LaCie</a> </td>
+  </tr>
+  <tr>
+    <td class="small"><em><strong>For sale:&nbsp; </strong></em><a href="http://shopping.netsuite.com/s.nl/c.362672/sc.14/category.233/.f" target="_blank">Inkjet Mall</a> ($175 per set)&nbsp; | &nbsp;<a href="http://www.ddisoftware.com/printerprofiles/" target="_blank">Digital Domain Inc.</a> ($25 each)&nbsp; |&nbsp; <a href="http://www.cathysprofiles.com/" target="_blank">Cathy's Profiles</a> (well-regarded custom profiles) </td>
+  </tr>
+  <tr>
+    <td class="small"><a href="http://www.colorbytesoftware.com/ProfileList.htm" target="_blank"><em>Colorbyte Imageprint</em></a> RIP profiles (color only; not gray) work with <span class="style4">Gamutvision</span>, but we cannot verify their accuracy. They have a <a href="http://www.colorbytesoftware.com/ProfileList.htm" target="_blank"><em>huge</em> library</a>. Dmax (maximum grayscale density) seems inconsistent. Imageprint is needed to use them. </td>
+  </tr>
+  <tr>
+    <td class="small"><a href="http://www.drycreekphoto.com/Frontier/" target="_blank"><em>Dry Creek Photo</em></a> (profiles for a lab near you) </td>
+  </tr>
+  <tr>
+    <td class="small"><strong><em>Labs</em></strong>&nbsp; (Check labs in your vicinity to see if they have downloadable ICC profiles.) <br>
+          <a href="http://www.pcraft.com/services/color_management_faqs.html" target="_blank">Photo Craft</a>&nbsp; |&nbsp; <a href="http://www.calypsoinc.com/data/profile.html" target="_blank">Calypso</a> (Lightjet/Epson/Giclee)&nbsp; |&nbsp;&nbsp;<a href="http://www.myphotocenter.com/lightjet.htm" target="_blank">Advance</a>&nbsp; |&nbsp; <a href="http://www.fototime.com/pages/iccprofile" target="_blank">FotoTime</a>&nbsp; </td>
+  </tr>
+</table>
+<h2><a name="images"></a>Printed image preview: color changes </h2>
+<p>Gamutvision can be used to preview how images change when printed. The pseudocolor display, which gives the change in any of several perceptual color units, and the 3D L*a*b* display, which shows change vectors, contains far more information than the gamut warnings of image editors, which merely tell you that a color is outside the gamut of the output device, but give no indication of <em><strong>how much</strong></em> change to expect. This example uses a photograph taken in Paris by <a href="http://flyinggina.smugmug.com/gallery/1322966" target="_blank">Virginia Bonesteel</a>.</p>
+<p align="center"><img src="images/GV_image_diff_Virginia.jpg" alt="Image color difference" width="602" height="493"> </p>
+<p align="left">&Delta;<em>C*</em><sub>CMC</sub>&nbsp;is one of several&nbsp;&Delta;<em>C</em> color difference metrics that omit Luminance (<em>L</em>*) in their calculation. (Others include&nbsp;&Delta;<em>C*</em><sub><em>ab</em></sub>&nbsp;and &Delta;<em>C*</em><sub>94</sub>.) &Delta;<em>E</em> color difference metrics, which &nbsp;include <em>L</em>*, tend to become very high in dark regions, especially for matte papers, which have relatively low Dmax. According to the profile, Dmax = 1.61 for Epson Enhanced Matte,  but it could be as high as 1.7 or 1.8 in reality. </p>
+<h2 align="left"><a name="apps"></a><span class="module">Gamutvision</span> documentation</h2>
+<table width="92%" border="0" align="center" cellpadding="3" cellspacing="0">
+  <tr>
+    <td><font color="#000099" face="Arial, Helvetica, sans-serif"><em><strong>Instructions </strong></em></font></td>
+  </tr>
+  <tr>
+    <td><font size="-1"><a href="installation.html">Installing Gamutvision</a>&nbsp;&nbsp; |&nbsp; </font><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision.html">Using Gamutvision</a> &mdash; the essential instructions: getting started&nbsp; |&nbsp; <a href="gamutvision_displays.html">Gamutvision displays</a> </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamutvision_image_analysis.html">Image color analysis with Gamutvision</a> </font></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><em><font color="#000099" face="Arial, Helvetica, sans-serif"><strong>Applications, tips, and techniques</strong></font><font face="Arial, Helvetica, sans-serif"><strong>&nbsp; </strong></font></em><span class="small"><em>These pages, which illustrate a few of </em></span><em><span class="module"><font size="-1">Gamutvision's</font></span><span class="small"> many uses, make excellent tutorial material. They will help you to get the most out of </span><font size="-1"><span class="module">Gamutvision</span></font><span class="small">. </span></em></td>
+  </tr>
+  <tr>
+    <td><font size="-1"><a href="defective_profile.html"><font face="Arial, Helvetica, sans-serif">Identifying defective profiles</font></a> <font face="Arial, Helvetica, sans-serif">&mdash; Use <span class="style4">Gamutvision</span> to find defective profiles. The example is a popular profile with a glaring defect for the excellent Epson R2400 printer. <span class="style4">Gamutvision</span> points the way to a simple solution. </font></font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="roundtrip.html">Evaluating printer profiles with Round trip</a> &mdash; <span class="style4">Gamutvision's</span> Round trip rendering intent allows you to evaluate a printer profile's reversibility (i.e., self-consistency). It doesn't tell the whole story, but it's a quick and easy way to find problem profiles.</font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="smudged_pines.html">Profile mystery: The case of the smudged pines</a> &mdash; <span class="style4">Gamutvision</span> sheds light on a profile defect that smudges a print of pine trees. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="blackpoint.html">Black Point Compensation</a> &mdash; <span class="style4">Gamutvision</span> shows the meaning of the mysterious checkbox, which affects printed media with relative colorimetric rendering intent. </font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="camera_scanner.html">Camera and scanner profiles</a> &mdash; <span class="style4">Gamutvision</span> shows you their color gamuts and what happens when you convert to standard color spaces.</font></td>
+  </tr>
+  <tr>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><a href="gamut_total.html">Printer gamuts: total and real</a> &mdash; There is a difference between a printer's theoretical (i.e., maximum) color gamut and the real color gamut achieved when working with standard color spaces. This page shows you ways of displaying this difference. </font></td>
+  </tr>
+</table>
+<h2><a name="links"></a>Links</h2>
+<p><a target="_blank" href="http://www.rpi.edu/%7Eschubert/More%20reprints/2000%20Ohno%20%28IS&amp;T%20Conference%29%20CIE%20fundamentals%20for%20color%20measurements.pdf"><strong>CIE Fundamentals for Color Measurements</strong></a> by Yoshi Ohno, Optical Technology Division, NIST. &nbsp;An excellent review of CIE colorimetry, presented at an IS&amp;T technical conference.    Describes the CIE 1931 (x, y) and&nbsp;1976 (u&rsquo;v&rsquo;) diagrams. </p>
+<p><strong><em>Related pages:</em></strong>&nbsp; <a href="gamutvision.html">Using Gamutvision</a>&nbsp; |&nbsp; <a href="printest.html">Gamutvision Print Test</a></p>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<?DOCTYPE TOC [
+<!ENTITY reg   "&#174;">
+<!ENTITY nbsp  "&#160;">
+]?>
+<?xml-stylesheet type='text/xsl' href='style/index.xsl'?>
+<?xml-stylesheet type='text/css' href='style/style.css'?>
+<docs>		
+<page name="Gamutvision Documentation" file="index.html" hidden="1"/>
+	 <page   name="Table of Contents"
+                major="1">
+
+		<page	name="Gamutvision Tour"
+			file="tour_gamutvision.html"
+			subtitle="Explore color spaces, gamut mappings, and rendering intents">
+			<section name="Structure" anchor="structure"/>
+			<section name="Example" anchor="example"/>
+			<section name="Display summary" anchor="displaytable"/>
+			<section name="Profile downloads" anchor="profdownload"/>
+			<section name="Image color difference" anchor="images"/>
+			<section name="Applications, tips" anchor="apps"/>
+			<section name="Links" anchor="links"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="Finding bad profiles" url="defective_profile.html"/>
+			<related name="GV Print Test" url="printest.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+		
+	
+		<page	name="Installation"
+			subtitle="and getting started"
+			file="installation.html">
+			<description>Instructions for installing, purchasing, and registering Gamutvision</description>
+			<section name="Install"  anchor="install"/>
+			<section name="Purchase" anchor="purchase"/>
+			<section name="Register" anchor="register"/>
+			<section name="Offline registration" anchor="offline"/>
+			<section name="Files"    anchor="files"/>
+			<related name="Gamutvision Instructions" url="gamutvision.html"/>
+		</page>
+
+		
+		<page	name="Using Gamutvision Part 1"
+			file="gamutvision.html"
+			subtitle="Explore color spaces, gamut mappings, and rendering intents">
+			<section name="Structure" anchor="structure"/>
+			<section name="Startup" anchor="startup"/>
+			<section name="Display types" anchor="displays"/>
+			<section name="Menu settings" anchor="menu"/>
+			<section name="Applications, tips" anchor="apps"/>
+			<section name="Issues" anchor="issues"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Finding bad profiles" url="defective_profile.html"/>
+			<related name="GV Print Test" url="printest.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+		
+		
+		<page	name="Using Gamutvision Part 2: Displays"
+			file="gamutvision_displays.html"
+			subtitle="A concise description of Gamutvision displays">
+			<section name="3D L*a*b*" anchor="Lab3D"/>
+			<section name="2D L*a*b* Gamut" anchor="Gamut2D"/>
+			<section name="2D L*a*b* Saturation" anchor="Sat2D"/>
+			<section name="2D a*b* Color difference" anchor="colordiff2D"/>
+			<section name="2D/3D HL Color difference" anchor="colordiff3D"/>
+			<section name="2D xy Saturation" anchor="CIE_xy"/>
+			<section name="2D u'v' Saturation" anchor="CIE_uv"/>
+			<section name="HSL contours" anchor="HSLcontour"/>
+			<section name="BW density response" anchor="BW"/>
+			<section name="Image color difference" anchor="imagediff"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Finding bad profiles" url="defective_profile.html"/>
+			<related name="GV Print Test" url="printest.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+		
+		
+		<page	name="Image color analysis with Gamutvision"
+			file="gamutvision_image_analysis.html"
+			subtitle="Analysis of individual images">
+			<section name="2D Color difference" anchor="diff2d"/>
+			<section name="3D Vectors" anchor="3dvector"/>
+			<section name="ColorChecker" anchor="gmbcc"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+		
+		<page	name="Gamutvision Print Test"
+			file="printest.html"
+			subtitle="Measure print quality factors: color response, tonal response, and Dmax">
+			<section name="Introduction" anchor="intro"/>
+			<section name="Instructions" anchor="instructions"/>
+			<section name="Results" anchor="results"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="Print Test tour" url="tour_printest.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+		
+		<page	name="Equations"
+			file="gamutvision_equations.html"
+			subtitle="Algorithms and reference formulas">
+			<section name="Difference formulas" anchor="colorerr"/>
+			<section name="Gamut volume" anchor="gamutvol"/>
+			<section name="Light and color" anchor="Color"/>
+			<section name="Color models" anchor="Colorspace"/>
+			<section name="HSV HSL equations" anchor="hsvhsl"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+
+		
+		<page	name="Defective Profiles"
+			file="defective_profile.html"
+			subtitle="Finding a defective profile">
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="GV Print Test" url="printest.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+		
+		<page	name="Profile mystery"
+			file="smudged_pines.html"
+			subtitle="The case of the smudged pines">
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+		
+		<page	name="Black Point Compensation"
+			file="blackpoint.html"
+			subtitle="What it really does">
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+		
+		<page	name="Camera and scanner profiles"
+			file="camera_scanner.html"
+			subtitle="Gamuts and mappings to working color spaces">
+			<section name="Camera profile" anchor="camera"/>
+			<section name="Scanner profile" anchor="scanner"/>
+			<section name="Luminous-Landscape Leica M8 Review" anchor="m8"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<link    name="Color management" url="http://www.normankoren.com/color_management.html" />
+			
+		</page>
+
+
+		
+		<page	name="Printer gamuts"
+			file="gamut_total.html"
+			subtitle="total and real (achieved in practice)">
+			<section name="Real-world colors" anchor="realworld"/>
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="Print test" url="printest.html"/>
+			
+		</page>
+
+
+
+		
+		<page	name="Round trips"
+			file="roundtrip.html"
+			subtitle="for finding defective printer profiles">
+			<related name="Gamutvision tour" url="tour_gamutvision.html"/>
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Gamutvision Displays" url="gamutvision_displays.html"/>
+			<related name="Print test" url="printest.html"/>
+			
+		</page>
+
+
+                <page   name="Contact"
+                        file="contact.html"
+			subtitle="About Imatest and Gamutvision, and how to reach us" />
+		
+		<page	name="Change Log"
+			file="changelog.html"
+			subtitle="Gamutvision release history"/>
+		
+		<page	name="Troubleshooting"
+			file="troubleshooting.html"
+			subtitle="What to do when Gamutvision doesn't work">
+			<related name="Using Gamutvision" url="gamutvision.html"/>
+			<related name="Installation"  url="installation.html"/>
+			
+		</page>
+
+                <page   name="Press release"
+                        file="press.html"
+                        subtitle="Press release, Aug. 23, 2006" />
+
+		
+		<page	name="License"
+			file="license.html"
+			subtitle="The Gamutvision End User License Agreement (EULA)"/>
+		
+	</page>
+</docs>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Total and real printer gamuts</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <meta name="Author" content="Norman Koren">
+  <meta name="Description" content="Total and real printer gamuts gamuts">
+  <title>Gamutvision</title>
+  <link href="style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p>A key question that arises in every photographer's digital workflow is, &quot;How will the print compare to the monitor image?&quot;  </p>
+<p>There is an important difference between a printer's total (maximum) gamut and the actual gamut achieved when printing from a working color space. With <span class="module">Gamutvision</span> you can display both and compare them side-by-side. </p>
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>To see the difference, let's review <span class="module">Gamutvision's</span> data flow.  The total gamut of a device is obtained when its ICC profile is used as an <em><strong>input profile</strong></em>, i.e., one of the <a href="gamutvision.html#structure">RGB gamut patterns</a>  (RGB input) is mapped to L*a*b*, xy, or uv using the profile. The total gamut for an output profile can be obtained by setting the rendering intent to <strong><font size="-1" face="Arial, Helvetica, sans-serif">None</font></strong>, in which case the mapped RGB output is the same as the input.  Numerous display options are available. </p>
+    </td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_detail_block.gif" alt="Gamutvision block diagram" width="391" height="213" hspace="8" vspace="8" align="left" /></font></td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>This  broader picture Gamutvision's structure suggests some display possibilities. You can select up to four ICC profiles: two input profiles and two output profiles. </p>
+        <ul>
+          <li> The input image is interpreted according to the input profile (1 or 3). Input plots always display the full gamut of the device or color space represented by the input profile. </li>
+          <li>The input image is mapped to the output image, using the input and output profiles with the specified rendering intent. No gamut mapping takes place (RGB values are unchanged and the full gamut is displayed) if <font size="-1" face="Arial, Helvetica, sans-serif">Rendering intent</font> is set to <font size="-1" face="Arial, Helvetica, sans-serif"><strong>None</strong></font>. </li>
+        </ul></td>
+    <td><font size="-1" face="Arial, Helvetica, sans-serif"><img src="images/Gamutvision_block.gif" alt="Gamutvision block diagram" width="432" height="282" hspace="8" vspace="8" align="left" /></font></td>
+  </tr>
+</table>
+<p>You might, for example,</p>
+<ul>
+  <li>Enter a printer profile into Profile 1. The profile 1 display will contain the total gamut.</li>
+  <li>Enter a working color space profile into Profile 3 and the (same) printer profile  into profile 4. The gamut actually achieved (with rendering intent 3&rarr;4) is displayed as Profile 4.</li>
+  <li>Display Profiles 1 and 4 simultaneously using <strong><font face="Arial, Helvetica, sans-serif">Display A</font></strong> or <strong><font face="Arial, Helvetica, sans-serif">Display B</font></strong>. This is shown below. The display is <strong><font size="-1" face="Arial, Helvetica, sans-serif">3D L*a*b* (wire input, solid output)</font></strong>. <span class="button"><font size="-1">Top view</font></span> has been pressed. ( <span class="button"><font size="-1">Last view</font></span> is  shown in its place.) so the a*b* gamut is displayed. Results are shown below. </li>
+</ul>
+<p align="center"><img src="images/gamut_whole_real_A.jpg" alt="Gamuts: whole and achieved" width="602" height="493" vspace="4" /><br />
+  <strong>Mapped (solid) vs. total (wireframe) gamut </strong></p>
+<p>For clarity, the background color has been set to 0.2 using the <span class="button"><font size="-1">More</font></span> button. You can enlarge the gamut image considerably by clicking  <span class="button"><font size="-1">More</font></span>, then selecting a value for <strong><font size="-1" face="Arial, Helvetica, sans-serif">3D plot axis setting</font></strong> other than the default <font size="-1" face="Arial, Helvetica, sans-serif">vis3d</font>. Although the image will be larger the a*b* axes may not display properly. </p>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><ul>
+      <ul>
+        <li>You can view  input and corresponding output gamuts simultaneously.</li>
+        <li>You can view <strong><em>any</em></strong> two gamuts simultaneously using Displays A and B. </li>
+        <li>You can  switch between views for rapid comparisons. </li>
+      </ul>
+    </ul>
+        <p>For example, to compare the effects of two working color spaces with a single printer/profile combination, you would enter the two working color space profiles into input Profiles 1 and 3 and the same printer profile into output Profiles 2 and 4. You could then view profiles 1 and 2 or 3 and 4 (showing the effects of the gamut mapping),  or you could use a Display box (A or B, shown below) to compare the output gamuts in profiles 2 and 4. The gamuts for Epson R2400 Premium Luster prints made from Adobe RGB (1998) (wireframe) and sRGB (solid) working color spaces  are shown on the right, using the 3D L*a*b* display set to <font size="-1"><span class="button">Top view</span></font>.  (Displays on this page use Epson-supplied <a href="http://photoshopnews.com/2005/10/06/x-rite-premium-profiles-bundled-with-epson-r2400-printer/" target="_blank"><font size="-1">X-rite &quot;premium&quot; profiles</font></a>, released around October 2005; different from earlier profiles supplied with the R2400). </p></td>
+    <td><div align="center"><strong><img src="images/GV_adobe_srgb_top.jpg" alt="Adobe RGB vs. sRGB: Gamut top view" width="279" height="284" hspace="8" vspace="2" /><br />
+      Mapped gamuts from sRGB (solid),<br />
+      and&nbsp; Adobe RGB (1998) (wireframe) </strong></div></td>
+  </tr>
+</table>
+<h4>Caution: </h4>
+<p>To see the entire gamut of a printer profile you should <em><strong>always</strong></em> use the <font size="-1" face="Arial, Helvetica, sans-serif"><strong>3D L*a*b* view</strong></font>, set for <strong><font size="-1" face="Arial, Helvetica, sans-serif">Top view</font></strong>. You should never use the <strong><font size="-1" face="Arial, Helvetica, sans-serif">2D a*b* Saturation view</font></strong>, which works well for color space profiles or mapped printer profiles, but does not work well when a printer profile is used as an input profile or an output profile with Rendering set to <font size="-1" face="Arial, Helvetica, sans-serif">None</font>. The reason: The 2D a*b* Saturation map is based on a gamut image where L(HSL) = 0.5. (This is L in the <a href="gamutvision_equations.html#Colorspace">HSL color representation</a>, not L*.) In normal color spaces, colors have their maximum saturation where L(HSL) = 0.5. But printers are highly nonlinear devices: they don't necessarily reach maximum saturation at for L(HSL) = 0.5; hence the 2D a*b* saturation map can produce the strange result shown on the left, which is not the true device gamut. </p>
+
+<table border="0" align="center" cellpadding="2" cellspacing="0">
+  <tr>
+    <td colspan="2" valign="middle"><div align="center"><strong>Mapped vs. total gamuts (displayed incorrectly (left) and correctly (right))</strong> </div></td>
+  </tr>
+  <tr>
+    <td valign="middle"><p align="center"><strong><img src="images/Gamut_whole_ab_saturation.jpg" alt="a*b* Saturation view: incorrect" width="374" height="361" hspace="8" vspace="4" /><br />
+      a*b* saturation map: <font color="#CC0000"><em>incorrect</em> </font></strong></p></td>
+    <td valign="middle"><div align="center"><strong><img src="images/Gamut_whole_Lab_topview.jpg" alt="L*a*b* Gamut top view: correct" width="393" height="380" hspace="8" vspace="4" /><br />
+      3D L*a*b* (top view): <font color="#009900"><em>correct
+      </em></font>
+    </strong></div></td>
+  </tr>
+  <tr>
+    <td colspan="2"><div align="center"><strong>Comparing the gamut of Adobe RGB (1998) mapped with (relative) colorimetric rendering intent<br />
+  to Epson R2400 Premium Luster 
+      (output profile) <br />
+      to the total gamut of Epson R2400 Premium Luster (input profile) </strong></div></td>
+  </tr>
+</table>
+</body>
+</html>

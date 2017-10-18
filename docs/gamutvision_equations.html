@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="Author" content="Norman Koren">
+<meta name="GENERATOR" content="Mozilla/4.79 [en] (Windows NT 5.0; U) [Netscape]">
+<meta name="Description" content="Colorcheck: Imatest ColorCheck Appendix">
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<title>Colorcheck Appendix</title>
+<style type="text/css">
+<!--
+.style21 {	font-size: x-small;
+	font-weight: bold;
+}
+.style22 {color: #660000; font-weight: bold; font-style: italic;}
+-->
+</style>
+</head>
+<body>
+<p>
+  <!--&nbsp;
+
+<table BORDER=0 CELLSPACING=3 CELLPADDING=6 >
+
+<tr>
+
+<td COLSPAN="2" BGCOLOR="#F0FAFF">
+
+<b><font face="Arial,Helvetica"><font color="#000099"><font size=-1>Table
+
+of contents for this page</font></font></font></b>
+
+<br><b><font face="Arial,Helvetica"><font color="#000000"><font size=-1><a href="#intro">What
+
+colorcheck does</a> | <a href="#checker_colors">ColorChecker colors</a>
+
+| <a href="#use">Photographing &amp; running</a> |
+
+<a href="#output">Output</a>
+
+| <a href="#Algorithm">Algorithm</a> | <a href="#links">Links</a></font></font></font></b>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td BGCOLOR="#FFFFF0">
+
+<b><font face="Arial,Helvetica"><font size=-1>Related Imatest pages</font></font></b>
+
+</td>
+
+
+
+<td BGCOLOR="#FFFFF0">
+
+<b><font face="Arial,Helvetica"><font size=-1><a href="imatest_instructions.html">Using
+
+Imatest</a></font></font></b>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td BGCOLOR="#FFFFF0">
+
+<b><font face="Arial,Helvetica"><font size=-1>on <a href="http://www.normankoren.com/">normankoren.com</a></font></font></b>
+
+</td>
+
+
+
+<td BGCOLOR="#FFFFF0">
+
+<b><font face="Arial,Helvetica"><font size=-1><a href="http://www.normankoren.com/color_management.html">Color
+
+management</a> | <a href="http://www.normankoren.com/Tutorials/MTF7.html">Digital
+
+cameras vs. film</a></font></font></b>
+
+</td>
+
+</tr>
+
+</table></center>
+
+--> 
+  This page contains algorithms and reference formulas used in <a href="tour_gamutvision.html">Gamutvision&trade;</a>. The <font color="#006600"><strong><em>green text </em></strong></font> is heavily mathematical. </p>
+<h2><a name="colorerr" id="colorerr"></a><b><i>Color difference (error) formulas </i></b></h2>
+<p>Several Gamutvision displays use color difference metrics to quantify the perceptual difference between colors. All of these metrics are based on L*a*b* color space, which  was designed to be perceptually uniform. If it were truly uniform, perceptual color differences could be determined by the Euclidian distance between colors expressed as L*a*b* values: </p>
+<blockquote>
+  <p>&Delta;<em>E</em>*<sub>ab</sub> = <font size="+2">(</font> (<em>L</em>*<sub>2</sub>-<em>L</em>*<sub>1</sub>)<sup>2</sup> + (<em>a</em>*<sub>2</sub>-<em>a</em>*<sub>1</sub>)<sup>2</sup> + (<em>b</em>*<sub>2</sub>-<em>b</em>*<sub>1</sub>)<sup>2</sup> <font size="+2">)</font><sup>1/2</sup>&nbsp; =&nbsp; <font size="+2">(</font>&Delta;<em>L</em>*<sup>2</sup> + &Delta;<em>a</em>*<sup>2</sup> + &Delta;<em>b</em>*<sup>2</sup> <font size="+2">)</font><sup>1/2</sup></p>
+</blockquote>
+<p>We are often interested in differences between color only, omitting luminance. </p>
+<blockquote>
+  <p>&Delta;<em>C</em>*<sub>ab</sub> = <font size="+2">(</font>(<em>a</em>*<sub>2</sub>-<em>a</em>*<sub>1</sub>)<sup>2</sup> + (<em>b</em>*<sub>2</sub>-<em>b</em>*<sub>1</sub>)<sup>2</sup> <font size="+2">)</font><sup>1/2</sup>&nbsp; =&nbsp; <font size="+2">(</font>&Delta;<em>a</em>*<sup>2</sup> + &Delta;<em>b</em>*<sup>2</sup> <font size="+2">)</font><sup>1/2</sup></p>
+</blockquote>
+<p>However, L*a*b* (sometimes referred to as CIE 1976) is not nearly as uniform as its designers intended. In particular, the eye is a good deal less sensitive to differences in chroma (<em>c</em>* = (<em>a</em>*<sup>2</sup> + <em>b</em>*<sup>2</sup> )<sup>1/2 </sup>; i.e., intensity of color) for strongly chromatic colors than it is to hues (hue angle = <em>h</em>* = arctan(<em>b</em>/<em>a</em>) ). To correct this deficiency several color metric formulas have been proposed. </p>
+<ul>
+  <li><strong>CIE 1994:</strong>&nbsp; &Delta;<em>E</em>*<sub>94</sub> , which includes Luminance <em>L</em>*, and &Delta;<em>C</em>*<sub>94</sub> , which omits <em>L</em>*. </li>
+  <li><strong>CMC:&nbsp;</strong> &Delta;<em>E</em>*<sub>CMC</sub> , which includes Luminance <em>L</em>*, and &Delta;<em>C</em>*<sub>CMC</sub> , which omits <em>L</em>*. Widely used in the textile industry for matching bolts of cloth. </li>
+</ul>
+<p>We are not able to recommend one over the other at this time. Both are more accurate than CIE 1976, but both are less familiar to photographers. They give very different numbers, so it's important to be consistent and always specify which measurement you are using.</p>
+<p>The Hue and Chroma differences,&nbsp;&Delta;<em>H*</em> and&nbsp;&Delta;<em>C</em>*, are of interest for their own sake and because they are used in the CIE 1994 and CMC color difference formulas, below. </p>
+<p>&Delta;<em>H*</em> = <font size="+1">(</font> (&Delta;<em>E*<sub>ab </sub></em>)<sup>2</sup> - (&Delta;<em>L</em>*)<sup>2</sup> - (&Delta;<em>C</em>*)<sup>2</sup> <font size="+1">)</font><sup>1/2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Hue difference&nbsp;;&nbsp;&nbsp;DCIH (5.36) )</p>
+<p> &Delta;<em>c</em>* = &nbsp;<font size="+1">(</font> <em>a<sub>1</sub></em>*<sup>2</sup> + <em>b<sub>1</sub></em>*<sup>2</sup> <font size="+1">)</font><sup>1/2</sup>&nbsp;&ndash; <font size="+1">(</font> <em>a<sub>2</sub></em>*<sup>2</sup> + <em>b<sub>2</sub></em>*<sup>2</sup> <font size="+1">)</font><sup>1/2</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (Chroma difference)</p>
+<p>&Delta;<em>h* = </em>180/&pi; (arctan( <em>b<sub>1</sub></em>* / <em>a<sub>1</sub></em>*) &ndash; arctan( <em>b<sub>2</sub></em>* / <em>a<sub>2</sub></em>*) )&nbsp; (Hue angle difference ; see &nbsp;<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><a href="http://www.ece.rochester.edu/~gsharma/dcihandbook/DCIHbkErrata.pdf" target="_blank">online Errata</a></font> ) <br>
+&Delta;<em>h* = </em>&Delta;<em>h* - 360&nbsp; if&nbsp; &Delta;<em>h* &gt; 200 </em></em>; &nbsp; &Delta;<em>h* = </em>&Delta;<em>h* + 360&nbsp; if&nbsp; &Delta;<em>h* &lt; -200 </em></em></p>
+<p>&Delta;<em>h* = </em>0 where the hue angle is poorly defined: L* &lt; 2 ;&nbsp; max(<em>a<sub>1 </sub></em>, <em>b<sub>1</sub></em>*) &lt; 2 ;&nbsp; max(<em>a<sub>2 </sub></em>, <em>b<sub>2</sub></em>*) &lt; 2 ;&nbsp; &nbsp; </p>
+<p><font color="#006600"><em><strong>Now for the math...</strong></em> </font></p>
+<blockquote>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">The notation in this section is adapted from the <a href="http://www.amazon.com/gp/product/084930900X/ref=ase_normankorenph-20/103-5654565-6501433?s=books&v=glance&n=283155&tagActionCode=normankorenph-20" target="_blank">Digital Color Imaging Handbook</a>, edited by Gaurav Sharma, published by the CRC Press, referred to below as DCIH. The DCIH <a href="http://www.ece.rochester.edu/~gsharma/dcihandbook/DCIHbkErrata.pdf" target="_blank">online Errata</a> was consulted. </font></p>
+</blockquote>
+<h3><strong><font color="#006600" face="Arial, Helvetica, sans-serif"><em>Absolute differences (including luminance)</em></font></strong></h3>
+<p><em><strong><font color="#006600" face="Arial, Helvetica, sans-serif">CIE 1976 </font></strong></em></p>
+<p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">The L*a*b* color space was designed to be <em><strong>relatively</strong></em> perceptually uniform. That means that perceptible color difference is approximately equal to the Euclidean distance between L*a*b* values. For colors {<em>L<sub>1</sub></em>*, <em>a<sub>1</sub></em>*, <em>b<sub>1</sub></em>*} and {<em>L<sub>2</sub></em>*, <em>a<sub>2</sub></em>*, <em>b<sub>2</sub></em>*}, where &Delta;<em>L</em>* = <em>L<sub>2</sub></em>* - <em>L<sub>1</sub></em>*, &Delta;<em>a</em>* = <em>a<sub>2</sub></em>* - <em>a<sub>1</sub></em>*, and &Delta;<em>b</em>* = <em>b<sub>2</sub></em>* - <em>b<sub>1</sub></em>*, </font></p>
+<blockquote>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>E*<sub>ab</sub></em> = <font size="+1">(</font> ( &Delta;<em>L</em>*)<sup>2</sup> + (&Delta;<em>a</em>*)<sup>2</sup> + (&Delta;<em>b</em>*)<sup>2</sup> <font size="+1">)</font></strong><font size="-1"><sup><strong>1/2</strong></sup></font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DCIH (1.42, 5.35); &nbsp;<font size="+1">(...)</font><sup>1/2</sup> denotes square root of (...) ). </font></p>
+</blockquote>
+<p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">Although &Delta;<em>E*<sub>ab</sub></em> is relatively simple to calculate and understand, it's not very accurate especially for strongly saturated colors. L*a*b* is not as perceptually uniform as its designers intended. For example, for saturated colors, which have large chroma values <font size="+1"><font size="-1">(</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>C</em>*</font><font size="-1"> = </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><font size="+1">(</font> <em>a</em>*<sup>2</sup> + <em>b</em>*<sup>2</sup> <font size="+1">)<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup></font></font></font><font size="-1"> ), the eye is less sensitive to changes in chroma  than to corresponding changes for Hue (</font></font>&Delta;<em>H*</em> = <font size="+1">(</font> (&Delta;<em>E*<sub>ab</sub></em>)<sup>2</sup> - (&Delta;<em>L</em>*)<sup>2</sup> - (&Delta;<em>C</em>*)<sup>2</sup> <font size="+1">)<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup></font></font> <font size="+1"><font size="-1">) or Luminance (</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&Delta;<em>L</em>*</font><font size="-1">). </font></font>To address this issue, several additional color difference formulas have been established. In these formulas, just-noticeable differences (JNDs) are represented by <em>ellipsoids</em> rather than circles. </font></p>
+<p><em><strong><font color="#006600" face="Arial, Helvetica, sans-serif">CIE 1994 </font></strong></em></p>
+<p><font color="#006600" size="+1" face="Arial, Helvetica, sans-serif"> <font size="-1">The CIE-94 color difference formula, </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&Delta;<em>E</em>*<sub>94</sub>, provides a better measure of perceived color difference.</font></font></p>
+<blockquote>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>E</em>*<sub>94</sub> = <font size="+1">(</font> (&Delta;<em>L</em>*)<sup>2</sup> + (&Delta;<em>C</em>*</strong></font><strong><font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C </sub></em>)<sup>2</sup> + (&Delta;<em>H</em>*<font size="+1">/</font><em>S<sub>H </sub></em>)<sup>2</sup> <font size="+1">)</font><sup>1/2</sup></font></strong><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp; (DCIH (5.37);&nbsp; omitting constants set to 1 ), where </font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C</sub></em> = 1 + 0.045 <em>C</em>* ;&nbsp; &nbsp;<em>S<sub>H</sub></em> = 1 + 0.015 <em>C</em>* </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DCIH (1.53, 1.54) )</font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"> [ <em>C</em>* = <font size="+1">(</font> ( <em>a<sub>1</sub></em>*<sup>2</sup> + <em>b<sub>1</sub></em>*<sup>2</sup> )<sup>1/2</sup> ( <em>a<sub>2</sub></em>*<sup>2</sup> + <em>b<sub>2</sub></em>*<sup>2</sup> )<sup>1/2</sup> <font size="+1">)<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup></font></font>&nbsp; (the geometrical mean chroma) gives symmetrical results for colors 1 and 2. However, when one of the colors (denoted by subscript <em>s</em>) is the standard,  the chroma of the standard, <em>C</em><em><sub>s</sub></em>* = ( <em>a<sub>s</sub></em>*<sup>2</sup> + <em>b<sub>s</sub></em>*<sup>2</sup> )<sup>1/2</sup>, is preferred for calculating <em>S<sub>C</sub></em> and <em>S<sub>H</sub></em>. The asymmetrical equation is used by Bruce Lindbloom.] </font></p>
+</blockquote>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p align="right"><strong><font color="#006600" size="-1"><a name="stdcom"></a>An early meeting of the<br>
+      CMC Standards Committee</font></strong></p>
+      <p><em><strong><font color="#006600" face="Arial, Helvetica, sans-serif">CMC </font></strong></em></p>
+      <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">The CMC color difference formula is widely used by the textile industry to match bolts of cloth. Although it's less familiar to photographers than the CIE 1976 geometric distance &Delta;<em>E*<sub>ab </sub></em>, it's probably the best of the measurement metrics. It is slightly asymmetrical: subscript <em>s</em> denotes the standard (reference) measurement. CMC is the <a href="http://www.sdc.org.uk/technical/standards.htm#CMC" target="_blank">Colour Measurement Committee</a> of the <a href="http://www.sdc.org.uk/" target="_blank">Society of Dyers and Colourists</a> (UK).</font></p>    </td>
+    <td><img src="images/Hatter_300W.jpg" alt="An early meeting of the CRC Standards Committee" width="300" height="216" hspace="6"></td>
+  </tr>
+</table>
+<blockquote>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>E</em>*<sub>CMC</sub>(<em>l,c</em>) = <font size="+1">(</font> (&Delta;<em>L</em>*<font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/</font><em>lS<sub>L</sub></em>)<sup>2</sup> + (&Delta;<em>C</em>*</strong></font><strong><font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/<font size="-1">c</font></font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C </sub></em>)<sup>2</sup> + (&Delta;<em>H</em>*<font size="+1">/</font><em>S<sub>H </sub></em>)<sup>2</sup> <font size="+1">)</font></font></strong><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup>&nbsp;&nbsp;&nbsp;&nbsp; (DCIH (5.37) ), where</font> </p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">(That's the lowercase letter <em>l</em> in (<em>l,c</em>) and the denominator of (&Delta;<em>L</em>*<font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/</font><em>lS<sub>L</sub></em>)<sup>2</sup>.)&nbsp; </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&Delta;<em>E</em>*<sub>CMC</sub>(1,1) (<em>l </em>= <em>c</em> = 1) is used for graphic arts perceptibility measurements. <em>l </em>= 2 is used in the textile industry for acceptability of fabric matching. For now Imatest displays &Delta;<em>E</em>*<sub>CMC</sub>(1,1). </font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>L</sub></em> = 0.040975 <em>L<sub>s</sub></em>* / (1+0.01765 <em>L<sub>s</sub></em>*) ;&nbsp; &nbsp;</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>L<sub>s</sub></em>* &ge; 16&nbsp;&nbsp;    &nbsp;&nbsp;&nbsp; (DCIH (1.48) ) </font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"> &nbsp;&nbsp;&nbsp;&nbsp; = 0.511 ;&nbsp;&nbsp; <em>L<sub>s</sub></em>* &lt; 16</font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C</sub></em> = 0.0638 <em>c<sub>s</sub></em>* / (1+0.0131 <em>c<sub>s</sub></em>* ) + 0.638 ;&nbsp; &nbsp;<em>S<sub>H</sub></em> = <em>S<sub>C</sub></em> (<em>T<sub>CMC </sub>F<sub>CMC</sub></em> + 1 - <em>F</em><em><sub>CMC </sub></em>)</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp; (DCIH (1.49, 1.50) )</font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>F<sub>CMC</sub></em> = <font size="+1">(</font> ( <em>c<sub>s</sub></em>*</font>)<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>4</sup> / ( </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">( <em>c<sub>s</sub></em>*</font>)<font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>4</sup> + 1900 ) </font> <font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">)<strong><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup></font></strong><font size="-1">&nbsp;&nbsp;&nbsp;&nbsp; (DCIH (1.51);</font></font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>T<sub>CMC</sub></em> = 0.56 + | 0.2 cos(<em>h<sub>s</sub></em>* + 168&deg;) |&nbsp;&nbsp;&nbsp;&nbsp; 164&deg; &le;  </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>h<sub>s</sub></em>* </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"> &le; 345&deg;</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">&nbsp;&nbsp;&nbsp; (DCIH (1.52) )</font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; = </font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">0.36 + | 0.4 cos(<em>h<sub>s</sub></em>* + 35 &deg;) |&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; otherwise </font></p>
+</blockquote>
+<p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">At the time of this writing (April 2006) we don't know which color difference metric, CIE 1994 or CMC, is generally preferred. Textbooks present both on an equal footing. &Delta;<em>E</em>*<sub>94</sub> is simple and robust while &Delta;<em>E</em>*<sub>CMC</sub> is more complex but widely used in the textile industry. The CIE-DE2000 color difference formula, discussed in DCIH, section 1.7.4, pp. 34-40,is complex and offers little practical advantage over&nbsp;either. Gaurav Sharma has found <a href="http://www.ece.rochester.edu/~gsharma/ciede2000/" target="_blank">some problems</a> with it. </font></p>
+<h3><font color="#006600" face="Arial, Helvetica, sans-serif"><strong><em>Color differences that omit luminance difference </em></strong></font></h3>
+<p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">Photographic papers, especially matte papers, are not able to reproduce deep gray and black tones well. This results in a large density difference that has a strong effect on &Delta;<em>E*<sub>ab</sub></em>,&nbsp;&nbsp;&Delta;<em>E</em>*<sub>94</sub>, and&nbsp;&nbsp;&Delta;<em>E</em>*<sub>94</sub>. It can be useful to look at color errors independently of density error. Color differences that omit &Delta;<em>L</em>* include </font></p>
+<blockquote>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>C*<sub>ab</sub></em> = <font size="+1">(</font>(&Delta;<em>a</em>*)<sup>2</sup> + (&Delta;<em>b</em>*)<sup>2</sup> <font size="+1">)<font size="-1"><sup>1/2</sup></font></font></strong></font></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>C</em>*<sub>94</sub> = <font size="+1">(</font> (&Delta;<em>c</em>*</strong></font><strong><font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C </sub></em>)<sup>2</sup> + (&Delta;<em>H</em>*<font size="+1">/</font><em>S<sub>H </sub></em>)<sup>2</sup> <font size="+1">)<font size="-1"><sup>1/2</sup></font></font></font></strong></p>
+  <p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><strong>&Delta;<em>C</em>*<sub>CMC</sub> = <font size="+1">(</font>(&Delta;<em>c</em>*</strong></font><strong><font color="#006600" size="+1" face="Arial, Helvetica, sans-serif">/</font><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><em>S<sub>C </sub></em>)<sup>2</sup> + (&Delta;<em>H</em>*<font size="+1">/</font><em>S<sub>H </sub></em>)<sup>2</sup> <font size="+1">)</font></font></strong><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif"><sup>1/2</sup>&nbsp;</font></p>
+</blockquote>
+<p><font color="#006600" size="-1" face="Arial, Helvetica, sans-serif">These formulas don't entirely remove the effects of exposure error since <em>L*</em> is affected by exposure, but they reduce it to a manageable level.</font></p>
+<h2><a name="gamutvol"></a>Gamut volume algorithm </h2>
+<p><img src="images/Gamutvision_3D_example_crop.jpg" alt="3D plot example" width="384" height="384" hspace="12" vspace="4" align="right">L*a*b* Gamut volume is the best single number for characterizing the color response of a device or color space profile. L*a*b* gamuts and volumes are shown on the right for Adobe RGB (1998) color space (wireframe) and the Epson R2400, Premium Luster (solid), mapped from Adobe RGB with perceptual rendering intent. The units of L*a*b* volume are sometimes labelled &Delta;<em>E</em><sup>3</sup> (referring to &Delta;<em>E</em>*<sub>ab</sub>, above). </p>
+<p>Gamut volume is  not easy to calculate: it can't be directly extracted from the profile. The Gamutvision algorithm calculates the gamut volume from an image containing all values of HSL Hue <em>H</em> and Lightness <em>L</em> for a fixed value of Saturation <em>S</em> (usually the maximum value, <em>S</em> = 1), illustrated <a href="#hslv">below</a> (on the right) and  in <a href="gamutvision.html#structure">Gamutvision Structure</a> (on the left). This image is used to generate the gamuts on the right. The algorithm is as follows.</p>
+<ul>
+  <li>Map the RGB image values into L*a*b*. </li>
+  <li>Find the &quot;center of mass&quot; of the gamut. This is typically in the neighborhood of L* = 55, a* = b* = 0. </li>
+  <li>Convert the values into cylindrical coordinates (<em>R</em>, <em>&Theta;</em>, <em>&Phi;</em>) with origin at the center of mass. </li>
+  <li>Create a &quot;binning&quot; array representing uniformly spaced longitudinal and latitudinal angles (<em>&Theta;</em> and <em>&Phi;</em>, spaced <em>&delta;&Theta;</em> and <em>&delta;&Phi;</em>).</li>
+  <li>Place the average  radius (<em>R</em>) corresponding to each image point in the appropriate binning array element. </li>
+  <li>Interpolate to fill the missing points.</li>
+  <li>Sum the volumes for each array entry to  find the total volume <em>V</em> = &sum;<em>&delta;V</em>, where  <br>
+  <em>&delta;V</em> = <em>R</em><sup>2</sup><em> &delta;h <sup> </sup><em>&delta;&Theta; </em></em>/ 3 ;&nbsp;&nbsp;&nbsp;&nbsp; <em>&delta;h</em> = <em>R </em>cos<em>(<em>&Phi;</em>)</em> <em>&delta;&Phi; </em>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<em>&delta;V</em> = <em>R</em><sup>3</sup> cos(<em>&Phi;</em>) <em> <sup> </sup><em>&delta;&Theta;</em></em> <em>&delta;&Phi;</em> / 3 &nbsp;&nbsp; (&Delta;<em>E</em><sup>3</sup> units) </li>
+</ul>
+<p>The color space gamuts calculated by this algorithm  are about 1% higher than than the volumes reported by <a href="http://www.brucelindbloom.com/index.html?WorkingSpaceInfo.html" target="_blank">Bruce Lindbloom</a>, except for extremely large gamut spaces (ProPhoto, WideGamut) which contain a* and b* values larger than the Gamutvision limits of &plusmn;128. </p>
+<h2> <a name="Color"></a><em>Light  and Color</em></h2>
+<p>This section reviews the basic concepts of additive and subtractive color. If you are familiar with them, you may want to skip to <a href="#Colorspace">Color models section, below</a>. Color theory  is dealt with in more depth in the series on <a href="http://www.normankoren.com/color_management.html" target="_blank">Color  management</a>. </p>
+<p><img src="images/gamutvision_equations_Color_add_subtract_450.jpg" alt="Additive vs. Subtractive colors" width="450" height="339" hspace="6" vspace="4" border="1" align="right">The  human eye is sensitive to electromagnetic radiation with wavelengths between  about 380 and 700 nanometers. This radiation is known as <strong><em>light</em></strong>.  The visible spectrum is illustrated on the right. The eye has three classes  of color-sensitive light receptors called <strong><em>cones</em></strong>,  which respond roughly to red, blue and green light (around 650, 530 and  460 nm, respectively). A range of colors can be reproduced by one of two  complimentary approaches: </p>
+<ul>
+  <li> <strong><em>Additive color:</em></strong> Combine light <strong><em>sources</em></strong>,  starting with darkness (black). The <strong><em>additive  primary</em></strong> colors are red (R), green (G), and blue (B). Adding  R and G light makes yellow (Y). Similarly, G + B = cyan (C) and R + B =  magenta (M). Combining all three additive primaries makes white.</li>
+</ul>
+<ul>
+  <li> <strong><em>Subtractive color:</em></strong> Illuminate  objects that contain dyes or pigments that <strong><em>remove</em></strong> portions of the visible spectrum. The objects may either transmit light  (transparencies) or reflect light (paper, for example). The <strong><em>subtractive  primaries</em></strong> are C, M and Y. Cyan absorbs red; hence C is sometimes  called "minus red" (-R). Similarly, M is -G and Y is -B. The two approaches  are illustrated on the right and described in the table below.</li>
+</ul>
+<p>Unfortunately, ideal C, Y and M inks don't exist; the subtractive primaries  don't entirely remove their compliments (R, B and G). This isn't a problem  for film, where light is transmitted through three separate dye layers,  but it has important consequences for prints made with ink on reflective  media (i.e., paper). Combining C, Y and M usually produces a muddy brown.  Black ink (K) must added to the mix to obtain deep black tones. CMYK color  is highly device dependent-- there are many algorithms for converting RGB  to CMYK. Photographic editing should be done in RGB) color  spaces. Conversion to CMYK (usually with colors added to extend the printer  color gamut) should be left to the printer driver software.</p>
+<center>
+  <table bgcolor="#999999" border="0" cellpadding="4" cellspacing="0" width="90%">
+    <tbody>
+      <tr>
+        <td><center>
+          <table bgcolor="#f0f0f0" border="0" cellpadding="5" cellspacing="0" width="100%">
+            <tbody>
+              <tr>
+                <td bgcolor="#333333"><font color="#FFFFFF"><strong>Additive  color</strong></font></td>
+                <td><strong>Subtractive color</strong></td>
+              </tr>
+              <tr>
+                <td><strong>Light sources:</strong> beams  of light or dots of light on <strong>monitor screens</strong></td>
+                <td bgcolor="#666666"><strong><font color="#FFFFFF">Objects  that transmit or reflect light:</font></strong> <font color="#FFFFFF"><strong>film or prints.</strong> Typically illuminated  by white light.</font></td>
+              </tr>
+              <tr>
+                <td><strong>Primaries:</strong> <strong>Red  (R),  Green (G), Blue  (B)</strong></td>
+                <td bgcolor="#666666"><strong><font color="#FFFFFF">Primaries:  Cyan  (C), Magenta  (M),  Yellow (Y)</font></strong></td>
+              </tr>
+              <tr>
+                <td>Light from independent sources  is added.</td>
+                <td bgcolor="#666666"><font color="#FFFFFF">Portions  of the visible light spectrum are absorbed by inks, which contain dyes  or pigments, or by dye layers in photographic film or paper.</font></td>
+              </tr>
+              <tr>
+                <td>Adding red and green makes  yellow (R + G = Y); Similarly, G + B = C and R + B = M. Adding all three  additive primaries in roughly equal amounts creates gray or white light.</td>
+                <td bgcolor="#666666"><font color="#FFFFFF">Each  subtractive primary removes one of the additive primary colors from the  reflected or transmitted image. Cyan (C) removes red; hence it is known  as minus red (-R). Similarly, M is -G and Y is -B. Objects are typically  illuminated by white light. Combining two subtractive primaries makes an  additive primary (see illustration). Combining all three subtractive primaries  in roughly equal amounts creates gray or black.</font></td>
+              </tr>
+            </tbody>
+          </table>
+        </center></td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+<p>You can obtain a wide range of colors, but not <em>all</em> the colors  the eye can see, by combining RGB light. The <em>gamut</em> of colors a device  can reproduce depends on the spectrum of the primaries, which can be far  from ideal. To complicate matters, the eye's response doesn't correspond <em>exactly</em> to R, G and B, as commonly defined (the description above is oversimplified).  Device color gamut and the eye's response are discussed in detail in the  page on <a href="file:///C:/A_website/color_management.html">Color Management</a>. </p>
+<h2> <a name="Colorspace"></a><em>Color  models</em></h2>
+<p>If you lighten or darken color images you need to understand how color  is represented. Unfortunately there are several models for representing  color. The first two should be familiar; the latter two may be new.
+</p>
+<ul>
+  <li> <strong>RGB</strong> - Red, Green, Blue; The additive primary colors. Used for monitor  screens and most image file formats. There are actually a number of RGB <strong><em>color  spaces</em></strong>-- sRBG, Adobe RGB 1998, Bruce RGB, Chrome 2000, etc.--  differing from each other in the purity of their primary colors, which  affects their <strong><em>gamut</em></strong>-- they range  of colors they represent. They are discussed in <a href="file:///C:/A_website/color_management.html">Color  Management</a>.</li>
+  <li> <strong>CMY(K)</strong> - Cyan, Magenta, Yellow; The subtractive primary colors:  the compliments of the additive primaries (Cyan is -red; magenta is -green;  yellow is -blue.) Widely used in inks for printing with black (<em>K</em>) added  because C, M, and Y pigments and inks rarely give deep, rich black tones  by themselves (they tend to make a muddy brown). CMYK is important to the  prepress industry, but most photographers don't need to be concerned with  it. Most high quality photographic printers have additional inks (light  M, light C and gray may be added to the basic four), so they aren't really  CMYK; the printer driver software converts RGB files into ink densities.</li>
+  <li> <strong>HSV</strong> - Hue, Saturation, Value. Hue is what we perceive as color.  S is saturation: 100% is a pure color. 0% is a shade of gray. Value is  related to brightness. HSV and HSL (below) are obtained by mathematically  transforming RGB. HSV is the identical to HSB.</li>
+  <li> <strong>HSL</strong> - Hue, Saturation, Lightness. <em>H</em> is the same as in HSV but <em>L</em>  and <em>V</em> are defined differently. <em>S</em> is similar for dark colors but quite different  for light colors. Also called HLS.</li>
+</ul>
+<p>It is not practical to use RGB or CMY(K) to adjust brightness or color  saturation because each of the three color channels would have to be changed,  and changing them by the same amount to adjust brightness would usually  shift the color (hue). HSV and HSL are practical for editing because the  software only needs to change V, L, or S. Image editing software typically  transforms RGB data into one of these representations, performs the adjustment,  then transforms the data back to RGB. You need to know which color model  is used because the effects on saturation are very different.</p>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="CENTER"><p><strong>HSV  color</strong> is shown here in an illustration from Jonathan  Sachs' tutorial, "<a href="http://www.dl-c.com/basics.pdf">The Basics of  Digital Images</a>" (right click on the link to save it in Adobe PDF format).  <em>V</em>  = max(<em>R</em>,<em>G</em>,<em>B</em>). Maximum Value (<em>V</em> = 1 or 100%) corresponds to pure  white (<em>R=G=B</em>=1) and to any fully saturated  color (at least one RGB value at 1 and one at 0;  no gray component (<em>W</em> = min(<em>R,G,B</em>)). <em>V</em> = 0 is pure black, regardless  of H and S. The HSV color model can be depicted as a <strong><em>cone</em></strong>,  widest at the top (<em>V</em> = 1), coming to a point at the bottom (<em>V</em> = 0; pure  black). (I use the "V"-like appearance of the cone as a mnemonic to remember  "HSV." The names of the color models are pretty arbitrary.) <a href="http://www.efg2.com/Lab/Graphics/Colors/HSV.htm">efg</a> has a technically detailed explanation of the HSV color model, complete  with a Java applet.</p></td>
+      <td valign="CENTER"><img src="images/gamutvision_equations_HSVcolors.jpg" alt="9" width="413" height="167" hspace="10" vspace="8" border="1" align="right"></td>
+    </tr>
+  </tbody>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td valign="CENTER"><p><strong>HSL  color.</strong> Maximum color saturation takes place at <em>L</em> = 0.5  (50%). <em>L</em> = 0 is pure black and <em>L</em> = 1 (100%) is pure white, regardless of  <em>H</em> or <em>S</em>. The HSL color model can be depicted as a <strong><em>double  cone</em></strong>, widest at the middle (L = 0.5), coming to points at  the top (<em>L</em> = 1; pure white) and bottom (<em>L</em> = 0; pure black).</p></td>
+      <td valign="CENTER"><img src="images/gamutvision_equations_HSLcolors.jpg" alt="5" width="344" height="176" hspace="10" vspace="8" border="1" align="right"></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong><em>Now the important part.</em></strong> What you must remember about the  HSV and HSL color models is,</p>
+<center>
+  <table bgcolor="#e9f0ff" border="0" cellpadding="6" cellspacing="0">
+    <tbody>
+      <tr align="center">
+        <td width="20"><strong>&nbsp;</strong></td>
+        <td><strong>Darkening  in HSV <em>reduces</em> saturation.</strong></td>
+        <td width="20">&nbsp;</td>
+        <td><strong>Darkening  in HSL <em>increases</em> saturation when L &gt; 0.5.</strong></td>
+        <td width="20">&nbsp;</td>
+      </tr>
+      <tr align="center">
+        <td><strong>&nbsp;</strong></td>
+        <td><strong>Lightening  in HSV <em>increases</em> saturation.</strong></td>
+        <td>&nbsp;</td>
+        <td><strong>Lightening  in HSL <em>reduces</em> saturation when L &gt; 0.5.</strong></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center"><img src="images/gamutvision_equations_HSV_red_LBL.jpg" alt="7" width="240" height="240" hspace="4" vspace="4" border="1"> <br>
+            <strong>HSV</strong> <br>
+        <strong>Best  representation of saturation</strong></td>
+        <td><strong>&nbsp;</strong></td>
+        <td align="center"><img src="images/gamutvision_equations_HSL_red_LBL.jpg" alt="3" width="240" height="240" hspace="4" vspace="4" border="1"> <br>
+            <strong>HSL</strong> <br>
+        <strong>Best  representation of lightness</strong></td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+<p>HSV and HSL were developed to represent colors in systems with limited  dynamic range (pixel levels 0-255 for 24-bit color). The limitation forces  a compromise. HSV represents saturation much better than brightness: <em>V</em>  = 1 can be a pure primary color or pure white; hence "Value" is a poor  representation of brightness. HSL represents brightness much better than  saturation: <em>L</em> = 1 is always pure white, but when <em>L</em> &gt; 0.5, colors with <em>S</em>  = 1 contain white, hence aren't completely saturated. In both models, hue  <em>H</em> is unchanged when <em>L</em>, <em>V</em>, or <em>S</em> are adjusted. </p>
+<p>HSV and HSL are illustrated above for red (<em>H</em> = 0). <em>S</em> varies from 0 to  1 along the horizontal axis; <em>V</em> and <em>L</em> vary from 0 to 1 along the vertical  axis. The right side of the HSV illustration (<em>S </em>= 1) always has maximum saturation  (<em>G </em>=<em> B </em>= 0) but the top (<em>V </em>= 1) varies from pure white at <em>S</em> = 0 to pure red at  <em>S </em>= 1. The top of the HSL illustration (<em>L </em>= 1) is pure white for all values  of <em>S</em>. It would be nice to be able to represent brightness and saturation  properly in one system, but you can't have it both ways. </p>
+<h2><a name="hsvhsl"></a>HSV and HSL equations </h2>
+<center>
+  <p align="left">Hue <em>H</em> is the same  for HSV and HSL. The full equations are in <a href="http://www.efg2.com/Lab/Graphics/Colors/HSV.htm">efg's  HSV lab report</a>. Expressed in degrees (0-360&ordm;) for any nonzero <em>x</em>,  H = 0 for Red (<em>x</em>,0,0); 60&ordm; for Yellow (<em>x</em>,<em>x</em>,0),  120&ordm; for Green (0,<em>x</em>,0) (illustrated below), 180&ordm; for Cyan  (0,<em>x</em>,<em>x</em>), 240&ordm; for Blue (0,0,<em>x</em>), and 300&ordm;  for Magenta (<em>x</em>,0,<em>x</em>). <em>H</em> can also be represented on a scale  of 0 to 1. </p>
+  <center>
+    <p>Assume <em>R</em>, <em>G</em>, and <em>B</em> can have  values between 0 and 1. Let <em>W</em> = min(<em>R,G,B</em>) = the gray component.</p>
+  </center>
+  <table border="0" cellpadding="3" cellspacing="3" cols="2" width="100%">
+    <tbody>
+      <tr>
+        <td bgcolor="#006600" width="50%"><center>
+            <strong><font color="#FFFFFF">HSV </font></strong><font color="#FFFFFF">(HSB)
+            </font>
+        </center></td>
+        <td bgcolor="#006600" width="50%"><center>
+            <strong><font color="#FFFFFF">HSL </font></strong><font color="#FFFFFF">(HLS)
+            </font>
+        </center></td>
+      </tr>
+      <tr>
+        <td><center>
+          <em>V</em> = max(<em>R,G,B</em>)
+        </center></td>
+        <td><center>
+          <em>L</em> = (<em>V</em>+<em>W</em>)/2
+        </center></td>
+      </tr>
+      <tr>
+        <td><center>
+          <em>S</em><sub>HSV</sub> = (<em>V-W</em>)  / <em>V</em>
+        </center></td>
+        <td><center>
+          <em>S</em><sub>HSL</sub> = (<em>V-W</em>)  / (<em>V</em>+<em>W</em>) = (<em>V-W</em>) / (2<em>L</em>) ;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <em>L</em> &lt;= 0.5 <br>
+          <em>S</em><sub>HSL</sub> = (<em>V-W</em>)  / (2-<em>V-W</em>) = (<em>V-W</em>) / (2-2<em>L</em>) ;&nbsp; <em>L</em> &gt; 0.5
+        </center></td>
+      </tr>
+      <tr>
+        <td><center>
+          Any color with <em>R</em>, <em>G</em>,  or <em>B</em> = 1 has <em>V</em> = 1. <br>
+          Maximum saturation occurs  when <em>W</em> = 0.
+        </center></td>
+        <td><center>
+          A bright, fully saturated  color (max(<em>R,G,B</em>) = <em>V</em> = 1; min(<em>R,G,B</em>) = <em>W</em> = 0; <em>S</em><sub>HSV</sub> = <em>S</em><sub>HSL</sub>  = 1) must have <em>L</em> = 0.5. <em>L</em> = 1 corresponds to pure white.
+        </center></td>
+      </tr>
+      <tr>
+        <td colspan="2"><center>
+            <strong><em>V</em>,  <em>L</em>, and <em>S</em> illustrated for <em>H</em> = 0.333 (120&ordm;; Green)</strong>
+                                                                        </center></td>
+      </tr>
+      <tr>
+        <td><center>
+            <img src="images/gamutvision_equations_HSV_green_LBL.jpg" alt="6" width="240" height="240" hspace="2" vspace="2" border="1"> <br>
+            <strong>HSV:</strong> Best representation  of saturation
+        </center></td>
+        <td><center>
+            <img src="images/gamutvision_equations_HSL_green_LBL.jpg" alt="2" width="240" height="240" hspace="2" vspace="2" border="1"> <br>
+            <strong>HSL:</strong> Best representation  of lightness
+        </center></td>
+      </tr>
+      <tr>
+        <td colspan="2"><center>
+            <strong><em><a name="hslv"></a>V</em>,  <em>L</em>, and <em>H</em> illustrated for <em>S </em>= 1 (maximum saturation)</strong>
+                                                                        </center></td>
+      </tr>
+      <tr>
+        <td valign="top"><center>
+            <img src="images/gamutvision_equations_HSV_Smax_LBL.png" alt="8" width="274" height="274" hspace="2" vspace="2" border="1">
+            <br>
+            <strong>HSV:</strong> identical to the bottom half<br>
+            of the HSL pattern on the right 
+        </center></td>
+        <td><center>
+            <strong><img src="images/gamutvision_equations_HSL_Smax_LBL.png" alt="4" width="274" height="274" hspace="2" vspace="2" border="1">
+                <br>
+            HSL: </strong>used for 3D L*a*b* gamut display<br>
+            and
+            gamut volume calculation
+
+        </center></td>
+      </tr>
+      <tr>
+        <td colspan="2">          <p>The <em>Y</em>, <em>C</em>, and <em>M</em> bands  are much narrower than the <em>R</em>, <em>G</em>, and <em>B</em> bands. <em>Y</em>, <em>C</em>, and <em>M</em> appear brighter than <em>R</em>, <em>G</em>,  and <em>B</em> at similar <em>V</em> and <em>L</em> levels because both <em>V</em> and <em>L</em> are related to max(<em>R,G,B</em>).
+          </p></td></tr>
+    </tbody>
+  </table>
+  <center>
+    <table bgcolor="#e6fae6" border="0" cellpadding="6" cellspacing="0" cols="1" width="94%">
+      <tbody>
+        <tr>
+          <td><center>
+              <font color="#006600"><strong>Some  interesting relationships</strong> <br>
+            (1) For <em>W</em> = min(<em>R,G,B</em>) =  0 (no gray; maximum saturation),&nbsp; <em>S</em><sub>HSL</sub> = <em>S</em><sub>HSV</sub> = 1 ;&nbsp; <em>L</em> = <em>V</em> / 2 ;&nbsp; <em>L</em> &lt;= 0.5. <br>
+            (2) For <em>V</em> = max(<em>R,G,B</em>) =  1 and <em>S</em><sub>HSL</sub> = 1,&nbsp; <em>L</em> = 1-(<em>S</em><sub>HSV</sub> / 2) ;&nbsp; <em>S</em><sub>HSV</sub>  =  (1-<em>L</em>) / 2;&nbsp; <em>L</em> &gt;= 0.5 </font>
+          </center></td>
+        </tr>
+        <tr>
+          <td><center>
+            <font color="#006600">            These relationships  imply that (1) the bottom half of the HSL L-H plot for <em>S </em>= 1 (above, right)  is identical to the HSV V-H plot for <em>S</em> = 1 (above, left), and (2) the top  half of the HSL S-H plot is identical to an HSV S-H plot for <em>V</em>=1 (not shown),  i.e., the HSL L-H plot (above, right) combines <em>two</em> HSV plots.            </font>
+          </center></td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+  <p align="left">All saturation equations  have <em>V-W</em> in the numerator; they differ in denominator scaling. In both  representations, <em>S</em> is a measure of <em>relative</em> saturation. <em>S</em> is 0 when  <em>W</em> = <em>V</em> (<em>R = G = B</em>; neutral gray); <em>S</em> = 1 when W is at its minimum allowable  value for a given value of <em>V</em> or <em>L</em>. For HSV, <em>W</em> = 0 when <em>S</em> = 1. </p>
+  <p align="left">For HSL with <em>L</em> &lt;= 0.5,  maximum saturation takes place when <em>W</em> = 0; <em>S</em><sub>HSL</sub> = (<em>V-W</em>) / (<em>V+W</em>)  = 1. When <em>L</em> &gt; 0.5, <em>W</em> must be greater than 0. Maximum saturation takes place  when <em>W</em> = 2<em>L-V</em> takes its minimum value, Wmin. In this case&nbsp;  <em>V</em> = 1, so <em>W</em><sub>min</sub> = 2<em>L</em>-1. <em>S</em><sub>HSL</sub> = (<em>V-W</em>) / (2-<em>V-W</em>) = (1-2<em>L</em>+1)  / (2-1-2<em>L</em>+1) = 1. </p>
+  <p align="left"><em>V</em> and <em>L</em> don't correspond  with perceived luminance; for example, blue and gray or white with the  same <em>V</em> or <em>L</em> values would have very different luminance. The PAL luminance  signal, Y = 0.30R + 0.59G + 0.11B, corresponds more closely to perceived  luminance.</p>
+</center>
+<center>
+</center>
+</body>
+</html>
